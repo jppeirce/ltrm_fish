@@ -1,0 +1,2153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="David C. Elzinga">
+
+<title>Community Focused Clustering of Fish Assemblages of the Upper Mississippi River</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="clustering_files/libs/clipboard/clipboard.min.js"></script>
+<script src="clustering_files/libs/quarto-html/quarto.js"></script>
+<script src="clustering_files/libs/quarto-html/popper.min.js"></script>
+<script src="clustering_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="clustering_files/libs/quarto-html/anchor.min.js"></script>
+<link href="clustering_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="clustering_files/libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="clustering_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="clustering_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="clustering_files/libs/bootstrap/bootstrap-8a79a254b8e706d3c925cde0a310d4f0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Community Focused Clustering of Fish Assemblages of the Upper Mississippi River</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>David C. Elzinga </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="data" class="level1">
+<h1>Data</h1>
+<p>We pulled all backwater, electrofishing records from the Long Term Resource Monitoring repository. In total, that is over 253,804 records.</p>
+<div id="05ac4cf8" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"ltrm_fish_data.csv"</span>, low_memory<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>First, we aim to reduce our dataset based on tolerance for missing data. We subset the data initially by requiring the <code>fishcode</code> to be available for our clustering algorithms. Next, to contextualize the conditions that are associated with different kinds of assemblages, we rely on basic hydrological characteristics, such as <code>temp</code>, <code>do</code> (dissolved oxygen), <code>current</code>, and <code>depth</code> we observe how the availability of these features has changed over time.</p>
+<div id="cell-fig-missing-data" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">'fishcode'</span>].notna()].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'year'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'sdate'</span>]).dt.year</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>yearly_missing_df <span class="op">=</span> df.groupby(<span class="st">'year'</span>)[[<span class="st">'temp'</span>, <span class="st">'do'</span>, <span class="st">'current'</span>, <span class="st">'depth'</span>]].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.isna().mean())</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>sns.lineplot(</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> yearly_missing_df,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> ax,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    linewidth <span class="op">=</span> <span class="dv">2</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    marker <span class="op">=</span> <span class="st">'s'</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Year"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Proportion of Missing Data"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-missing-data" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-missing-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="clustering_files/figure-html/fig-missing-data-output-1.png" width="591" height="432" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-missing-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The proportion of data that is missing for each feature (color) by year.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Both temperature and depth have been reliably recorded, however, current and dissolved oxygen were not reliably recorded until 2000 and 2004, respectively (see Figure <a href="#fig-missing-data" class="quarto-xref">Figure&nbsp;1</a>). For simplicity, and to mitigate the introduced bias by excluding observations with missing data, we elected to retain only observations since 2004 that had known values for all four hydrological features, reducing our number of observations to 130,951.</p>
+<div id="05f896c1" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[(df[<span class="st">'year'</span>] <span class="op">&gt;=</span> <span class="dv">2004</span>) <span class="op">&amp;</span> (df[[<span class="st">'temp'</span>, <span class="st">'do'</span>, <span class="st">'current'</span>, <span class="st">'depth'</span>]].isna().<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">==</span> <span class="dv">0</span>)].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The LTRM dataset is organized by individual fish observations. Thus, we decided to reformat it such that each row represents a location (by northing and easting) and time (by period) pair. Corresponding to that spatio-temporal identifier, we marked all present and all absent species and the median hydrological conditions.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Since multiple samples could correspond to one spatio-temporal identifier, only recording the median of hydrological conditions does limit the information retained. It’s possible we could also retain the IQR or some measure of spread for the features.</p>
+</div>
+</div>
+<p>A table showing the final, re-organized dataset is provided below. In total, there are 2,280 assemblages and 119 unique species of fish.</p>
+<div id="1ba4f826" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.groupby([<span class="st">'utm_e'</span>, <span class="st">'utm_n'</span>, <span class="st">'year'</span>, <span class="st">'period'</span>, <span class="st">'pool'</span>]).agg(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    median_temp<span class="op">=</span>(<span class="st">'temp'</span>, <span class="st">'median'</span>),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    median_do<span class="op">=</span>(<span class="st">'do'</span>, <span class="st">'median'</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    median_current<span class="op">=</span>(<span class="st">'current'</span>, <span class="st">'median'</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    median_depth<span class="op">=</span>(<span class="st">'depth'</span>, <span class="st">'median'</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    fish_codes<span class="op">=</span>(<span class="st">'fishcode'</span>, <span class="kw">lambda</span> x: <span class="bu">list</span>(x))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>unique_fish <span class="op">=</span> <span class="bu">set</span>([item <span class="cf">for</span> sublist <span class="kw">in</span> df[<span class="st">'fish_codes'</span>] <span class="cf">for</span> item <span class="kw">in</span> sublist])</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>expanded_df <span class="op">=</span> pd.DataFrame({fish: df[<span class="st">'fish_codes'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: fish <span class="kw">in</span> x) <span class="cf">for</span> fish <span class="kw">in</span> unique_fish})</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.concat([df, expanded_df], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>df.drop(columns <span class="op">=</span> [<span class="st">'fish_codes'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>fish_df <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">'median_temp'</span>, <span class="st">'median_do'</span>, <span class="st">'median_current'</span>,<span class="st">'median_depth'</span>])</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'richness'</span>] <span class="op">=</span> fish_df.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">'display.max_columns'</span>, <span class="va">None</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">median_temp</th>
+<th data-quarto-table-cell-role="th">median_do</th>
+<th data-quarto-table-cell-role="th">median_current</th>
+<th data-quarto-table-cell-role="th">median_depth</th>
+<th data-quarto-table-cell-role="th">WLYE</th>
+<th data-quarto-table-cell-role="th">U-CL</th>
+<th data-quarto-table-cell-role="th">RDSN</th>
+<th data-quarto-table-cell-role="th">SVMW</th>
+<th data-quarto-table-cell-role="th">CNLP</th>
+<th data-quarto-table-cell-role="th">TFSD</th>
+<th data-quarto-table-cell-role="th">PDFH</th>
+<th data-quarto-table-cell-role="th">FWDM</th>
+<th data-quarto-table-cell-role="th">SBWB</th>
+<th data-quarto-table-cell-role="th">TPMT</th>
+<th data-quarto-table-cell-role="th">OSSF</th>
+<th data-quarto-table-cell-role="th">GDFH</th>
+<th data-quarto-table-cell-role="th">BNMW</th>
+<th data-quarto-table-cell-role="th">PRPH</th>
+<th data-quarto-table-cell-role="th">GSBG</th>
+<th data-quarto-table-cell-role="th">SFSN</th>
+<th data-quarto-table-cell-role="th">BKBF</th>
+<th data-quarto-table-cell-role="th">QLBK</th>
+<th data-quarto-table-cell-role="th">FHMW</th>
+<th data-quarto-table-cell-role="th">BLCF</th>
+<th data-quarto-table-cell-role="th">CARP</th>
+<th data-quarto-table-cell-role="th">RRDR</th>
+<th data-quarto-table-cell-role="th">GSOS</th>
+<th data-quarto-table-cell-role="th">NTPK</th>
+<th data-quarto-table-cell-role="th">YLBH</th>
+<th data-quarto-table-cell-role="th">MNEY</th>
+<th data-quarto-table-cell-role="th">CCGF</th>
+<th data-quarto-table-cell-role="th">SPSK</th>
+<th data-quarto-table-cell-role="th">BKSS</th>
+<th data-quarto-table-cell-role="th">TTPH</th>
+<th data-quarto-table-cell-role="th">BHCP</th>
+<th data-quarto-table-cell-role="th">BNBH</th>
+<th data-quarto-table-cell-role="th">YWBS</th>
+<th data-quarto-table-cell-role="th">BUSK</th>
+<th data-quarto-table-cell-role="th">U-CY</th>
+<th data-quarto-table-cell-role="th">U-LY</th>
+<th data-quarto-table-cell-role="th">GSPS</th>
+<th data-quarto-table-cell-role="th">LMBS</th>
+<th data-quarto-table-cell-role="th">RVCS</th>
+<th data-quarto-table-cell-role="th">CMMW</th>
+<th data-quarto-table-cell-role="th">FHCF</th>
+<th data-quarto-table-cell-role="th">SHRH</th>
+<th data-quarto-table-cell-role="th">PSWM</th>
+<th data-quarto-table-cell-role="th">SMBF</th>
+<th data-quarto-table-cell-role="th">WTBS</th>
+<th data-quarto-table-cell-role="th">BWFN</th>
+<th data-quarto-table-cell-role="th">BNDR</th>
+<th data-quarto-table-cell-role="th">GZSD</th>
+<th data-quarto-table-cell-role="th">CMSN</th>
+<th data-quarto-table-cell-role="th">RVSN</th>
+<th data-quarto-table-cell-role="th">SNGR</th>
+<th data-quarto-table-cell-role="th">U-IL</th>
+<th data-quarto-table-cell-role="th">WTPH</th>
+<th data-quarto-table-cell-role="th">BGWM</th>
+<th data-quarto-table-cell-role="th">GSPK</th>
+<th data-quarto-table-cell-role="th">GDRH</th>
+<th data-quarto-table-cell-role="th">CNCF</th>
+<th data-quarto-table-cell-role="th">MMSN</th>
+<th data-quarto-table-cell-role="th">SMMW</th>
+<th data-quarto-table-cell-role="th">SVCP</th>
+<th data-quarto-table-cell-role="th">U-PC</th>
+<th data-quarto-table-cell-role="th">BDKF</th>
+<th data-quarto-table-cell-role="th">RVRH</th>
+<th data-quarto-table-cell-role="th">WTCP</th>
+<th data-quarto-table-cell-role="th">RKBS</th>
+<th data-quarto-table-cell-role="th">BDDR</th>
+<th data-quarto-table-cell-role="th">NHSK</th>
+<th data-quarto-table-cell-role="th">BKBH</th>
+<th data-quarto-table-cell-role="th">GSWM</th>
+<th data-quarto-table-cell-role="th">STCT</th>
+<th data-quarto-table-cell-role="th">U-CN</th>
+<th data-quarto-table-cell-role="th">FKMT</th>
+<th data-quarto-table-cell-role="th">WDSN</th>
+<th data-quarto-table-cell-role="th">STGR</th>
+<th data-quarto-table-cell-role="th">YOYF</th>
+<th data-quarto-table-cell-role="th">MQTF</th>
+<th data-quarto-table-cell-role="th">SVRH</th>
+<th data-quarto-table-cell-role="th">SVLP</th>
+<th data-quarto-table-cell-role="th">SVCB</th>
+<th data-quarto-table-cell-role="th">SGER</th>
+<th data-quarto-table-cell-role="th">SMBS</th>
+<th data-quarto-table-cell-role="th">STBS</th>
+<th data-quarto-table-cell-role="th">WRMH</th>
+<th data-quarto-table-cell-role="th">BGOS</th>
+<th data-quarto-table-cell-role="th">PNSD</th>
+<th data-quarto-table-cell-role="th">LESF</th>
+<th data-quarto-table-cell-role="th">GNSF</th>
+<th data-quarto-table-cell-role="th">CLSR</th>
+<th data-quarto-table-cell-role="th">BLGL</th>
+<th data-quarto-table-cell-role="th">PSBG</th>
+<th data-quarto-table-cell-role="th">BMBF</th>
+<th data-quarto-table-cell-role="th">MGNP</th>
+<th data-quarto-table-cell-role="th">YWPH</th>
+<th data-quarto-table-cell-role="th">SNSN</th>
+<th data-quarto-table-cell-role="th">U-CT</th>
+<th data-quarto-table-cell-role="th">GDSN</th>
+<th data-quarto-table-cell-role="th">GSRS</th>
+<th data-quarto-table-cell-role="th">JYDR</th>
+<th data-quarto-table-cell-role="th">PGMW</th>
+<th data-quarto-table-cell-role="th">SHDR</th>
+<th data-quarto-table-cell-role="th">STSN</th>
+<th data-quarto-table-cell-role="th">LNGR</th>
+<th data-quarto-table-cell-role="th">GDEY</th>
+<th data-quarto-table-cell-role="th">HFCS</th>
+<th data-quarto-table-cell-role="th">MDDR</th>
+<th data-quarto-table-cell-role="th">PDSN</th>
+<th data-quarto-table-cell-role="th">SBSN</th>
+<th data-quarto-table-cell-role="th">BTTM</th>
+<th data-quarto-table-cell-role="th">SJHR</th>
+<th data-quarto-table-cell-role="th">CNSN</th>
+<th data-quarto-table-cell-role="th">ERSN</th>
+<th data-quarto-table-cell-role="th">LGPH</th>
+<th data-quarto-table-cell-role="th">WTSK</th>
+<th data-quarto-table-cell-role="th">BKCP</th>
+<th data-quarto-table-cell-role="th">BSDR</th>
+<th data-quarto-table-cell-role="th">BHMW</th>
+<th data-quarto-table-cell-role="th">GSCP</th>
+<th data-quarto-table-cell-role="th">RESF</th>
+<th data-quarto-table-cell-role="th">SCBC</th>
+<th data-quarto-table-cell-role="th">richness</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">utm_e</th>
+<th data-quarto-table-cell-role="th">utm_n</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">period</th>
+<th data-quarto-table-cell-role="th">pool</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">532479</td>
+<td data-quarto-table-cell-role="th">4938958</td>
+<td data-quarto-table-cell-role="th">2014</td>
+<td data-quarto-table-cell-role="th">1</td>
+<td data-quarto-table-cell-role="th">04</td>
+<td>24.9</td>
+<td>6.9</td>
+<td>0.41</td>
+<td>1.90</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">536879</td>
+<td data-quarto-table-cell-role="th">4935808</td>
+<td data-quarto-table-cell-role="th">2004</td>
+<td data-quarto-table-cell-role="th">1</td>
+<td data-quarto-table-cell-role="th">04</td>
+<td>20.6</td>
+<td>6.9</td>
+<td>0.08</td>
+<td>1.60</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">536929</td>
+<td data-quarto-table-cell-role="th">4935758</td>
+<td data-quarto-table-cell-role="th">2016</td>
+<td data-quarto-table-cell-role="th">1</td>
+<td data-quarto-table-cell-role="th">04</td>
+<td>24.8</td>
+<td>6.0</td>
+<td>0.02</td>
+<td>1.60</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">536979</td>
+<td data-quarto-table-cell-role="th">4935758</td>
+<td data-quarto-table-cell-role="th">2023</td>
+<td data-quarto-table-cell-role="th">1</td>
+<td data-quarto-table-cell-role="th">04</td>
+<td>28.1</td>
+<td>12.8</td>
+<td>0.06</td>
+<td>0.45</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">537129</td>
+<td data-quarto-table-cell-role="th">4936458</td>
+<td data-quarto-table-cell-role="th">2004</td>
+<td data-quarto-table-cell-role="th">3</td>
+<td data-quarto-table-cell-role="th">04</td>
+<td>8.5</td>
+<td>11.3</td>
+<td>0.00</td>
+<td>0.40</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<section id="exploratory-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
+<p>Before performing any statistical learning, the pre-processed dataset can be explored to uncover any basic patterns. We first looked at the distribution of richness (the number of species found in each assemblage) by pool.</p>
+<div id="cell-fig-pool-richness" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(df.reset_index(), x<span class="op">=</span><span class="st">'richness'</span>, clip<span class="op">=</span>(<span class="dv">0</span>, <span class="va">None</span>), hue<span class="op">=</span><span class="st">'pool'</span>, fill<span class="op">=</span><span class="va">True</span>, alpha <span class="op">=</span> <span class="fl">0.1</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Richness"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Density"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-pool-richness" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pool-richness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="clustering_files/figure-html/fig-pool-richness-output-1.png" width="619" height="432" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pool-richness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: The distribution of the number of unique species found in each assemblage (richness) for each pool (color). Note: assemblages at the same location but recorded at different periods/years are treated as distinct.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-pool-richness" class="quarto-xref">Figure&nbsp;2</a> suggests the richness of an assemblage, irrespective of pool, period, and year, tends to be contained between 5 and 25 species. Pool 4 tends to have the assemblages that are the least rich with a median richness around 8 species, whereas the La Grange Pool tends to be the most rich with a median richness around 17 species.</p>
+<p>Next, we looked how the median richness in each pool has changed with respect to the sampling year.</p>
+<div id="cell-fig-pool-richness-time" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(df, x<span class="op">=</span><span class="st">'year'</span>, y<span class="op">=</span><span class="st">'richness'</span>, hue<span class="op">=</span><span class="st">'pool'</span>, ax <span class="op">=</span> ax, estimator<span class="op">=</span><span class="st">'median'</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ax.set_xticks([<span class="dv">2004</span>, <span class="dv">2007</span>, <span class="dv">2010</span>, <span class="dv">2013</span>, <span class="dv">2016</span>, <span class="dv">2019</span>, <span class="dv">2023</span>])</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>ax.set_yticks(<span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">23</span>, <span class="dv">2</span>))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Year"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Richness"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>ax.legend(title<span class="op">=</span><span class="st">'pool'</span>, loc<span class="op">=</span><span class="st">'upper right'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.18</span>, <span class="fl">1.02</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-pool-richness-time" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pool-richness-time-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="clustering_files/figure-html/fig-pool-richness-time-output-1.png" width="674" height="437" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pool-richness-time-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Line plots of the median richness (line) and 95% confidence intervals (hue) separated by pool.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-pool-richness-time" class="quarto-xref">Figure&nbsp;3</a> suggests there does not exist any sustained temporal trends across pools with regards to an increase or decrease in median richness of assemblages. Notably, pools 4 and 8 both had major one-year declines in richness in 2020, although this is possibly due to a under-sampling bias due to the COVID-19 pandemic. Thus, we elected to remove all assemblages from 2020 in pools 4 and 8 for data quality purposes. This left us with 2,256 assemblages in total.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We could also remove data from 2008 (for some or all pools), but that is not as clear to me as bias in the collection method, however, wasn’t there a major recession that year?</p>
+</div>
+</div>
+<div id="573a6314" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> <span class="op">~</span>((df.index.get_level_values(<span class="st">'year'</span>) <span class="op">==</span> <span class="dv">2020</span>) <span class="op">&amp;</span> (df.index.get_level_values(<span class="st">'pool'</span>).isin([<span class="st">'04'</span>, <span class="st">'08'</span>])))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[mask]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>fish_df <span class="op">=</span> fish_df[mask]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Next, we looked at how richness varies across periods for each pool.</p>
+<div id="cell-fig-pool-richness-period" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(df, x<span class="op">=</span><span class="st">'period'</span>, y<span class="op">=</span><span class="st">'richness'</span>, hue<span class="op">=</span><span class="st">'pool'</span>, ax <span class="op">=</span> ax, estimator<span class="op">=</span><span class="st">'median'</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>ax.set_xticks([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])  <span class="co"># Set tick positions</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Period"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Richness"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-pool-richness-period" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pool-richness-period-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="clustering_files/figure-html/fig-pool-richness-period-output-1.png" width="587" height="432" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pool-richness-period-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Line plots of the median richness (line) and 95% confidence intervals (hue) separated by pool and period.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-pool-richness-period" class="quarto-xref">Figure&nbsp;4</a> suggests that across across all pools, assemblages tend to be the least rich in period 1 (early summer), have a substantial increase in richness by period 2 (late summer), with a modest decrease in richness by period 3 (early fall). Interestingly, the La Grange pool’s change in richness between periods 1 and 2 is most pronounced, whereas pool 26’s change in richness across all periods is nearly negligible.</p>
+<p>Our final piece of exploratory data analysis was to understand the distribution of unique species across all pools.</p>
+<div id="cell-fig-upset" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> upsetplot <span class="im">import</span> plot</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>fish_df <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">'median_temp'</span>, <span class="st">'median_do'</span>, <span class="st">'median_current'</span>,<span class="st">'median_depth'</span>, <span class="st">'richness'</span>])</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>presence_matrix <span class="op">=</span> fish_df.groupby(level<span class="op">=</span><span class="st">'pool'</span>).<span class="bu">max</span>()</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>multi_index_df <span class="op">=</span> presence_matrix.T</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by the 5-level MultiIndex and count species</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> (</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    multi_index_df</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="bu">list</span>(multi_index_df.columns))  <span class="co"># Group by all pools</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    .size()  <span class="co"># Count species in each group</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    .rename(<span class="st">'species_count'</span>)  <span class="co"># Rename for clarity</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>plot(result, element_size<span class="op">=</span><span class="dv">25</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-upset" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-upset-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="clustering_files/figure-html/fig-upset-output-1.png" width="743" height="324" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-upset-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Upset plot of pool and species presence. Dots represent pool combinations, with the corresponding vertical bar indicating the number of species present at that combination of pools. The horizontal bars indicate the number of unique species in each pool.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The most common habitat combination is that a species is found in all pools. A sizeable number of species are also found in both the La Grange pool and pool 26, or just the La Grange pool. The La Grange pool contains the most unique species, with the other four pools roughly equal richness (see Figure <a href="#fig-upset" class="quarto-xref">Figure&nbsp;5</a>)</p>
+</section>
+</section>
+<section id="analysis" class="level1">
+<h1>Analysis</h1>
+<p>The primary analysis here has two machine learning components. The first is an unsupervised, clustering algorithm to group similar assemblages based on community structure (not the presence/absence of one particular species). This clustering is intentionally done without consideration of pool, year, period, or hydrological conditions. The resulting clusters, thus, tend to suggest common assemblage themes. From these clusters, we can readily discuss how their frequency has changed across time and pools. The second is a supervised, classification problem to use hydrological conditions to predict the assemblage type. This classification model can then provide context about the conditions under which certain assemblage types are more likely to occur, aiding in habitat restoration projects.</p>
+<section id="clustering" class="level2">
+<h2 class="anchored" data-anchor-id="clustering">Clustering</h2>
+<p>We first identified candidate metrics of dissimilarity between assemblages. There are several possible choices, but four more common choices for comparing exclusively binary features are Hamming, Jaccard, Rogers-Tanimoto, and Cosine distances. We also present a variant of the Rogers-Tanimoto distance, concisely named Similarity of Presence and Absence Metric (SPAM), under which Hamming, Jaccard, and Rogers-Tanimoto are sub-cases.</p>
+<p>For concreteness, we also present two toy-assemblages to demonstrate each distance, where we suppose there are only three species of fish: Red, Blue, and Green and we have two assemblages, <span class="math inline">\(A\)</span>: (True, False, False), and <span class="math inline">\(B\)</span>: (True, True, False). Let <span class="math inline">\(a\)</span> denote the shared presence count, <span class="math inline">\(b\)</span> denote the shared absence count, <span class="math inline">\(c\)</span> denote the count of species in <span class="math inline">\(A\)</span> but not <span class="math inline">\(B\)</span>, and <span class="math inline">\(d\)</span> denote the count of species in <span class="math inline">\(B\)</span> but not <span class="math inline">\(A\)</span>. In the simple example, <span class="math inline">\(a=b=1\)</span>, <span class="math inline">\(c=0\)</span>, and <span class="math inline">\(d=1\)</span>. Let <span class="math inline">\(|\cdot|\)</span> denote the cardinality of a set, namely, the number of True elements in an assemblage, so <span class="math inline">\(|A| = 1\)</span> and <span class="math inline">\(|B| = 2\)</span> in the example. Let <span class="math inline">\(a_i\)</span> refer to the value of the indicator function, such that <span class="math inline">\(a_i = 1\)</span> if the <span class="math inline">\(i^\text{th}\)</span> element of <span class="math inline">\(A\)</span> is True and 0 otherwise, and similarly for <span class="math inline">\(b_i\)</span>.</p>
+<section id="hamming" class="level3">
+<h3 class="anchored" data-anchor-id="hamming">Hamming</h3>
+<p>Hamming distance is perhaps the simplest of the distance metrics presented here, as it simply counts the number of raw differences between two assemblages,</p>
+<p><span class="math display">\[
+d_{\text{Hamming}} = \sum_i 1\{a_i \neq b_i\} = c + d.
+\]</span></p>
+<p>For the provided example, the Hamming distance would be one, out of a potential maximum value of three. Since Hamming distance does not depend on the number of shared presences or absences, it treats their values equally as null, and places a higher weight on mismatches between assemblages.</p>
+</section>
+<section id="jaccard" class="level3">
+<h3 class="anchored" data-anchor-id="jaccard">Jaccard</h3>
+<p>Jaccard distance measures the proportion of mismatched species relative to the the number of species found overall across assemblages,</p>
+<p><span class="math display">\[
+\begin{equation}
+d_{\text{Jaccard}} = \frac{|A \cup B| - |A \cap B|}{|A \cup B|} = \dfrac{c + d}{a + c + d}.
+\end{equation}
+\]</span></p>
+<p>For the provided example, the Jaccard distance would be 1/2 out of a potential maximum value of one. Notably, Jaccard distance ignores explicitly any information value of shared absence. Although, implicitly, as the number of shared absences increases, the collective <span class="math inline">\(a\)</span>, <span class="math inline">\(c\)</span>, and <span class="math inline">\(d\)</span> values must decrease since the sum <span class="math inline">\(a+b+c+d\)</span> is fixed, even if the substitution of <span class="math inline">\(a + c + d \mapsto n - b\)</span> was made, mismatch occurrences are weighted equally to shared absence information.</p>
+</section>
+<section id="rogers-tanimoto" class="level3">
+<h3 class="anchored" data-anchor-id="rogers-tanimoto">Rogers-Tanimoto</h3>
+<p>Rogers-Tanimoto distance weights dissimilarities as twice as impactful as shared occurrences,</p>
+<p><span class="math display">\[
+d_{\text{Rogers-Tanimoto}} = \dfrac{2(c + d)}{a + b + 2(c + d)}.
+\]</span></p>
+<p>For the provided example, the Rogers-Tanimoto distance would be 1/2 out of a potential maximum value of one. While the Rogers-Tanimoto distance is more advantageous in our setting by valuing mismatches as more informative than shared absence data, it still values shared presence and shared absence equally.</p>
+</section>
+<section id="cosine" class="level3">
+<h3 class="anchored" data-anchor-id="cosine">Cosine</h3>
+<p>Cosine distance measures the cosine of the angle between the vectors corresponding to each assemblage. It can be particularly advantageous for situations where the differences between vectors are irrelevant of magnitude, but rather depend on direction, and further it excels for high-dimensional, sparse data (such as ours, with a sparsity of 89%). Concretely, the formula is,</p>
+<p><span class="math display">\[
+\begin{equation}
+d_{\text{Cosine}} = 1 - \dfrac{A \cdot B}{||A||\,|B||}
+\end{equation}
+\]</span></p>
+<p>where <span class="math inline">\(||\cdot||\)</span> denotes the euclidean norm of each assemblage. In the binary case, it can be simplified to,</p>
+<p><span class="math display">\[
+\begin{equation}
+d_{\text{Cosine}} = 1 - \dfrac{|A \cap B|}{\sqrt{|A|\, |B|}} = 1 - \dfrac{a}{\sqrt{(a + c)(a + d)}}.
+\end{equation}
+\]</span></p>
+<p>Consequently, this formulation is fixated only on shared presence, and gives no weight to shared absence.</p>
+</section>
+<section id="similarity-by-presence-and-absence-metric-spam" class="level3">
+<h3 class="anchored" data-anchor-id="similarity-by-presence-and-absence-metric-spam">Similarity by Presence and Absence Metric (SPAM)</h3>
+<p>All of the distance metrics presented thus far either ignore shared absence information (Hamming, Cosine), or treat shared absence equal to shared presence data (Hamming, Rogers-Tanimoto), or treat mismatch occurrences equal to shared absence occurrences(Jaccard). We elected to construct a metric similar to the Rogers-Tanimoto metric which both incorporates shared absence occurrences and allow for unequal weighting between shared absence, shared presence, and mismatch occurrences. These extensions are vital for comparing assemblages derived from ecological surveys where false-absences are non-negligible. To our knowledge, such a metric is not used in the literature. We refer to this metric as the Similarity by Presence and Absence Metric (SPAM), which we define as, <span class="math display">\[
+d_{\text{SPAM}} = \dfrac{\alpha (c + d)}{\beta a + b + \alpha (c + d)},
+\]</span></p>
+<p>where <span class="math inline">\(0 &lt; \alpha &lt; \beta\)</span>, are chosen weights that indicate the relative value an occurrence provides. For example, if <span class="math inline">\(1 &lt; \alpha &lt; \beta\)</span>, then shared presence data is the most informative, followed by mismatches, followed by shared absence data. If <span class="math inline">\(\alpha &lt; 1 &lt; \beta\)</span> then shared presence data is most informative, followed by shared absence data, followed by mismatches. A similar theme can be drawn from any combinations of <span class="math inline">\(\alpha, \beta &gt; 0\)</span>.</p>
+<p>In our situation, we view shared presence data as the most informative, followed by mismatch occurrences, followed by shared absence. While this stance dictates that <span class="math inline">\(1 &lt; \alpha &lt; \beta\)</span>, we subjectively chose <span class="math inline">\(\alpha = 2\)</span> and <span class="math inline">\(\beta = 3\)</span>. As a result, for the example provided above, the SPAM distance would be 1/3.</p>
+</section>
+<section id="comparing-distance-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="comparing-distance-metrics">Comparing Distance Metrics</h3>
+<p>Interestingly, the proposed SPAM distance metric is a more general form of a normalized Hamming distance (<span class="math inline">\(\alpha = \beta = 1\)</span>), the Jaccard distance (<span class="math inline">\(\alpha, \beta \rightarrow \infty\)</span>), and the Rogers-Tanimoto distance metrics (<span class="math inline">\(\alpha = 2\)</span>, <span class="math inline">\(\beta = 1\)</span>). Therefore, for our proceeding work we elected to consider both the SPAM distance metric and the cosine distance metric as our measure of dissimilarity between assemblages.</p>
+</section>
+<section id="agglomerative-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="agglomerative-clustering">Agglomerative Clustering</h3>
+<p>We elect to form clustering using agglomerative clustering. This process initializes by places each assemblage in their own cluster. Next, the distance between clusters is computed, and the nearest clusters are merged into the same cluster. Note, once a cluster has two or more elements (assemblages), the user must specify a linkage to define the distance between clusters.</p>
+<p>There are four primary choices for linkages. Single and complete linkages compute the minimum and maximum, respectively, distances between elements of each cluster. As a result, both single and complete linkages are sensitive to false-absences in one or more of their assemblages. Ward’s linkage aim is to minimize the gain in within-cluster variance as result of the merge, necessitating the definition of a mean assemblage, which is ill-defined in our binary setting.</p>
+<p>The final linkage, and the one we elect to use, is average. In this method, the average, pairwise distances between assemblages is computed, and the cluster pairing for which this is minimum is merged. The merging of clusters is halted when the user either specifies the number of clusters, and/or a tolerance for the distance between clusters to be merged.</p>
+</section>
+<section id="outliers" class="level3">
+<h3 class="anchored" data-anchor-id="outliers">Outliers</h3>
+<p>Before we perform the agglomerative clustering, we removed assemblages that are considered substantial outliers. To define these outliers, we computed the pairwise distances between assemblages, and found the median distance to each other assemblage, per-assemblage. This was done for both the cosine and SPAM metrics defined earlier. The resulting distributions are provided below.</p>
+<div id="549b07f3" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial.distance <span class="im">import</span> pdist, squareform</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> spam_distance(x, y, alpha<span class="op">=</span><span class="dv">2</span>, beta<span class="op">=</span><span class="dv">3</span>):</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> <span class="bu">sum</span>((x <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> (y <span class="op">==</span> <span class="dv">1</span>))</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> <span class="bu">sum</span>((x <span class="op">==</span> <span class="dv">0</span>) <span class="op">&amp;</span> (y <span class="op">==</span> <span class="dv">0</span>))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> <span class="bu">sum</span>((x <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> (y <span class="op">==</span> <span class="dv">0</span>))</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> <span class="bu">sum</span>((x <span class="op">==</span> <span class="dv">0</span>) <span class="op">&amp;</span> (y <span class="op">==</span> <span class="dv">1</span>))</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> alpha <span class="op">*</span> (c <span class="op">+</span> d) <span class="op">/</span> (beta<span class="op">*</span>a <span class="op">+</span> b <span class="op">+</span> alpha <span class="op">*</span> (c <span class="op">+</span> d))</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>dist_matrix_cosine <span class="op">=</span> pdist(<span class="dv">1</span><span class="op">*</span>fish_df, metric<span class="op">=</span><span class="st">'cosine'</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>dist_matrix_spam <span class="op">=</span> pdist(<span class="dv">1</span><span class="op">*</span>fish_df, metric<span class="op">=</span>spam_distance)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>dist_df_cosine <span class="op">=</span> pd.DataFrame(squareform(dist_matrix_cosine))</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>dist_df_spam <span class="op">=</span> pd.DataFrame(squareform(dist_matrix_spam))</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(dist_df_cosine.median(axis<span class="op">=</span><span class="dv">0</span>), clip<span class="op">=</span>(<span class="dv">0</span>, <span class="va">None</span>), ax <span class="op">=</span> ax[<span class="dv">0</span>], fill<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(dist_df_spam.median(axis<span class="op">=</span><span class="dv">0</span>), clip<span class="op">=</span>(<span class="dv">0</span>, <span class="va">None</span>), ax <span class="op">=</span> ax[<span class="dv">1</span>], fill<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">"orange"</span>)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">"Median Cosine Distance"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">"Density"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">"Median SPAM Distance"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_ylabel(<span class="st">"Density"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>Text(0, 0.5, 'Density')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="clustering_files/figure-html/cell-11-output-2.png" width="802" height="432" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The presence of outliers was more clear when using cosine distance, likely resulting from the occasional assemblages with only a few species. Thus, we made two copies of the dataset to proceed with, one we use cosine distance on and where we remove assemblages with median cosine distances greater than 0.8 ( leaving 2203 assemblages remaining), and one we use SPAM distance on and choose to retain all assemblages.</p>
+<div id="baa125fd" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fish_cosine_df <span class="op">=</span> fish_df[(dist_df_cosine.median(axis<span class="op">=</span><span class="dv">0</span>) <span class="op">&lt;=</span> <span class="fl">0.8</span>).values].copy()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>fish_spam_df <span class="op">=</span> fish_df.copy()</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>cosine_df <span class="op">=</span> df[(dist_df_cosine.median(axis<span class="op">=</span><span class="dv">0</span>) <span class="op">&lt;=</span> <span class="fl">0.8</span>).values].copy()</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>spam_df <span class="op">=</span> df.copy()</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>dist_matrix_cosine <span class="op">=</span> pdist(<span class="dv">1</span><span class="op">*</span>fish_cosine_df, metric<span class="op">=</span><span class="st">'cosine'</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>dist_matrix_spam <span class="op">=</span> pdist(<span class="dv">1</span><span class="op">*</span>fish_spam_df, metric<span class="op">=</span>spam_distance)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>dist_df_cosine <span class="op">=</span> pd.DataFrame(squareform(dist_matrix_cosine))</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>dist_df_spam <span class="op">=</span> pd.DataFrame(squareform(dist_matrix_spam))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="choosing-clusters" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-clusters">Choosing Clusters</h3>
+<p>Since our clusters will be used as targets for our classification task, we required each of the resulting clusters to have a minimum of 100 assemblages. Second, we aimed to have no less than four clusters, and no more than ten clusters, to both promote success with our classification task, but to also generate ecologically-meaningful, distinct assemblage themes for each cluster.</p>
+<p>To accomplish these goals, we varied the our tolerance for the distance between assemblage clusters from 0 to 1 for the cosine distance and dataset, and 0 to 0.5 for the SPAM distance and dataset. The resulting figures were used to guide our threshold choice.</p>
+<div id="413f1b85" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> linkage, fcluster</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>linked_cosine <span class="op">=</span> linkage(dist_matrix_cosine, method<span class="op">=</span><span class="st">'average'</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>linked_spam <span class="op">=</span> linkage(dist_matrix_spam, method<span class="op">=</span><span class="st">'average'</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n, thresholds <span class="kw">in</span> <span class="bu">enumerate</span>([np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">101</span>), np.linspace(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">51</span>)]):</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    ratio_data_clustered <span class="op">=</span> []</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    num_big_clusters <span class="op">=</span> []</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> thresholds:</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>            clusters <span class="op">=</span> fcluster(linked_cosine, t, criterion<span class="op">=</span><span class="st">'distance'</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>            clusters <span class="op">=</span> fcluster(linked_spam, t, criterion<span class="op">=</span><span class="st">'distance'</span>)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        cluster_sizes <span class="op">=</span> np.bincount(clusters)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        large_clusters <span class="op">=</span> cluster_sizes[cluster_sizes <span class="op">&gt;=</span> <span class="dv">100</span>]</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>        num_big_clusters.append(<span class="bu">len</span>(large_clusters))</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>            ratio_data_clustered.append(large_clusters.<span class="bu">sum</span>() <span class="op">/</span> <span class="bu">len</span>(fish_cosine_df))</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>            ratio_data_clustered.append(large_clusters.<span class="bu">sum</span>() <span class="op">/</span> <span class="bu">len</span>(fish_spam_df))</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>        <span class="co">#if num_big_clusters[-1] &gt; 4:</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>        <span class="co">#    print(ratio_data_clustered[-1])</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>        <span class="co">#    print(t, num_big_clusters[-1])</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    ax[n].plot(thresholds, ratio_data_clustered, color<span class="op">=</span><span class="st">'darkcyan'</span>, marker<span class="op">=</span><span class="st">'o'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>)</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> ax[n].twinx()</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>    ax2.plot(thresholds, num_big_clusters, color<span class="op">=</span><span class="st">'salmon'</span>, marker<span class="op">=</span><span class="st">'o'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>)</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>    ax[n].set_xlabel(<span class="st">"Threshold"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    ax[n].set_ylabel(<span class="st">"Proportion of Assemblages Clustered"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    ax[n].spines[<span class="st">'left'</span>].set_linewidth(<span class="dv">3</span>) </span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    ax[n].tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span><span class="st">'darkcyan'</span>)</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    ax[n].spines[<span class="st">'left'</span>].set_edgecolor(<span class="st">'darkcyan'</span>)</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    ax[n].yaxis.set_tick_params(left<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">'darkcyan'</span>) </span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>    ax2.spines[<span class="st">'right'</span>].set_linewidth(<span class="dv">3</span>) </span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>    ax2.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span><span class="st">'salmon'</span>)</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>    ax2.spines[<span class="st">'right'</span>].set_edgecolor(<span class="st">'salmon'</span>)</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>    ax2.yaxis.set_tick_params(right<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">'salmon'</span>)</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>    ax2.set_ylabel(<span class="st">"Number of Large Clusters"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].axvline(<span class="fl">0.53</span>, color<span class="op">=</span><span class="st">'grey'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].axvline(<span class="fl">0.20</span>, color<span class="op">=</span><span class="st">'grey'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>fig.subplots_adjust(wspace<span class="op">=</span><span class="fl">0.4</span>)</span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">"Cosine Distance"</span>)</span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">"SPAM Distance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>Text(0.5, 1.0, 'SPAM Distance')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="clustering_files/figure-html/cell-13-output-2.png" width="704" height="378" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For the cosine distance and dataset, we elected to use a distance threshold of 0.53, resulting in 5 major clusters which contain 75.53% (1664 of 2203) of the remaining assembalges. For the SPAM distance and dataset, we eelcted to use a distance threshold of 0.20 (1805 of 2256), resulting in 5 major clusters which contain 80.00% of the remaining assembalges. We can visualize both of these clustering processes using dendrograms,</p>
+<div id="f6095f0f" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>dendrogram(</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    linked_cosine,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    color_threshold <span class="op">=</span> <span class="fl">0.53</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    count_sort<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    no_labels<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax[<span class="dv">0</span>]</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>dendrogram(</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    linked_spam,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    color_threshold <span class="op">=</span> <span class="fl">0.20</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    count_sort<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    no_labels<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax[<span class="dv">1</span>]</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].axhline(y<span class="op">=</span><span class="fl">0.53</span>, color<span class="op">=</span><span class="st">'grey'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].axhline(y<span class="op">=</span><span class="fl">0.20</span>, color<span class="op">=</span><span class="st">'grey'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Assemblages'</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">'Assemblages'</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">"Distance"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">"Cosine Distance"</span>)</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">"SPAM Distance"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="clustering_files/figure-html/cell-14-output-1.png" width="666" height="356" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="cluster-characteristics" class="level3">
+<h3 class="anchored" data-anchor-id="cluster-characteristics">Cluster Characteristics</h3>
+<p>Each clustering method produced sets of five clusters, and, by design, each of these clusters have at least 100 assemblages, although, the number of assemblages in each cluster varies substantially.</p>
+<div id="d1634a0e" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> fcluster</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cosine</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>cosine_cluster_labels <span class="op">=</span> fcluster(linked_cosine, t<span class="op">=</span><span class="fl">0.53</span>, criterion<span class="op">=</span><span class="st">'distance'</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>cosine_df[<span class="st">'cluster'</span>] <span class="op">=</span> cosine_cluster_labels</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>fish_cosine_df[<span class="st">'cluster'</span>] <span class="op">=</span> cosine_cluster_labels</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>cluster_sizes <span class="op">=</span> cosine_df[<span class="st">'cluster'</span>].value_counts()</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>big_clusters <span class="op">=</span> cluster_sizes[cluster_sizes <span class="op">&gt;=</span> <span class="dv">100</span>].index</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> cosine_df[<span class="st">'cluster'</span>].isin(big_clusters).values</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>cosine_df <span class="op">=</span> cosine_df[mask].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>fish_cosine_df <span class="op">=</span> fish_cosine_df[mask].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>mapping <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(big_clusters, <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(big_clusters) <span class="op">+</span> <span class="dv">1</span>)))</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>cosine_df[<span class="st">'cluster'</span>] <span class="op">=</span> cosine_df[<span class="st">'cluster'</span>].replace(mapping)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>fish_cosine_df[<span class="st">'cluster'</span>] <span class="op">=</span> fish_cosine_df[<span class="st">'cluster'</span>].replace(mapping)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co"># spam</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>spam_cluster_labels <span class="op">=</span> fcluster(linked_spam, t<span class="op">=</span><span class="fl">0.20</span>, criterion<span class="op">=</span><span class="st">'distance'</span>)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>spam_df[<span class="st">'cluster'</span>] <span class="op">=</span> spam_cluster_labels</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>fish_spam_df[<span class="st">'cluster'</span>] <span class="op">=</span> spam_cluster_labels</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>cluster_sizes <span class="op">=</span> spam_df[<span class="st">'cluster'</span>].value_counts()</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>big_clusters <span class="op">=</span> cluster_sizes[cluster_sizes <span class="op">&gt;=</span> <span class="dv">100</span>].index</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> spam_df[<span class="st">'cluster'</span>].isin(big_clusters).values</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>spam_df <span class="op">=</span> spam_df[mask].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>fish_spam_df <span class="op">=</span> fish_spam_df[mask].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>mapping <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(big_clusters, <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(big_clusters) <span class="op">+</span> <span class="dv">1</span>)))</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>spam_df[<span class="st">'cluster'</span>] <span class="op">=</span> spam_df[<span class="st">'cluster'</span>].replace(mapping)</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>fish_spam_df[<span class="st">'cluster'</span>] <span class="op">=</span> fish_spam_df[<span class="st">'cluster'</span>].replace(mapping)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="94022c41" class="cell" data-execution_count="15">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">'cluster'</span>, data<span class="op">=</span>fish_cosine_df, hue<span class="op">=</span><span class="st">'cluster'</span>, palette<span class="op">=</span><span class="st">"Set2"</span>, legend<span class="op">=</span><span class="va">False</span>, ax <span class="op">=</span> ax[<span class="dv">0</span>])</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">'cluster'</span>, data<span class="op">=</span>fish_spam_df, hue<span class="op">=</span><span class="st">'cluster'</span>, palette<span class="op">=</span><span class="st">"Set2"</span>, legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">"Number of Assemblages"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">"Cosine Clusters"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">"SPAM Clusters"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>Text(0.5, 0, 'SPAM Clusters')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="clustering_files/figure-html/cell-16-output-2.png" width="670" height="358" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We next inspected how each cluster varied in it’s species composition.</p>
+<div id="17ba2f2a" class="cell" data-execution_count="16">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ordering <span class="op">=</span> fish_df.mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>).index.tolist()</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>ordering.append(<span class="st">'cluster'</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>cosine_comp  <span class="op">=</span> fish_cosine_df[ordering].groupby(<span class="st">'cluster'</span>).mean() <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>spam_comp  <span class="op">=</span> fish_spam_df[ordering].groupby(<span class="st">'cluster'</span>).mean() <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>filt <span class="op">=</span> (np.maximum(cosine_comp.<span class="bu">max</span>(), spam_comp.<span class="bu">max</span>()) <span class="op">&gt;</span> <span class="dv">10</span>).values</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>cosine_comp <span class="op">=</span> cosine_comp.loc[:, filt]</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>spam_comp <span class="op">=</span> spam_comp.loc[:, filt]</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">50</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cosine_comp.T, cmap<span class="op">=</span><span class="st">'Blues'</span>, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">".1f"</span>, ax <span class="op">=</span> ax[<span class="dv">0</span>], cbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>sns.heatmap(spam_comp.T, cmap<span class="op">=</span><span class="st">'Blues'</span>, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">".1f"</span>, ax <span class="op">=</span> ax[<span class="dv">1</span>], cbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].tick_params(axis<span class="op">=</span><span class="st">'y'</span>, rotation<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">"Cosine Clusters"</span>)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">"SPAM Cluster"</span>)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">""</span>)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">""</span>)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].xaxis.set_ticks_position(<span class="st">'top'</span>)</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].xaxis.set_label_position(<span class="st">'top'</span>)</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].xaxis.set_ticks_position(<span class="st">'top'</span>)</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].xaxis.set_label_position(<span class="st">'top'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="clustering_files/figure-html/cell-17-output-1.png" width="817" height="3758" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="31d2e968" class="cell" data-execution_count="17">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.patches <span class="im">as</span> mpatches</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming cosine_comp.T is your DataFrame</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>X1 <span class="op">=</span> cosine_comp.T.values  <span class="co"># First dataset</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>X2 <span class="op">=</span> spam_comp.T.values  <span class="co"># Example second dataset (80% of rows)</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>datasets <span class="op">=</span> [X1, X2]  <span class="co"># List of datasets</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>titles <span class="op">=</span> [<span class="st">"Cosine Distance"</span>, <span class="st">"SPAM Distance"</span>]  <span class="co"># Titles for the subplots</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create subplots</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>), sharex<span class="op">=</span><span class="va">True</span>, sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (X, ax) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(datasets, axs)):</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Standardize the data</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> StandardScaler().fit_transform(X)</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Perform PCA</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>    X_pca <span class="op">=</span> pca.fit_transform(X)</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get loadings</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    loadings <span class="op">=</span> pca.components_.T</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Scatter plot of transformed data points</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>    most_common_cluster <span class="op">=</span> cosine_comp.T.idxmax(axis<span class="op">=</span><span class="dv">1</span>)  <span class="co"># Adjust based on your logic</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>    palette <span class="op">=</span> sns.color_palette(<span class="st">"Set2"</span>, n_colors<span class="op">=</span><span class="bu">len</span>(<span class="bu">set</span>(most_common_cluster)))</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>    mapped_colors <span class="op">=</span> [palette[v <span class="op">-</span> <span class="dv">1</span>] <span class="cf">for</span> v <span class="kw">in</span> most_common_cluster]</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>    legend_handles <span class="op">=</span> [</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>        mpatches.Patch(color<span class="op">=</span>palette[i], alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="bu">str</span>(i <span class="op">+</span> <span class="dv">1</span>)) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(X.shape[<span class="dv">1</span>])</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>    ax.scatter(X_pca[:, <span class="dv">0</span>], X_pca[:, <span class="dv">1</span>], color<span class="op">=</span>mapped_colors, s<span class="op">=</span><span class="dv">10</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add labels to data points</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j, txt <span class="kw">in</span> <span class="bu">enumerate</span>(cosine_comp.T.index):</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>        ax.text(X_pca[j, <span class="dv">0</span>], X_pca[j, <span class="dv">1</span>], <span class="bu">str</span>(txt), color<span class="op">=</span>mapped_colors[j], fontsize<span class="op">=</span><span class="dv">8</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot the loadings (vectors)</span></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(loadings.shape[<span class="dv">0</span>]):</span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>        ax.quiver(<span class="dv">0</span>, <span class="dv">0</span>, loadings[j, <span class="dv">0</span>], loadings[j, <span class="dv">1</span>], angles<span class="op">=</span><span class="st">'xy'</span>, scale_units<span class="op">=</span><span class="st">'xy'</span>, scale<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>                  color<span class="op">=</span><span class="st">'red'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>        ax.text(loadings[j, <span class="dv">0</span>] <span class="op">*</span> <span class="fl">1.2</span>, loadings[j, <span class="dv">1</span>] <span class="op">*</span> <span class="fl">1.2</span>, cosine_comp.T.columns[j],</span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>                color<span class="op">=</span><span class="st">'black'</span>, fontsize<span class="op">=</span><span class="dv">10</span>, ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add reference lines</span></span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>    ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>    ax.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add title and labels</span></span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a>    ax.set_title(titles[i])</span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="ss">f'PC1 (</span><span class="sc">{</span>pca<span class="sc">.</span>explained_variance_ratio_[<span class="dv">0</span>] <span class="op">*</span> <span class="dv">100</span><span class="sc">:.2f}</span><span class="ss">%)'</span>)</span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="ss">f'PC2 (</span><span class="sc">{</span>pca<span class="sc">.</span>explained_variance_ratio_[<span class="dv">1</span>] <span class="op">*</span> <span class="dv">100</span><span class="sc">:.2f}</span><span class="ss">%)'</span>)</span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>    ax.legend(handles<span class="op">=</span>legend_handles, title<span class="op">=</span><span class="st">'Top Cluster'</span>, loc<span class="op">=</span><span class="st">'best'</span>, frameon<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout</span></span>
+<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="clustering_files/figure-html/cell-18-output-1.png" width="1525" height="564" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I need to fix the length of these arrows</p>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

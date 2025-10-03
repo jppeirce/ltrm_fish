@@ -1,0 +1,11 @@
+Jaccard
+
+1. Agnes (Agglomerative w/ Jaccard) - complete, average, single
+2. Divsive w/ Jaccard (Same as Diana w/ complete), could also do average and complete
+3. K-Modes (w/ Jaccard), different number of clusters
+4. Self-Organizing Maps (w/ Jaccard Distance) 
+
+sort clusteirng map based on overall frequency
+clusters frequency over time
+
+MCA, Autoencoders + regular clustering techniques
