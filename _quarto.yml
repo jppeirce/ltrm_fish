@@ -1,0 +1,52 @@
+title: "Title of manuscript: short and informative"
+author:
+  - name: "First Author"
+    affiliation: "1"
+  - name: "Second Author"
+    affiliation: "2"
+affiliations:
+  - id: "1"
+    institution: "Department of Ecology, University A, City, Country"
+  - id: "2"
+    institution: "Department of Biology, University B, City, Country"
+date: "`r Sys.Date()`"
+abstract: |
+  Short abstract (max ~250 words). Summarize background, main methods, key results, and conclusions.
+keywords: [community assembly, fish, lentic, diversity]
+#bibliography: manuscript/references.bib
+format:
+  pdf:
+    documentclass: article
+    number-sections: true
+    toc: false
+    latex-engine: xelatex
+    keep-tex: false
+    title-block: false
+    include-in-header: |
+      % Packages for the custom title page and nicer spacing
+      \usepackage{authblk}
+      \usepackage{setspace}
+      \usepackage{geometry}
+      \usepackage{hyperref}
+      \geometry{margin=1in}
+    include-before-body: |
+      % Custom title page so front-matter isn't printed as plain text
+      \begin{titlepage}
+      \centering
+      {\LARGE \textbf{Title of manuscript: short and informative} \par}
+      \vspace{1cm}
+      {\large First Author\textsuperscript{1}, Second Author\textsuperscript{2} \par}
+      \vspace{0.6cm}
+      {\small\textsuperscript{1}Department of Ecology, University A, City, Country \par}
+      {\small\textsuperscript{2}Department of Biology, University B, City, Country \par}
+      \vspace{1cm}
+      \begin{minipage}{0.85\textwidth}
+      \begin{abstract}
+      Short abstract (max ~250 words). Summarize background, main methods, key results, and conclusions.
+      \end{abstract}
+      \end{minipage}
+      \vfill
+      \end{titlepage}
+  html:
+    theme: paper
+    title-block: false
