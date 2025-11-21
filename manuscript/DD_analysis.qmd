@@ -1,0 +1,403 @@
+---
+title: "Habitat for Humanity - Dumpster Diversion Program 2024"
+project:
+  type: manuscript
+
+format:
+  html:
+    self-contained: true
+    code-fold: true
+  docx:
+    embed-resources: true
+  pdf:
+    documentclass: article
+    number-sections: true
+    toc: false
+    fontsize: 11pt
+    geometry: margin=1in
+
+---
+
+```{r}
+#| include: false
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 4
+#| fig-height: 3
+```
+
+```{r, warning=FALSE, include=FALSE, results='hide'}
+# Load necessary libraries
+library(tidyverse)
+library(pander)
+library(scales)
+library(knitr)
+library(english)
+
+# Total weight of trash collected during move out:
+trash_weight <- tibble(
+  Year = c(2023, 2024),
+  "Move Out" = c(26320, 20960),
+  "After Move Out" = c(2120, 3280) )
+
+trash_weight_2023 <- trash_weight[trash_weight$Year == 2023,]$`Move Out` + trash_weight[trash_weight$Year == 2023,]$`After Move Out`
+trash_weight_2024 <- trash_weight[trash_weight$Year == 2024,]$`Move Out` + trash_weight[trash_weight$Year == 2024,]$`After Move Out`
+
+tw_long <- pivot_longer(trash_weight, 
+                        cols = c(`Move Out`, `After Move Out`), 
+                        names_to = "Collected", 
+                        values_to = "Amount")
+
+
+# Load the data for diverted and received 
+data_diverted <- read_csv("DD2024diverted.csv")
+data_received <- read_csv("DD2024received.csv")
+
+# Prepare values for the summary
+
+# Total items
+total_furniture <- sum(data_diverted[data_diverted$Category == "Furniture",]$Total-data_diverted[data_diverted$Category == "Furniture",]$Discarded)
+total_bedding <- sum(data_diverted[data_diverted$Item %in% c("Mattress", "Topper", "Sheets", "Duvet", "Blanket"),]$Total-data_diverted[data_diverted$Item %in% c("Mattress", "Topper", "Sheets", "Duvet", "Blanket"),]$Discarded)
+total_clothing <- sum(data_diverted[data_diverted$Category == "Clothes",]$Total-data_diverted[data_diverted$Category == "Clothes",]$Discarded)
+total_electronics <- sum(data_diverted[data_diverted$Item %in% c("Microwave","Mini Fridge", "Waffle Maker", "Coffee Maker", "Air Fryer Crock Pot", "Toaster", "Blender", "Vaccum", "Humidifier", "TV"),]$Total-data_diverted[data_diverted$Item %in% c("Microwave","Mini Fridge", "Waffle Maker", "Coffee Maker", "Air Fryer Crock Pot", "Toaster", "Blender", "Vaccum", "Humidifier", "TV"),]$Discarded)
+
+total_weight <- sum((data_diverted$Total-data_diverted$Discarded)*data_diverted$Weight) # lbs
+
+# Conversion rates per item
+furniture_CO2 <- 110.231 #lb Co2
+bedding_CO2 <- 110.231 
+clothing_CO2 <- 22.0462
+electronics_CO2 <- 110.231
+
+clothing_water <- 713.2645 #gal water
+bedding_water <- 1320.86
+
+electronics_energy <- 200 #kWh
+
+annual_car_CO2 <- 11435
+annual_family_water <- 107000
+mo_energy_per_houseWI <- 703
+
+```
+
+# Summary
+
+The Dumpster Diversion Program at UWL was a collaboration between the La Crosse Habitat for Humanity and the University of Wisconsin La Crosse. At the end of Spring Semester 2024, ten storage containers, or “pods,” were placed near campus dumpsters, acting as collection sites for large items to be donated. The pods remained for about two weeks, coinciding with move-out, and then were transported to the Habitat for Humanity Restore to be sorted.
+
+In 2023, `r format(trash_weight_2023, big.mark = ",",)` pounds of material collected from campus were transported to the La Crosse County Landfill. This total did not include large items, as the City of La Crosse provided large item pickup that year. In 2024, large item pickup was no longer available, yet the total weight of landfill-bound material from campus decreased by 4,200 pounds (see figure below). This notable reduction—and potentially more—was diverted from the landfill through the successful implementation of the Dumpster Diversion Program.
+
+```{r, echo = FALSE, warning=FALSE}
+#| out-width: "75%"
+totals <- tw_long %>%
+  group_by(Year) %>%
+  summarise(Total = sum(Amount))
+
+ggplot(tw_long, aes(x = factor(Year), y = Amount)) +
+  geom_bar(stat = "identity", aes(fill = Collected)) +
+  geom_text(data = totals, aes(x = factor(Year), y = Total, label = Total),
+            vjust = -0.5, fontface = "bold") +
+  labs(x = "Year", y = "Weight (lb)") +
+  scale_fill_manual(values = c("Move Out" = "coral", "After Move Out" = "lightblue")) +
+ # guides(fill = guide_legend(title = NULL))+
+  theme(
+ #       axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = c(1, 1),
+        legend.justification = c(1, 1),
+        legend.background = element_rect(fill = "white", color = "black"))+
+  theme_minimal()
+```
+
+
+During the Dumpster Diversion program a total of `r sum(data_diverted$Total)` items in `r length(unique(data_diverted$Category))` categories (Bedroom, Cleaning, Clothes, Food, Furniture, Kitchen, Random, and School Supplies) were collected. These diverted items have generated substantial environmental benefits by extending product lifespans, reducing landfill waste, and lowering the carbon footprint associated with new production. By prioritizing reuse over disposal, UWL students are actively contributing to a circular economy and minimizing resource depletion.
+
+In addition, `r length(unique(data_received$Organization))` organizations in the Coulee Region received `r sum(data_received$Number)` items (`r round(sum(data_received$Number)/sum(data_diverted$Total),3)*100`% of total diverted) with approximately value of `r dollar(sum(data_received$Money, na.rm = TRUE))`.
+
+| Impact Metric | Approximate Estimated Savings |
+|------------------------------------|------------------------------------|
+| Waste Diverted | `r round(total_weight/2000,1)` tons kept out of landfills (in comparison, `r round(trash_weight_2024/2000,1)` tons was collected for landfill) |
+| Carbon Reduction | `r round( (total_furniture*furniture_CO2 + total_bedding*bedding_CO2 + total_clothing*clothing_CO2 + total_electronics*electronics_CO2)/2000,1)` tons of CO2 (equivalent to removing `r round( (total_furniture*furniture_CO2 + total_bedding*bedding_CO2 + total_clothing*clothing_CO2 + total_electronics*electronics_CO2)/annual_car_CO2)` cars from the road for a year) \[1, 2\] |
+| Water Saved | `r format(round( total_bedding*bedding_water + total_clothing*clothing_water, 0), big.mark = ",",)` gallons (equivalent to `r format(round(( total_bedding*bedding_water + total_clothing*clothing_water)/annual_family_water, 1), big.mark = ",",)` household's annual water use) \[1, 3\] |
+| Energy Saved | `r format(round( total_electronics*electronics_energy, 1), big.mark = ",",)` kWh (equivalent to powering a home for `r format(ceiling(( total_electronics*electronics_energy)/mo_energy_per_houseWI), big.mark = ",",)` months) \[1\] |
+
+: Key Environmental Benefits
+
+# Data Analysis and Graphs
+
+## General Summary of Diverted Items
+
+A total of `r sum(data_diverted$Total)` items in `r length(unique(data_diverted$Category))` categories were collected. A random sample of the dataset is:
+
+```{r, echo = FALSE, warning=FALSE}
+# Display 5 random rows of the data_diverted
+#summary(data_diverted)
+pander(sample_n(data_diverted |> select(Item, Category, Total, Discarded, Money), 5))
+```
+
+After grouping the items by category:
+
+```{r, echo = FALSE, warning=FALSE}
+# Summarize the data_diverted with money spent in each category
+summary <- data_diverted %>%
+    group_by(Category) %>%
+    summarize(
+        Items_Diverted = sum(Total - Discarded),
+        Total_Value = sum(Money, na.rm = TRUE),
+        Value_Per_Item = round(Total_Value/Items_Diverted, 2))
+
+# Add better column names
+#pander(summary)
+
+# Display the table
+kable(summary, col.names = c("Category", "Items", "Total Value (`$`)", "Value per Item (`$`)"))
+```
+
+### Graphs
+
+```{r, echo = FALSE, warning=FALSE}
+#| out-width: "75%"
+ggplot(summary, aes(x = Category)) +
+    geom_bar(aes(y = Items_Diverted), stat = "identity", fill = "blue", alpha = 0.7) +
+    scale_y_continuous(
+        name = "Number") +
+    labs(title = "Number of Items Diverted per Category") +
+    theme_minimal()
+
+ggplot(summary, aes(x = Category)) +
+    geom_bar(aes(y = Total_Value), stat = "identity", fill = " dark green", alpha = 0.7) +
+    scale_y_continuous(
+        name = "Total Value",
+        labels = scales::dollar_format(prefix = "$")) +
+    labs(title = "Total Value of each Category") +
+    theme_minimal()
+```
+
+### Observations:
+
+-   The most collected categories were food and furniture items.
+-   The number of bedroom, clothes, kitchen, and random items were approximately the same.
+-   There were very few cleaning items and school supplies donated.
+-   The category with the highest value is furniture, which was significantly greater than all the rest.
+-   The second most collected category (furniture) is also the most valuable (see below).
+
+```{r, echo = FALSE, warning=FALSE}
+#| out-width: "75%"
+
+ggplot(summary, aes(x = Category)) +
+    geom_bar(aes(y = Value_Per_Item), stat = "identity", fill = "purple", alpha = 0.7) +
+    scale_y_continuous(
+        name = "Value per Item",
+        labels = scales::dollar_format(prefix = "$")) +
+    labs(title = "Value per Item") +
+    theme_minimal()
+
+```
+
+## Waste Diversion (Landfill Reduction)
+
+By keeping furniture, clothing, and electronics in circulation, this initiative prevents over `r round(total_weight/2000,1)` tons of material from entering landfills, reducing methane emissions, and soil contamination.
+
+```{r, echo = FALSE, warning=FALSE}
+# Summarize the data_diverted with money spent in each category
+summary2 <- data_diverted %>%
+    group_by(Category) %>%
+    summarize(
+        Items_Saved = sum(Total - Discarded),
+        Total_Value = sum(Money, na.rm = TRUE),
+        Value_Per_Item = round(Total_Value/Items_Saved, 2),
+        Total_Weight = round(sum(Weight * (Total-Discarded)), 2),
+        Mean_Comb = round(mean(Combustible),2),
+        Weight_Comb = Mean_Comb*Total_Weight,
+        Mean_Metal = round(mean(Metal),2),
+        Weight_Metal = Mean_Metal*Total_Weight,
+        Mean_Plastic = round(mean(Plastic),2),
+        Weight_Plastic = Mean_Plastic*Total_Weight)
+
+# Display the summary
+#pander(summary2 |>
+#         select(Category, Weight_Comb, Weight_Metal, # Weight_Plastic, Total_Weight ))
+
+# summary:
+weight_total <- sum(summary2$Total_Weight)
+comb_total <- sum(summary2$Weight_Comb)
+metal_total <- sum(summary2$Weight_Metal)
+plastic_total <- sum(summary2$Weight_Plastic)
+```
+
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
+#| out-width: "75%"
+
+# Stacked Bar Plot for Weight Distribution
+summary2_long <- summary2 %>%
+    select(Category, Weight_Comb, Weight_Metal, Weight_Plastic) %>%
+    pivot_longer(cols = starts_with("Weight"), names_to = "Material", values_to = "Weight") %>%
+    mutate(Material = recode(Material,
+                             "Weight_Comb" = "Combustible",
+                             "Weight_Metal" = "Metal",
+                             "Weight_Plastic" = "Plastic"))
+
+ggplot(summary2_long, aes(x = Category, y = Weight, fill = Material)) +
+    geom_bar(stat = "identity") +
+    labs(title = "Weight Distribution per Category", y = "Weight", x = "Category") +
+    theme_minimal() +
+    scale_fill_manual(values = c("Combustible" = "red", "Metal" = "grey", "Plastic" = "blue")) +
+    theme(
+ #       axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = c(1, 1),
+        legend.justification = c(1, 1),
+        legend.background = element_rect(fill = "white", color = "black")
+    )
+# Pie Chart for Overall Weight Distribution
+total_weights <- summary2 %>%
+    summarise(
+        Combustible = sum(Weight_Comb),
+        Metal = sum(Weight_Metal),
+        Plastic = sum(Weight_Plastic)
+#        Other = sum(Total_Weight)-(Combustible + Metal + Plastic) 
+    ) %>%
+    pivot_longer(cols = everything(), names_to = "Material", values_to = "Weight")
+
+ggplot(total_weights, aes(x = "", y = Weight, fill = Material)) +
+    geom_bar(stat = "identity", width = 1) +
+    coord_polar("y") +
+    labs(title = "Overall Weight Distribution") +
+    theme_minimal() +
+    scale_fill_manual(values = c("Combustible" = "red", "Metal" = "grey", "Plastic" = "blue"))
+```
+
+### Observations
+
+An estimated `r format(round(weight_total), big.mark = ",",scientific = FALSE)` pounds\* collected with approximately
+
+-   `r format(round(comb_total), big.mark = ",")` pounds (`r round(100*comb_total/weight_total,1)`%) of combustible material
+
+-   `r format(round(metal_total), big.mark = ",")` pounds (`r round(100*metal_total/weight_total,1)`%) of metal material,
+
+-   `r format(round(sum(summary2$Weight_Plastic)), big.mark = ",",)` pounds (`r round(100*plastic_total/weight_total,1)`%) of plastic material, and
+
+-   `r format(round(weight_total - (comb_total+metal_total+plastic_total)), big.mark = ",",)` pounds (`r round(100*(1-(comb_total+metal_total+plastic_total)/weight_total),1)`%) of other (glass, ceramic, etc.) material.
+
+\* Approximate minimum weight (in lbs) of each item was estimated from various sources on the internet. For example:
+
+```{r, echo = FALSE, warning=FALSE}
+# Display 10 random rows of the data_diverted
+#summary(data_diverted)
+pander(sample_n(data_diverted |> select(Item, Category, Total, Weight), 3))
+```
+
+## Additional Environmental Benefits
+
+### Lowering Carbon Emissions
+
+Manufacturing new goods requires significant energy and raw materials. By extending the lifespan of these items, we reduce carbon emissions associated with manufacturing new ones.
+
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
+carbon_savings <- data.frame(
+  Category = c("Furniture", "Mattresses & Bedding", "Clothing", "Electronic & Appliances"),
+  CO2_Avoided_Per_Item = c("110-220", "110", "22-44", "110-440"),
+  Number_of_Items = c(total_furniture, total_bedding, total_clothing, total_electronics),
+  Total_CO2_Saved = format(round( c(total_furniture*furniture_CO2, total_bedding*bedding_CO2, total_clothing*clothing_CO2, total_electronics*electronics_CO2),1), big.mark = ",")
+)
+
+# Display the table
+kable(carbon_savings, col.names = c("Category", "CO2 Avoided Per Item (lb)", "Number of Items", "Total CO2 Saved (lb)"), 
+      caption = "Carbon Footprint Reduction by Category")
+```
+
+**Total Carbon Savings:** By reusing donated furniture, textiles, and electronic we have avoided approximate `r round( (total_furniture*furniture_CO2 + total_bedding*bedding_CO2 + total_clothing*clothing_CO2 + total_electronics*electronics_CO2)/2000,1)` tons of CO$_2$ emissions, the equivalent of offsetting *an entire year's emissions for `r format(floor(( total_bedding*bedding_water + total_clothing*clothing_water)/annual_family_water), big.mark = ",",)` households or `r round( (total_furniture*furniture_CO2 + total_bedding*bedding_CO2 + total_clothing*clothing_CO2 + total_electronics*electronics_CO2)/(annual_car_CO2))` cars off the road for a year!*
+
+### Conserving Natural Resources
+
+The donation of `r total_clothing` clothing items alone saved `r format(round( total_clothing*clothing_water, 1), big.mark = ",",)` gallons of water, reducing the demand for resource-intensive textile production. Reusing mattresses, bedding, pillows, and blankets (a total of `r total_bedding` items) resulted in approximate `r format(round( total_bedding*bedding_water, 0), big.mark = ",",)` gallons of water savings. Donated microwaves, fridges, and coffee makers (a total of `r total_electronics` items) helped conserve over `r format(round( total_electronics*electronics_energy, 1), big.mark = ",",)` kWh of energy, reducing dependence on fossil fuels.
+
+## Costs
+
+There were 10 dumpsters or pods. **Assuming** the pods are 40-yard dumpsters that cost approximately \$697-\$947 to tip.
+
+```{r, echo = FALSE, warning=FALSE}
+costs <- tibble(
+    Source  = c("Volunteers", "Staff", "Dumpster Tips"),
+    Number = c(517,256,10),
+    Cost_Per_Unit = c(33.49,33.49,700),
+    Unit = c("$ per hour", "$ per hour", "$ per tip")
+)
+
+costs <- costs %>% mutate(
+    Cost = Number*Cost_Per_Unit
+)
+
+pander(costs)
+```
+
+### Graphs
+
+```{r, echo = FALSE, warning=FALSE}
+#| out-width: "75%"
+
+# Plot Total_Money and Money_Per_Item
+ggplot(costs, aes(x = Source)) +
+    geom_bar(aes(y = Cost), stat = "identity", fill = "red", alpha = 0.7) +
+   scale_y_continuous(
+        name = "Dollars",
+        labels = scales::dollar_format(prefix = "$")) +
+    labs(title = "Cost per Source") +
+    theme_minimal()
+```
+
+## Summary of Received Items
+
+`r str_to_title(as.english(length(unique(data_received$Organization))))` organizations in the Coulee Region received `r sum(data_received$Number)` items (`r round(sum(data_received$Number)/sum(data_diverted$Total),3)*100`% of total diverted) of approximately value of `r dollar(sum(data_received$Money, na.rm = TRUE))`. A random sample of the received dataset is:
+
+```{r, echo = FALSE, warning=FALSE}
+# Display 10 random rows of the data_diverted
+#summary(data_diverted)
+pander(sample_n(data_received[,1:5], 5))
+```
+
+After grouping by Organization:
+
+```{r, echo = FALSE, warning=FALSE}
+
+received_summary <- data_received |>
+    group_by(Organization) |>
+    summarize( 
+        "Number of Items" = sum(Number),
+        "Monetary Value" = sum(Money, na.rm = TRUE)
+    )
+pander(received_summary)
+```
+
+### Graphs
+
+```{r, echo = FALSE, warning=FALSE}
+#| out-width: "75%"
+
+ggplot(received_summary, aes(x = Organization, y = `Number of Items`)) +
+    geom_bar(stat = "identity", fill = "blue", alpha = 0.7) +
+    labs(title = "Number of Items Received per Organization", y = "Number of Items", x = "Organization") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 75, hjust = 1))
+
+ggplot(received_summary, aes(x = Organization, y = `Monetary Value`)) +
+    geom_bar(stat = "identity", fill = "darkgreen", alpha = 0.7) +
+    labs(title = "Value of Items Received per Organization", y = "Total Value ($)", x = "Organization") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 75, hjust = 1))
+```
+
+### Observations
+
+-   UWL Pantry received the largest number of items. However, all items were food items with estimated value of \$1/item.
+-   LAX Exchange received a low number of items (approximately `r round( sum(100*data_received[data_received$Organization == "LAX Exchange",]$Number)/sum(data_received$Number),1)`% of all items) for the highest value of \$`r sum(data_received[data_received$Organization == "LAX Exchange",]$Money, na.rm = TRUE)`.
+
+# Suggestions for future Dumpster Diversions
+
+-   Data: numbers of items diverted, weight of trash (other items collected during the same period of time), number of volunteers, and items donated/sold.
+
+# Sources:
+
+\[1\] U.S. Environmental Protection Agency
+
+\[2\] FIRA furniture industry carbon footprint report (https://www.fira.co.uk/images/fira-carbon-footprinting-document-2011.pdf)
+
+\[3\] World Wildlife Foundation
