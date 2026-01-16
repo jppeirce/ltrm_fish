@@ -1,0 +1,15 @@
+---
+title: "2cluster_analysis"
+format: html
+editor: visual
+---
+
+```{r}
+#| echo: false
+#| output: false
+#  install.packages(c("dynamicTreeCut","vegan")) # run once
+library(dynamicTreeCut)
+library(vegan)   # for Jaccard distances on binary data
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).

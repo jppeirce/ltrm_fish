@@ -16,7 +16,7 @@
         "# Data\n",
         "We pulled all backwater, electrofishing records from the Long Term Resource Monitoring (LTRM) repository. In total, that is over 253,804 records.\n"
       ],
-      "id": "57383e0e"
+      "id": "e60a0cbb"
     },
     {
       "cell_type": "code",
@@ -28,7 +28,7 @@
         "\n",
         "# ESVEG92, SUBSTRT, SNAG, wingdyke, trib, riprap, inout, flooded- do any of these determine another"
       ],
-      "id": "33f3cb95",
+      "id": "d757a0fd",
       "execution_count": null,
       "outputs": []
     },
@@ -40,7 +40,7 @@
         "Next, to contextualize the conditions that are associated with different kinds of assemblages, \n",
         "we rely on basic hydrological characteristics recorded in the LTRM. Their descriptions are available in the [LTRM's meta data[](https://umesc.usgs.gov/cgi-bin/ltrmp/fish/fish_meta.pl). We first inspect how the availability of these features has changed over time. \n"
       ],
-      "id": "3a0f3a08"
+      "id": "c2037bc1"
     },
     {
       "cell_type": "code",
@@ -78,7 +78,7 @@
       "source": [
         "In general, hydrological characteristics have become reliably recorded, especially since 2004 (see Figure @fig-missing-data). To avoid introducing bias by imputing missing data values, and to mitigate the introduced bias by excluding observations with missing data, we elected to retain only observations since 2004 that had known values for all 12 hydrological features, reducing our number of observations to 130,882. \n"
       ],
-      "id": "b9049412"
+      "id": "a2895775"
     },
     {
       "cell_type": "code",
@@ -86,7 +86,7 @@
       "source": [
         "df = df[(df['year'] >= 2004) & (df[quant_cols + cat_cols].isna().sum(axis=1) == 0)].reset_index(drop=True)"
       ],
-      "id": "3c15f9a5",
+      "id": "4a6bd226",
       "execution_count": null,
       "outputs": []
     },
@@ -106,7 +106,7 @@
         "A table showing the final, re-organized dataset is provided below. In total, there \n",
         "are 2,280 assemblages and 119 unique species of fish. "
       ],
-      "id": "d4c29e53"
+      "id": "23bf0114"
     },
     {
       "cell_type": "code",
@@ -131,7 +131,7 @@
         "pd.set_option('display.max_columns', None)\n",
         "df.head()"
       ],
-      "id": "0fcdb2c3",
+      "id": "911c8e91",
       "execution_count": null,
       "outputs": []
     },
@@ -144,7 +144,7 @@
         "to uncover any basic patterns. We first looked at the distribution of richness (the number of\n",
         "species found in each assemblage) by pool. \n"
       ],
-      "id": "35d9b6d4"
+      "id": "dba7e2df"
     },
     {
       "cell_type": "code",
@@ -173,7 +173,7 @@
         "\n",
         "Next, we looked how the median richness in each pool has changed with respect to the sampling year. \n"
       ],
-      "id": "182130e1"
+      "id": "19a8f1e0"
     },
     {
       "cell_type": "code",
@@ -204,7 +204,7 @@
         "We could also remove data from 2008 (for some or all pools), but that is not as clear to me as bias in the collection method, however, wasn't there a major recession that year?\n",
         "::: \n"
       ],
-      "id": "81e05edf"
+      "id": "78bd2811"
     },
     {
       "cell_type": "code",
@@ -215,7 +215,7 @@
         "df = df[mask]\n",
         "fish_df = fish_df[mask]"
       ],
-      "id": "d07c36fd",
+      "id": "b901a9b6",
       "execution_count": null,
       "outputs": []
     },
@@ -225,7 +225,7 @@
       "source": [
         "Next, we looked at how richness varies across periods for each pool.\n"
       ],
-      "id": "40220aae"
+      "id": "32bed3f9"
     },
     {
       "cell_type": "code",
@@ -252,7 +252,7 @@
         "\n",
         "Our final piece of exploratory data analysis was to understand the distribution of unique species across all pools. \n"
       ],
-      "id": "8e1e6f51"
+      "id": "ddb133d0"
     },
     {
       "cell_type": "code",
@@ -373,7 +373,7 @@
         "### Outliers\n",
         "Before we perform the agglomerative clustering, we removed assemblages that are considered substantial outliers. To define these outliers, we computed the pairwise distances between assemblages, and found the median distance to each other assemblage, per-assemblage. This was done for both the cosine and SPAM metrics defined earlier. The resulting distributions are provided below. \n"
       ],
-      "id": "f1724328"
+      "id": "fbe42724"
     },
     {
       "cell_type": "code",
@@ -402,7 +402,7 @@
         "ax[1].set_xlabel(\"Median SPAM Distance\", fontsize = 12)\n",
         "ax[1].set_ylabel(\"Density\", fontsize = 12)"
       ],
-      "id": "ed5a4ffc",
+      "id": "d9dde668",
       "execution_count": null,
       "outputs": []
     },
@@ -412,7 +412,7 @@
       "source": [
         "The presence of outliers was more clear when using cosine distance, likely resulting from the occasional assemblages with only a few species. Thus, we made two copies of the dataset to proceed with, one we use cosine distance on and where we remove assemblages with median cosine distances greater than 0.8 ( leaving 2203 assemblages remaining), and one we use SPAM distance on and choose to retain all assemblages. \n"
       ],
-      "id": "81c746a5"
+      "id": "a4a007a1"
     },
     {
       "cell_type": "code",
@@ -430,7 +430,7 @@
         "dist_df_cosine = pd.DataFrame(squareform(dist_matrix_cosine))\n",
         "dist_df_spam = pd.DataFrame(squareform(dist_matrix_spam))"
       ],
-      "id": "720847d8",
+      "id": "ca07e229",
       "execution_count": null,
       "outputs": []
     },
@@ -443,7 +443,7 @@
         "\n",
         "To accomplish these goals, we varied the our tolerance for the distance between assemblage clusters from 0 to 1 for the cosine distance and dataset, and 0 to 0.5 for the SPAM distance and dataset. The resulting figures were used to guide our threshold choice. \n"
       ],
-      "id": "e87c7798"
+      "id": "0841e762"
     },
     {
       "cell_type": "code",
@@ -504,7 +504,7 @@
         "ax[0].set_title(\"Cosine Distance\")\n",
         "ax[1].set_title(\"SPAM Distance\")"
       ],
-      "id": "9670bf4e",
+      "id": "92501117",
       "execution_count": null,
       "outputs": []
     },
@@ -514,7 +514,7 @@
       "source": [
         "For the cosine distance and dataset, we elected to use a distance threshold of 0.53, resulting in 5 major clusters which contain 75.53% (1664 of 2203) of the remaining assembalges. For the SPAM distance and dataset, we eelcted to use a distance threshold of 0.20 (1805 of 2256), resulting in 5 major clusters which contain 80.00% of the remaining assembalges. We can visualize both of these clustering processes using dendrograms, \n"
       ],
-      "id": "d83e8a53"
+      "id": "46d94945"
     },
     {
       "cell_type": "code",
@@ -550,7 +550,7 @@
         "ax[0].set_title(\"Cosine Distance\")\n",
         "ax[1].set_title(\"SPAM Distance\");"
       ],
-      "id": "698758c6",
+      "id": "02aa7c8d",
       "execution_count": null,
       "outputs": []
     },
@@ -562,7 +562,7 @@
         "\n",
         "Each clustering method produced sets of five clusters, and, by design, each of these clusters have at least 100 assemblages, although, the number of assemblages in each cluster varies substantially. \n"
       ],
-      "id": "7d8c53ef"
+      "id": "018b420d"
     },
     {
       "cell_type": "code",
@@ -602,7 +602,7 @@
         "spam_df['cluster'] = spam_df['cluster'].replace(mapping)\n",
         "fish_spam_df['cluster'] = fish_spam_df['cluster'].replace(mapping)"
       ],
-      "id": "3bc3ff49",
+      "id": "d4f1018f",
       "execution_count": null,
       "outputs": []
     },
@@ -619,7 +619,7 @@
         "ax[0].set_xlabel(\"Cosine Clusters\", fontsize=12)\n",
         "ax[1].set_xlabel(\"SPAM Clusters\", fontsize=12)"
       ],
-      "id": "2255054e",
+      "id": "3959e6ea",
       "execution_count": null,
       "outputs": []
     },
@@ -629,7 +629,7 @@
       "source": [
         "We next inspected how each cluster varied in it's species composition."
       ],
-      "id": "2eb381de"
+      "id": "06cc1280"
     },
     {
       "cell_type": "code",
@@ -659,7 +659,7 @@
         "ax[1].xaxis.set_ticks_position('top')\n",
         "ax[1].xaxis.set_label_position('top');"
       ],
-      "id": "96cece50",
+      "id": "6959981f",
       "execution_count": null,
       "outputs": []
     },
@@ -731,7 +731,7 @@
         "plt.tight_layout()\n",
         "plt.show()"
       ],
-      "id": "6b60c91c",
+      "id": "c1fa6308",
       "execution_count": null,
       "outputs": []
     },
@@ -743,7 +743,7 @@
         "I need to fix the length of these arrows and probably stack these plots vertically\n",
         ":::\n"
       ],
-      "id": "a2271f46"
+      "id": "bcde5739"
     },
     {
       "cell_type": "code",
@@ -767,7 +767,7 @@
         "# Show the plot\n",
         "plt.show()"
       ],
-      "id": "07c41a5a",
+      "id": "051dedc8",
       "execution_count": null,
       "outputs": []
     },
@@ -779,7 +779,7 @@
         "\n",
         "## Classification\n"
       ],
-      "id": "598c4e5a"
+      "id": "1dc5a36c"
     },
     {
       "cell_type": "code",
@@ -848,7 +848,7 @@
         "plt.title('Confusion Matrix')\n",
         "plt.show()"
       ],
-      "id": "f1dd40fc",
+      "id": "709a2113",
       "execution_count": null,
       "outputs": []
     },
@@ -858,7 +858,7 @@
       "source": [
         "add in pool as a feature, measure more things like IQR, max/min of current hydro feats, get new hydro feats that don't have a lot of missing"
       ],
-      "id": "89a11b1d"
+      "id": "fdcea263"
     }
   ],
   "metadata": {
@@ -866,7 +866,7 @@
       "name": "python3",
       "language": "python",
       "display_name": "Python 3 (ipykernel)",
-      "path": "/Users/minidude/opt/miniconda3/share/jupyter/kernels/python3"
+      "path": "/opt/anaconda3/share/jupyter/kernels/python3"
     }
   },
   "nbformat": 4,
