@@ -1,0 +1,225 @@
+---
+title: "Spatial and Temporal Changes in Fish Assemblages of the Upper Mississippi River"
+format: html
+---
+
+```{python}
+#| echo: false
+from IPython.display import Image
+import pandas as pd
+import matplotlib.pyplot as plt
+```
+This project is a collaboration with federal scientists at the US Geological Survey (USGS) Upper Midwest Environmental Sciences Center (UMESC).
+
+For over 30 years, the USGS UMESC has been monitoring the fish assemblages of the Upper Mississippi River as part of the Long Term Resource Monitoring (LTRM) program. The LTRM program collects data on fish populations, habitat conditions, and other environmental factors to understand the spatial and temporal changes in fish assemblages. This information is crucial for informing conservation and management efforts to protect and sustain the fish populations in the Upper Mississippi River.
+
+
+```{python}
+#| echo: false
+Image(filename="LTRM.png", width=500, height=350)
+Image(filename="LTRM2.png", width=500, height=350)
+```
+
+# Do fish species hang out together in assemblages?
+
+A *fish assemblage* is a group of fish species that are found together in a particular habitat or area. Fish assemblages can be influenced by various factors such as water quality, habitat structure, and food availability.
+
+```{python}
+#| echo: false
+#| warning: false
+df_data = pd.read_csv("ltrm_fish_D_p4813_aa1_aa3_all.csv", low_memory=False)
+pd.options.display.max_columns = None
+df_data['year'] = pd.to_datetime(df_data['sdate']).dt.year
+df_data.head(5)
+```
+
+## Original Dataset Shape
+```{python}
+df_data.shape
+```
+
+# Data Wrangling
+The original dataset contains 314,004 rows and 177 columns.
+
+- Filter to keep only rows where the fishcode column is not missing.
+- Remove unknown fish codes (those starting with 'U-'), UNID = unidentified, and NFSH = no fish
+- Remove hybrid fish codes
+
+
+```{python}
+#| echo: false
+print("Before: ", df_data.shape)
+df_data = df_data[df_data['fishcode'].notna()]
+print("Removed fishcode = NA:", df_data.shape)
+df_data = df_data[(~df_data['fishcode'].str.startswith('U-')) & (~df_data['fishcode'].isin(['NFSH', 'UNID']))]
+print("Removed unknown fish codes: ", df_data.shape)
+hybrid_fish = ['BCWC', 'BGLE', 'BGOS', 'BGRS', 'BGWM', 'CCGF', 'GSBG', 'GSPS', 'GSRS', 'GSWM', 'GSOS', 'LNST', 'OSLE', 'PSBG', 'PSOS', 'PSWM', 'SBWB', 'SCBS', 'SGWE', 'SNPD', 'WPYB']
+df_data = df_data[~df_data['fishcode'].isin(hybrid_fish)]
+print("Hybrid removed: ", df_data.shape)
+```
+
+Filter only for Fall samples (September, October, November) reflects conditions prior to overwintering.
+```{python}
+df = df_data[df_data['period'] == 3]
+print(df.shape)
+```
+
+For this specific investigation, only some of the columns are relevant, so we will drop the rest.
+
+```{python}
+keep_cols =['utm_e', 'utm_n', 'barcode', 'year', 'pool', 'fishcode']
+df = df[keep_cols].reset_index(drop=True)
+print(df.head())
+print(df.shape)
+```
+
+```{python}
+print(f"Number of unique samples (identified by barcode)= {df.barcode.unique().shape[0]}")
+print(f"Number of unique fishcodes = {df.fishcode.unique().shape[0]}")
+```
+
+```{python}
+#| echo: false
+#| output: false
+def assign_pool(row):
+    pool_val = row['pool']
+    if isinstance(pool_val, str):
+        return pool_val
+    if pool_val == 4:
+        return 'Upper Pool 4' if row['utm_n'] > 4.925e6 else 'Lower Pool 4'
+    else:
+        return f'Pool {int(pool_val)}' # Convert to string format
+
+df['pool'] = df.apply(assign_pool, axis=1)
+```
+
+
+```{python}
+agg_df = df.groupby(['barcode']).agg(
+    utm_e=('utm_e', 'median'),
+    utm_n=('utm_n', 'median'),
+    year=('year', lambda x: x.value_counts().index[0]),
+    pool=('pool', lambda x: x.value_counts().index[0]),
+    fish_codes=('fishcode', lambda x: list(x)),
+).reset_index()
+
+agg_df.head()
+```
+
+```{python}
+# Expand fish presence/absence
+unique_fish = agg_df['fish_codes'].explode().unique()
+# Create only fish presence/absence columns
+fish_df = pd.DataFrame({fish: agg_df['fish_codes'].apply(lambda x: fish in x) for fish in unique_fish})
+agg_df = pd.concat([agg_df.drop(columns=['fish_codes']), fish_df], axis=1)
+agg_df.head()
+```
+
+
+There are alot of of columns of False. We can remove fish species found in less than 5% of samples.
+
+```{python}
+#| echo: false
+# Calculate the 5% threshold
+min_occurrence = len(fish_df) * 0.05
+
+# Find fish species that occur in at least 5% of barcodes
+species_counts = fish_df.sum(axis=0) # sum down columns (each column is a species)
+common_species = species_counts[species_counts >= min_occurrence].index.tolist()
+
+# Filter fish_df to keep only common species
+fish_df_filtered = fish_df[common_species].copy()
+
+print(f"Original number of species: {len(fish_df.columns)}")
+print(f"Species occurring in ≥ 5% of assemblages: {len(common_species)}")
+print(f"Removed {len(fish_df.columns) - len(common_species)} rare species")
+print(f"Number of samples (barcodes): {len(fish_df)}")
+print(f"Shape of filtered fish_df: {fish_df_filtered.shape}")
+```
+
+# Cluster Analysis
+
+How to measure similarity between samples? We can use Jaccard distance, which is a common metric for binary data (presence/absence). The Jaccard distance between two samples A and B is defined as:
+$$d_J(A, B) = 1 - \frac{|A \cap B|}{|A \cup B|}$$
+Where $|A \cap B|$ is the number of species present in both samples, and $|A \cup B|$ is the number of species present in either sample.
+
+```{python}
+#| echo: false
+Image(filename="jaccard.png", width=600, height=400)
+```
+
+```{python}
+import numpy as np
+fish_df_binary = (fish_df > 0).astype(np.int8)
+fish_df_binary.head()
+```
+
+```{python}
+from scipy.spatial.distance import pdist, squareform
+from scipy.cluster.hierarchy import linkage, dendrogram, fcluster
+
+dist_matrix = pdist(fish_df_binary, metric='jaccard')
+dist_df = pd.DataFrame(squareform(dist_matrix))
+
+dist_df.head().round(2)
+```
+
+A dendrogram is a visualization that displays the ...
+
+```{python}
+#| echo: false
+plt.figure(figsize=(15, 7))
+dendrogram(linkage(dist_matrix, method='average'),
+color_threshold=1, no_labels=True)
+plt.xlabel("Sample Index", fontsize=13)
+plt.ylabel("Distance", fontsize=13)
+plt.show()
+```
+
+How to decide how many clusters to cut the dendrogram into?
+
+- [Math] - Look for large vertical gaps in the dendrogram (indicating distinct clusters)
+- [Math] - Consistancy of cluster membership when bootstrapping sampling of the data
+- [Domain Knowledge] - Consider ecological relevance and interpretability of clusters
+- No cluster of more than 1000 samples (barcodes) to keep it manageable for visualization and exploration
+- Fewer number of cluster of less than 300 samples (barcodes) to ensure clusters are not too small to be meaningful
+
+```{python}
+#| echo: false
+cluster_threshold = 0.68
+plt.figure(figsize=(15, 7))
+dendrogram(linkage(dist_matrix, method='average'), color_threshold=cluster_threshold)
+plt.xlabel("Sample Index", fontsize=13)
+plt.ylabel("Distance", fontsize=13)
+plt.show()
+
+# First assign clusters using fcluster
+agg_df['cluster'] = fcluster(linkage(dist_matrix, method='average'), t=cluster_threshold, criterion='distance')
+fish_df['cluster'] = agg_df['cluster']
+
+# Then reassign cluster numbers in order by cluster size (largest = 1)
+cluster_sizes = agg_df['cluster'].value_counts().sort_values(ascending=False)
+cluster_map = {old: new for new, old in enumerate(cluster_sizes.index, 1)}
+agg_df['cluster'] = agg_df['cluster'].map(cluster_map)
+fish_df['cluster'] = agg_df['cluster']
+
+# Summary of clusters
+cluster_summary = agg_df.groupby('cluster').size().sort_values(ascending=False)
+print(f"\n=== CLUSTER SUMMARY (threshold={cluster_threshold}) ===")
+print(f"Total clusters: {len(cluster_summary)}")
+print(f"Clusters with >1000 samples: {(cluster_summary >= 1000).sum()}")
+print(f"Clusters with >30 samples: {(cluster_summary >= 30).sum()}")
+print(f"\nCluster sizes:")
+print(cluster_summary.head(30))
+
+# Visualize cluster size distribution
+plt.figure(figsize=(12, 5))
+cluster_summary.plot(kind='bar')
+plt.xlabel('Cluster ID')
+plt.ylabel('Number of Samples')
+plt.title(f'Cluster Sizes (threshold={cluster_threshold})')
+plt.xticks(rotation=45);
+#print(agg_df.groupby('cluster').size())
+```
+
+# Next steps
