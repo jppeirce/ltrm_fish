@@ -5,9 +5,10 @@ format: html
 
 ```{python}
 #| echo: false
-from IPython.display import Image
+from IPython.display import Image, display
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 ```
 This project is a collaboration with federal scientists at the US Geological Survey (USGS) Upper Midwest Environmental Sciences Center (UMESC).
 
@@ -16,8 +17,8 @@ For over 30 years, the USGS UMESC has been monitoring the fish assemblages of th
 
 ```{python}
 #| echo: false
-Image(filename="LTRM.png", width=500, height=350)
-Image(filename="LTRM2.png", width=500, height=350)
+display(Image(filename="LTRM.png", width=600, height=400))
+display(Image(filename="LTRM2.png", width=600, height=400))
 ```
 
 # Do fish species hang out together in assemblages?
@@ -49,25 +50,32 @@ The original dataset contains 314,004 rows and 177 columns.
 ```{python}
 #| echo: false
 print("Before: ", df_data.shape)
-df_data = df_data[df_data['fishcode'].notna()]
+df_data = df_data[df_data['fishcode'].notna()].reset_index(drop=True)
 print("Removed fishcode = NA:", df_data.shape)
-df_data = df_data[(~df_data['fishcode'].str.startswith('U-')) & (~df_data['fishcode'].isin(['NFSH', 'UNID']))]
+df_data = df_data[(~df_data['fishcode'].str.startswith('U-')) & (~df_data['fishcode'].isin(['NFSH', 'UNID']))].reset_index(drop=True)
 print("Removed unknown fish codes: ", df_data.shape)
 hybrid_fish = ['BCWC', 'BGLE', 'BGOS', 'BGRS', 'BGWM', 'CCGF', 'GSBG', 'GSPS', 'GSRS', 'GSWM', 'GSOS', 'LNST', 'OSLE', 'PSBG', 'PSOS', 'PSWM', 'SBWB', 'SCBS', 'SGWE', 'SNPD', 'WPYB']
-df_data = df_data[~df_data['fishcode'].isin(hybrid_fish)]
+df_data = df_data[~df_data['fishcode'].isin(hybrid_fish)].reset_index(drop=True)
 print("Hybrid removed: ", df_data.shape)
 ```
 
 Filter only for Fall samples (September, October, November) reflects conditions prior to overwintering.
 ```{python}
-df = df_data[df_data['period'] == 3]
+df = df_data[df_data['period'] == 3].reset_index(drop=True)
 print(df.shape)
 ```
 
-For this specific investigation, only some of the columns are relevant, so we will drop the rest.
+For this specific investigation, only some of the columns are relevant
+-   barcode for sample identification
+-   fishcode for species identification
+-   year collected for temporal analysis
+-   pool (i.e. location) for spatial analysis
+-   (utm_e, utm_n) for specific location
+
+We will drop the rest.
 
 ```{python}
-keep_cols =['utm_e', 'utm_n', 'barcode', 'year', 'pool', 'fishcode']
+keep_cols =['barcode', 'fishcode', 'year', 'pool', 'utm_e', 'utm_n']
 df = df[keep_cols].reset_index(drop=True)
 print(df.head())
 print(df.shape)
@@ -96,11 +104,11 @@ df['pool'] = df.apply(assign_pool, axis=1)
 
 ```{python}
 agg_df = df.groupby(['barcode']).agg(
-    utm_e=('utm_e', 'median'),
-    utm_n=('utm_n', 'median'),
+    fish_codes=('fishcode', lambda x: list(x)),
     year=('year', lambda x: x.value_counts().index[0]),
     pool=('pool', lambda x: x.value_counts().index[0]),
-    fish_codes=('fishcode', lambda x: list(x)),
+    utm_e=('utm_e', 'median'),
+    utm_n=('utm_n', 'median')
 ).reset_index()
 
 agg_df.head()
@@ -138,20 +146,27 @@ print(f"Shape of filtered fish_df: {fish_df_filtered.shape}")
 ```
 
 # Cluster Analysis
+```{python}
+#| echo: false
+fish_df = pd.read_csv('pandas/fish_df.csv')
+```
 
-How to measure similarity between samples? We can use Jaccard distance, which is a common metric for binary data (presence/absence). The Jaccard distance between two samples A and B is defined as:
+
+```{python}
+import numpy as np
+fish_df_binary = (fish_df > 0).astype(np.int8)
+fish_df_binary.head()
+```
+
+## Distance
+
+**How do we measure similarity between samples?** We can use Jaccard distance, which is a common metric for binary data (presence/absence). The Jaccard distance between two samples A and B is defined as:
 $$d_J(A, B) = 1 - \frac{|A \cap B|}{|A \cup B|}$$
 Where $|A \cap B|$ is the number of species present in both samples, and $|A \cup B|$ is the number of species present in either sample.
 
 ```{python}
 #| echo: false
 Image(filename="jaccard.png", width=600, height=400)
-```
-
-```{python}
-import numpy as np
-fish_df_binary = (fish_df > 0).astype(np.int8)
-fish_df_binary.head()
 ```
 
 ```{python}
@@ -164,7 +179,61 @@ dist_df = pd.DataFrame(squareform(dist_matrix))
 dist_df.head().round(2)
 ```
 
-A dendrogram is a visualization that displays the ...
+## Linkage and Dendrogram
+
+Next, we can use hierarchical clustering to group similar samples together based on their Jaccard distances. The hierarchical clustering process involves iteratively merging the closest clusters until all samples are in a single cluster.
+
+For example, if we focus only in the first 4 samples of the distance matrix
+
+```{python}
+dist_example =dist_df.iloc[0:4, 0:4].round(2)
+print(dist_example)
+```
+
+The samples that are most similar (and have smaller distance) are samples 0 and 2 (distance = 0.50). We can cluster those samples together and recalculate the distance matrix to see how the remaining samples relate to that cluster. 
+
+The distance between the new cluster 02 and sample 1 is the average of the distances between sample 0 and sample 1 (0.72) and sample 2 and sample 1 (0.67), which is 0.695. 
+
+Similar, the distance between 02 and sample 3 is the average of the distances between sample 0 and sample 3 (0.67) and sample 2 and sample 3 (0.71), which is 0.69. 
+
+|        | 02 | 1 | 3 |
+|-------|------|------|------|
+| **02** | 0   |    |    |
+| **1** | 0.695   | 0   |    |
+| **3** | 0.69   | 0.79   | 0   |
+
+Now we repeat the process. Since the smallest distance is between cluster 02 and 3, we cluster those together and recalculate the distance matrix again. The distance between the new cluster 023 and sample 1 is the average of the distances between sample 02 and sample 1 (0.695), sample 02 and sample 3 (0.69).
+
+|        | 023 | 1 | 
+|-------|------|------|
+| **023** | 0   |    |    
+| **1** | 0.6925   | 0   |    
+
+This process continues until all samples are clustered together. The result can be visualized as a *dendrogram*, which shows the hierarchical relationships between the samples based on their distances.
+
+```{python}
+#| warning: false
+plt.figure(figsize=(10, 6))
+dendrogram(linkage(dist_example, method='average'), 
+color_threshold=None, no_labels=False)
+plt.xlabel("Index", fontsize=13)
+plt.ylabel("Distance", fontsize=13)
+plt.show()
+```
+
+With a few more samples:
+```{python}
+#| echo: false
+#| warning: false
+plt.figure(figsize=(10, 6))
+dendrogram(linkage(dist_df.iloc[0:20, 0:20], method='average'), 
+color_threshold=1, no_labels=False)
+plt.xlabel("Sample Index", fontsize=13)
+plt.ylabel("Distance", fontsize=13)
+plt.show()
+```
+
+For the full dataset:
 
 ```{python}
 #| echo: false
@@ -176,20 +245,24 @@ plt.ylabel("Distance", fontsize=13)
 plt.show()
 ```
 
-How to decide how many clusters to cut the dendrogram into?
+# How do we decide how many clusters to cut the dendrogram into?
 
-- [Math] - Look for large vertical gaps in the dendrogram (indicating distinct clusters)
-- [Math] - Consistancy of cluster membership when bootstrapping sampling of the data
-- [Domain Knowledge] - Consider ecological relevance and interpretability of clusters
-- No cluster of more than 1000 samples (barcodes) to keep it manageable for visualization and exploration
-- Fewer number of cluster of less than 300 samples (barcodes) to ensure clusters are not too small to be meaningful
+There is no single "correct" way to determine the optimal number of clusters, but there are several complementary approaches we can use to make an informed decision. We can
+
+-   [Math] Look for large vertical gaps in the dendrogram, which indicate distinct clusters. A large gap suggests that merging those clusters would result in a significant increase in distance, indicating that they are quite different from each other.
+
+-   [Math] Assess the consistency of cluster membership when bootstrapping sampling of the data. 
+
+-   [Math] Limit over‑fragmentation by reducing the number of clusters containing fewer than 30 samples
+
+-   [Domain Knowledge] No cluster of more than 1,000 samples. An upper bound prevents a single dominant cluster from obscuring finer‑scale, ecologically meaningful assemblages. 
 
 ```{python}
 #| echo: false
-cluster_threshold = 0.68
+cluster_threshold = 0.71
 plt.figure(figsize=(15, 7))
-dendrogram(linkage(dist_matrix, method='average'), color_threshold=cluster_threshold)
-plt.xlabel("Sample Index", fontsize=13)
+dendrogram(linkage(dist_matrix, method='average'), color_threshold=cluster_threshold, no_labels=True)
+plt.xlabel("Barcode", fontsize=13)
 plt.ylabel("Distance", fontsize=13)
 plt.show()
 
@@ -205,16 +278,12 @@ fish_df['cluster'] = agg_df['cluster']
 
 # Summary of clusters
 cluster_summary = agg_df.groupby('cluster').size().sort_values(ascending=False)
-print(f"\n=== CLUSTER SUMMARY (threshold={cluster_threshold}) ===")
-print(f"Total clusters: {len(cluster_summary)}")
-print(f"Clusters with >1000 samples: {(cluster_summary >= 1000).sum()}")
-print(f"Clusters with >30 samples: {(cluster_summary >= 30).sum()}")
 print(f"\nCluster sizes:")
 print(cluster_summary.head(30))
 
 # Visualize cluster size distribution
 plt.figure(figsize=(12, 5))
-cluster_summary.plot(kind='bar')
+cluster_summary.head(8).plot(kind='bar')
 plt.xlabel('Cluster ID')
 plt.ylabel('Number of Samples')
 plt.title(f'Cluster Sizes (threshold={cluster_threshold})')
@@ -222,4 +291,189 @@ plt.xticks(rotation=45);
 #print(agg_df.groupby('cluster').size())
 ```
 
+Fish species codes (full species names in Table 1) for eight clusters, whereby cluster is defined by fish assemblage composition. The heatmap shows the percentage of sampling sites where each species was present within each cluster. Cell values and color represent prevalence (0–100%), with darker blues indicating higher prevalence of that fish species. Clusters are ordered by sample size or the number of sites classified within that cluster (shown in parentheses).  
+
+# Cluster Analysis
+
+```{python}
+#| code-fold: true
+#| code-summary: "Show this code"
+sns.set_style("white")
+sns.set_context("notebook", font_scale=1.0)
+
+# Order species by overall frequency of occurrence (sum across columns)
+species_cols = [c for c in fish_df.columns if c != 'cluster']
+species_order = fish_df[species_cols].sum(axis=0).sort_values(ascending=False).index.tolist()
+
+# Keep only top 20 most common species
+fishcode_2_include = 41
+top_species = species_order[:fishcode_2_include]
+
+# Compute percent presence per cluster for top 20 species only
+# Result: rows = cluster, cols = species
+jac_comp = fish_df.groupby('cluster')[top_species].mean() * 100
+
+# Order clusters by overall sample count (so columns are in meaningful order)
+# Filter clusters with size >= 10
+# 4 cluster size > 160
+# 8 cluster size > 30
+cluster_filter = 30
+cluster_sizes = fish_df['cluster'].value_counts()
+cluster_sizes = cluster_sizes[cluster_sizes >= cluster_filter]
+cluster_order = [c for c in cluster_sizes.index if c in jac_comp.index]
+jac_comp = jac_comp.reindex(cluster_order)
+
+# Transpose so rows=species, cols=cluster (more natural for reading species)
+display_df = jac_comp.T
+
+# Create readable cluster labels with site counts
+col_labels = [f"{c}\n({cluster_sizes.get(c,0)} samples)" for c in display_df.columns]
+
+# Plot
+fig, ax = plt.subplots(figsize=(max(10, 0.6 * display_df.shape[1]), 0.35 * display_df.shape[0] + 4))
+cmap = sns.color_palette("YlGnBu", as_cmap=True)  # perceptually-uniform sequential
+
+sns.heatmap(
+    display_df,
+    ax=ax,
+    cmap=cmap,
+    vmin=0,
+    vmax=100,
+    annot=True,
+    fmt=".1f",
+    linewidths=0.4,
+    linecolor="0.9",
+    cbar_kws={"label": "% presence"}
+)
+
+ax.set_xticklabels(col_labels, rotation=45, ha="right", fontsize=10)
+ax.set_yticklabels(ax.get_yticklabels(), rotation=0, fontsize=9)
+ax.set_xlabel("Cluster (sample count)")
+ax.set_ylabel("Species")
+ax.set_title(f"Fish Species by Cluster (of sample count {cluster_filter} or larger) — % presence", pad=14)
+#ax.set_title(f"Top {fishcode_2_include} Most Common Fish Species by Cluster (of sample count {cluster_filter} or larger) — % presence", pad=14)
+plt.tight_layout()
+plt.show()
+fig.savefig(
+    'cluster_species_presence.jpg',
+    dpi=300,
+    bbox_inches='tight',
+    format='jpeg',
+    pil_kwargs={'quality': 95, 'optimize': True, 'progressive': True}
+)
+```
+
+
+```{python}
+#| code-fold: true
+#| code-summary: "Show this code"
+import tol_colors as tc
+
+CB_PALETTE = tc.muted
+# Fallback colors for clusters > 8
+EXTRA_COLORS = [ '#44AA99', '#999933','#882255', '#AA4499']
+GREY_COLOR = (0.75, 0.75, 0.75)  # light gray for non-highlighted clusters
+
+# =============================================================================
+# CONFIGURATION: Select clusters to highlight
+# =============================================================================
+highlight_clusters = [1, 2, 3, 4, 5, 6, 7, 8]  # <-- CHANGE THIS to select clusters (set to None or [] to show all)
+
+# Minimum cluster size filter
+min_cluster_size = 30
+
+# Define pool order for facets (2 columns: row1 = Pool 4s, row2 = Pool 8 & 13)
+pool_order = ["Upper Pool 4", "Lower Pool 4", "Pool 8", "Pool 13"]
+
+# =============================================================================
+# Data preparation
+# =============================================================================
+# Filter cluster size over threshold
+cluster_counts = agg_df['cluster'].value_counts()
+clusters_over_threshold = cluster_counts[cluster_counts >= min_cluster_size].index
+df_plot = agg_df[agg_df['cluster'].isin(clusters_over_threshold)].copy()
+
+# Filter to only include pools in our desired order
+df_plot = df_plot[df_plot['pool'].isin(pool_order)].copy()
+
+# Set mode_pool as ordered categorical to control facet order
+df_plot['pool'] = pd.Categorical(
+    df_plot['pool'], 
+    categories=pool_order, 
+    ordered=True
+)
+
+cluster_sizes = df_plot['cluster'].value_counts()
+unique_clusters = sorted(df_plot['cluster'].unique())
+
+# =============================================================================
+# Build color map: use consistent CB colors, grey out non-highlighted clusters
+# =============================================================================
+
+# create a color map for highlighed clusters mapped to CB_PALETTE colors
+color_map = {}
+for idx, cluster_id in enumerate(unique_clusters):
+    if highlight_clusters and cluster_id not in highlight_clusters:
+        color_map[cluster_id] = GREY_COLOR
+    else:
+        if idx < len(CB_PALETTE):
+            color_map[cluster_id] = CB_PALETTE[idx]
+        else:
+            extra_color_idx = (idx - len(CB_PALETTE)) % len(EXTRA_COLORS)
+            color_map[cluster_id] = EXTRA_COLORS[extra_color_idx]
+
+# Add jitter to UTM coordinates
+# Adjust jitter_amount based on your coordinate scale (UTM is in meters)
+jitter_amount = 300  # 300 meters of jitter
+np.random.seed(42)  # For reproducibility
+df_plot['utm_e_jitter'] = df_plot['utm_e'] + np.random.uniform(-jitter_amount, jitter_amount, len(df_plot))
+df_plot['utm_n_jitter'] = df_plot['utm_n'] + np.random.uniform(-jitter_amount, jitter_amount, len(df_plot))
+
+g = sns.FacetGrid(
+    df_plot,
+    col="pool",
+    hue="cluster",
+    palette=color_map,
+    col_wrap=2,
+    height=5,
+    sharex=False,
+    sharey=False
+)
+g.map_dataframe(sns.scatterplot, x="utm_e_jitter", y="utm_n_jitter", alpha=0.7, s=40)
+
+# Format axes in thousands
+for ax in g.axes.flat:
+    ax.tick_params(axis='x', rotation=45)
+    ax.xaxis.set_major_locator(plt.MaxNLocator(nbins=5))
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'{x/1000:.0f}'))
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda y, p: f'{y/1000:.0f}'))
+
+g.set_axis_labels("UTM Easting (×1000)", "UTM Northing (×1000)")
+
+# Add legend positioned closer to the plots
+g.add_legend(title="Cluster", bbox_to_anchor=(1.0, 0.5), loc='center left')
+
+# Update title
+if highlight_clusters:
+    title_suffix = f" (highlighting clusters: {highlight_clusters})"
+else:
+    title_suffix = ""
+g.figure.suptitle(f"Assemblage Locations by Cluster and Pool", fontsize=16)
+
+# Adjust layout with more bottom space for rotated labels and proper right margin
+g.figure.subplots_adjust(right=0.9, bottom=0.15, top=0.90, hspace=0.25, wspace=0.25)
+
+plt.show()
+```
+Spatial distribution of fish assemblage clusters across four Upper Mississippi River study reaches. Points represent sampling locations in UTM coordinates; colors denote cluster ID (1 = gray, 2 = green, 3 = blue, 4 = red). Rows correspond to pools (Upper Pool 4, Lower Pool 4, Pool 8, Pool 13).
+
 # Next steps
+
+-   Explore how clusters relate to environmental variables (e.g. water temperature and quality, type of habitat, etc.)
+    - Can a decision tree predict cluster membership based on environmental variables? Which variables are most important for distinguishing clusters?
+
+-   Explore temporal trends in cluster membership. Are certain clusters becoming more or less common over time? Are there seasonal patterns in cluster composition?
+
+-   Cluster 1 was the most common cluster across all pools. What clusters are most common in each pool? Are there clusters that are unique to certain pools? Are there features of the pools (e.g. habitat, water quality, etc.) that might explain the differences in assemblages?
+
+-   What is special about the less common clusters? Do they represent rare or specialized assemblages that might be of conservation concern? Or do they represent sampling artifacts or noise in the data?
