@@ -18,16 +18,16 @@ For over 30 years, the USGS UMESC has been monitoring the fish assemblages of th
 ```{python}
 #| echo: false
 display(Image(filename="LTRM.png", width=600, height=400))
-display(Image(filename="LTRM2.png", width=600, height=400))
+display(Image(filename="LTRM2.png", width=600, height=500))
 ```
 
-# Do fish species hang out together in assemblages?
+# Do fish of different species hang out together?
 
 A *fish assemblage* is a group of fish species that are found together in a particular habitat or area. Fish assemblages can be influenced by various factors such as water quality, habitat structure, and food availability.
 
 ```{python}
-#| echo: false
-#| warning: false
+#| code-fold: true
+#| code-summary: "Show this code"
 df_data = pd.read_csv("ltrm_fish_D_p4813_aa1_aa3_all.csv", low_memory=False)
 pd.options.display.max_columns = None
 df_data['year'] = pd.to_datetime(df_data['sdate']).dt.year
@@ -42,13 +42,15 @@ df_data.shape
 # Data Wrangling
 The original dataset contains 314,004 rows and 177 columns.
 
+## Row filtering steps
 - Filter to keep only rows where the fishcode column is not missing.
 - Remove unknown fish codes (those starting with 'U-'), UNID = unidentified, and NFSH = no fish
 - Remove hybrid fish codes
 
 
 ```{python}
-#| echo: false
+#| code-fold: true
+#| code-summary: "Show this code"
 print("Before: ", df_data.shape)
 df_data = df_data[df_data['fishcode'].notna()].reset_index(drop=True)
 print("Removed fishcode = NA:", df_data.shape)
@@ -65,12 +67,13 @@ df = df_data[df_data['period'] == 3].reset_index(drop=True)
 print(df.shape)
 ```
 
+## Column filtering steps
 For this specific investigation, only some of the columns are relevant
--   barcode for sample identification
--   fishcode for species identification
--   year collected for temporal analysis
--   pool (i.e. location) for spatial analysis
--   (utm_e, utm_n) for specific location
+- barcode for sample identification
+- fishcode for species identification
+- year collected for temporal analysis
+- pool (i.e. location) for spatial analysis
+- (utm_e, utm_n) for specific location
 
 We will drop the rest.
 
@@ -101,7 +104,7 @@ def assign_pool(row):
 df['pool'] = df.apply(assign_pool, axis=1)
 ```
 
-
+### Organize data by sample (barcode) and expand fish presence/absence
 ```{python}
 agg_df = df.groupby(['barcode']).agg(
     fish_codes=('fishcode', lambda x: list(x)),
@@ -145,7 +148,7 @@ print(f"Number of samples (barcodes): {len(fish_df)}")
 print(f"Shape of filtered fish_df: {fish_df_filtered.shape}")
 ```
 
-# Cluster Analysis
+# Hierarchical Cluster Analysis
 ```{python}
 #| echo: false
 fish_df = pd.read_csv('pandas/fish_df.csv')
@@ -154,7 +157,7 @@ fish_df = pd.read_csv('pandas/fish_df.csv')
 
 ```{python}
 import numpy as np
-fish_df_binary = (fish_df > 0).astype(np.int8)
+fish_df_binary = (fish_df > 0).astype(int)
 fish_df_binary.head()
 ```
 

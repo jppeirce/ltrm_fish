@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -63,10 +63,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="DSC210pres_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="DSC210pres_files/libs/quarto-html/anchor.min.js"></script>
 <link href="DSC210pres_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="DSC210pres_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="DSC210pres_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="DSC210pres_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="DSC210pres_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="DSC210pres_files/libs/bootstrap/bootstrap-973236bd072d72a04ee9cd82dcc9cb29.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="DSC210pres_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
@@ -130,7 +130,7 @@ window.Quarto = {
 
 <p>This project is a collaboration with federal scientists at the US Geological Survey (USGS) Upper Midwest Environmental Sciences Center (UMESC).</p>
 <p>For over 30 years, the USGS UMESC has been monitoring the fish assemblages of the Upper Mississippi River as part of the Long Term Resource Monitoring (LTRM) program. The LTRM program collects data on fish populations, habitat conditions, and other environmental factors to understand the spatial and temporal changes in fish assemblages. This information is crucial for informing conservation and management efforts to protect and sustain the fish populations in the Upper Mississippi River.</p>
-<div id="4bc0178e" class="cell" data-execution_count="2">
+<div id="52cbc8e5" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -141,16 +141,23 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="DSC210pres_files/figure-html/cell-3-output-2.png" width="600" height="400" class="figure-img"></p>
+<p><img src="DSC210pres_files/figure-html/cell-3-output-2.png" width="600" height="500" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<section id="do-fish-species-hang-out-together-in-assemblages" class="level1">
-<h1>Do fish species hang out together in assemblages?</h1>
+<section id="do-fish-of-different-species-hang-out-together" class="level1">
+<h1>Do fish of different species hang out together?</h1>
 <p>A <em>fish assemblage</em> is a group of fish species that are found together in a particular habitat or area. Fish assemblages can be influenced by various factors such as water quality, habitat structure, and food availability.</p>
-<div id="5784b65a" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="26">
+<div id="85702ae8" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Show this code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df_data <span class="op">=</span> pd.read_csv(<span class="st">"ltrm_fish_D_p4813_aa1_aa3_all.csv"</span>, low_memory<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pd.options.display.max_columns <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df_data[<span class="st">'year'</span>] <span class="op">=</span> pd.to_datetime(df_data[<span class="st">'sdate'</span>]).dt.year</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df_data.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="210">
 <div>
 
 
@@ -1246,9 +1253,9 @@ window.Quarto = {
 </div>
 <section id="original-dataset-shape" class="level2">
 <h2 class="anchored" data-anchor-id="original-dataset-shape">Original Dataset Shape</h2>
-<div id="6e33bf3e" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df_data.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="27">
+<div id="addb69a4" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_data.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="211">
 <pre><code>(314004, 177)</code></pre>
 </div>
 </div>
@@ -1257,12 +1264,25 @@ window.Quarto = {
 <section id="data-wrangling" class="level1">
 <h1>Data Wrangling</h1>
 <p>The original dataset contains 314,004 rows and 177 columns.</p>
+<section id="row-filtering-steps" class="level2">
+<h2 class="anchored" data-anchor-id="row-filtering-steps">Row filtering steps</h2>
 <ul>
 <li>Filter to keep only rows where the fishcode column is not missing.</li>
 <li>Remove unknown fish codes (those starting with ‘U-’), UNID = unidentified, and NFSH = no fish</li>
 <li>Remove hybrid fish codes</li>
 </ul>
-<div id="e4f968e7" class="cell" data-execution_count="5">
+<div id="409bfe71" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Show this code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Before: "</span>, df_data.shape)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_data <span class="op">=</span> df_data[df_data[<span class="st">'fishcode'</span>].notna()].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Removed fishcode = NA:"</span>, df_data.shape)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df_data <span class="op">=</span> df_data[(<span class="op">~</span>df_data[<span class="st">'fishcode'</span>].<span class="bu">str</span>.startswith(<span class="st">'U-'</span>)) <span class="op">&amp;</span> (<span class="op">~</span>df_data[<span class="st">'fishcode'</span>].isin([<span class="st">'NFSH'</span>, <span class="st">'UNID'</span>]))].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Removed unknown fish codes: "</span>, df_data.shape)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>hybrid_fish <span class="op">=</span> [<span class="st">'BCWC'</span>, <span class="st">'BGLE'</span>, <span class="st">'BGOS'</span>, <span class="st">'BGRS'</span>, <span class="st">'BGWM'</span>, <span class="st">'CCGF'</span>, <span class="st">'GSBG'</span>, <span class="st">'GSPS'</span>, <span class="st">'GSRS'</span>, <span class="st">'GSWM'</span>, <span class="st">'GSOS'</span>, <span class="st">'LNST'</span>, <span class="st">'OSLE'</span>, <span class="st">'PSBG'</span>, <span class="st">'PSOS'</span>, <span class="st">'PSWM'</span>, <span class="st">'SBWB'</span>, <span class="st">'SCBS'</span>, <span class="st">'SGWE'</span>, <span class="st">'SNPD'</span>, <span class="st">'WPYB'</span>]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>df_data <span class="op">=</span> df_data[<span class="op">~</span>df_data[<span class="st">'fishcode'</span>].isin(hybrid_fish)].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hybrid removed: "</span>, df_data.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Before:  (314004, 177)
 Removed fishcode = NA: (313998, 177)
@@ -1271,20 +1291,23 @@ Hybrid removed:  (312817, 177)</code></pre>
 </div>
 </div>
 <p>Filter only for Fall samples (September, October, November) reflects conditions prior to overwintering.</p>
-<div id="0ce25b80" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df_data[df_data[<span class="st">'period'</span>] <span class="op">==</span> <span class="dv">3</span>].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="39ba0f79" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df_data[df_data[<span class="st">'period'</span>] <span class="op">==</span> <span class="dv">3</span>].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(127605, 177)</code></pre>
 </div>
 </div>
+</section>
+<section id="column-filtering-steps" class="level2">
+<h2 class="anchored" data-anchor-id="column-filtering-steps">Column filtering steps</h2>
 <p>For this specific investigation, only some of the columns are relevant - barcode for sample identification - fishcode for species identification - year collected for temporal analysis - pool (i.e.&nbsp;location) for spatial analysis - (utm_e, utm_n) for specific location</p>
 <p>We will drop the rest.</p>
-<div id="94e85e3d" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>keep_cols <span class="op">=</span>[<span class="st">'barcode'</span>, <span class="st">'fishcode'</span>, <span class="st">'year'</span>, <span class="st">'pool'</span>, <span class="st">'utm_e'</span>, <span class="st">'utm_n'</span>]</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[keep_cols].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="7584d492" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>keep_cols <span class="op">=</span>[<span class="st">'barcode'</span>, <span class="st">'fishcode'</span>, <span class="st">'year'</span>, <span class="st">'pool'</span>, <span class="st">'utm_e'</span>, <span class="st">'utm_n'</span>]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[keep_cols].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    barcode fishcode  year  pool   utm_e    utm_n
 0  13001737     BLGL  1996    13  736158  4642551
@@ -1295,25 +1318,27 @@ Hybrid removed:  (312817, 177)</code></pre>
 (127605, 6)</code></pre>
 </div>
 </div>
-<div id="ad7e97ad" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of unique samples (identified by barcode)= </span><span class="sc">{</span>df<span class="sc">.</span>barcode<span class="sc">.</span>unique()<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of unique fishcodes = </span><span class="sc">{</span>df<span class="sc">.</span>fishcode<span class="sc">.</span>unique()<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cd87e3a9" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of unique samples (identified by barcode)= </span><span class="sc">{</span>df<span class="sc">.</span>barcode<span class="sc">.</span>unique()<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of unique fishcodes = </span><span class="sc">{</span>df<span class="sc">.</span>fishcode<span class="sc">.</span>unique()<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of unique samples (identified by barcode)= 2412
 Number of unique fishcodes = 93</code></pre>
 </div>
 </div>
-<div id="d9b4904a" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>agg_df <span class="op">=</span> df.groupby([<span class="st">'barcode'</span>]).agg(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    fish_codes<span class="op">=</span>(<span class="st">'fishcode'</span>, <span class="kw">lambda</span> x: <span class="bu">list</span>(x)),</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    year<span class="op">=</span>(<span class="st">'year'</span>, <span class="kw">lambda</span> x: x.value_counts().index[<span class="dv">0</span>]),</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    pool<span class="op">=</span>(<span class="st">'pool'</span>, <span class="kw">lambda</span> x: x.value_counts().index[<span class="dv">0</span>]),</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    utm_e<span class="op">=</span>(<span class="st">'utm_e'</span>, <span class="st">'median'</span>),</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    utm_n<span class="op">=</span>(<span class="st">'utm_n'</span>, <span class="st">'median'</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>).reset_index()</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>agg_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="33">
+<section id="organize-data-by-sample-barcode-and-expand-fish-presenceabsence" class="level3">
+<h3 class="anchored" data-anchor-id="organize-data-by-sample-barcode-and-expand-fish-presenceabsence">Organize data by sample (barcode) and expand fish presence/absence</h3>
+<div id="bdba5884" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>agg_df <span class="op">=</span> df.groupby([<span class="st">'barcode'</span>]).agg(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    fish_codes<span class="op">=</span>(<span class="st">'fishcode'</span>, <span class="kw">lambda</span> x: <span class="bu">list</span>(x)),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    year<span class="op">=</span>(<span class="st">'year'</span>, <span class="kw">lambda</span> x: x.value_counts().index[<span class="dv">0</span>]),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    pool<span class="op">=</span>(<span class="st">'pool'</span>, <span class="kw">lambda</span> x: x.value_counts().index[<span class="dv">0</span>]),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    utm_e<span class="op">=</span>(<span class="st">'utm_e'</span>, <span class="st">'median'</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    utm_n<span class="op">=</span>(<span class="st">'utm_n'</span>, <span class="st">'median'</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>).reset_index()</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>agg_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="217">
 <div>
 
 
@@ -1381,14 +1406,14 @@ Number of unique fishcodes = 93</code></pre>
 </div>
 </div>
 </div>
-<div id="5a3fe957" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Expand fish presence/absence</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>unique_fish <span class="op">=</span> agg_df[<span class="st">'fish_codes'</span>].explode().unique()</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create only fish presence/absence columns</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>fish_df <span class="op">=</span> pd.DataFrame({fish: agg_df[<span class="st">'fish_codes'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: fish <span class="kw">in</span> x) <span class="cf">for</span> fish <span class="kw">in</span> unique_fish})</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>agg_df <span class="op">=</span> pd.concat([agg_df.drop(columns<span class="op">=</span>[<span class="st">'fish_codes'</span>]), fish_df], axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>agg_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="34">
+<div id="b6b0e69d" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Expand fish presence/absence</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>unique_fish <span class="op">=</span> agg_df[<span class="st">'fish_codes'</span>].explode().unique()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create only fish presence/absence columns</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>fish_df <span class="op">=</span> pd.DataFrame({fish: agg_df[<span class="st">'fish_codes'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: fish <span class="kw">in</span> x) <span class="cf">for</span> fish <span class="kw">in</span> unique_fish})</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>agg_df <span class="op">=</span> pd.concat([agg_df.drop(columns<span class="op">=</span>[<span class="st">'fish_codes'</span>]), fish_df], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>agg_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="218">
 <div>
 
 
@@ -2009,7 +2034,7 @@ Number of unique fishcodes = 93</code></pre>
 </div>
 </div>
 <p>There are alot of of columns of False. We can remove fish species found in less than 5% of samples.</p>
-<div id="6ea1ab27" class="cell" data-execution_count="12">
+<div id="dd78fd38" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-stdout">
 <pre><code>Original number of species: 93
 Species occurring in ≥ 5% of assemblages: 40
@@ -2019,13 +2044,15 @@ Shape of filtered fish_df: (2412, 40)</code></pre>
 </div>
 </div>
 </section>
-<section id="cluster-analysis" class="level1">
-<h1>Cluster Analysis</h1>
-<div id="341583fe" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>fish_df_binary <span class="op">=</span> (fish_df <span class="op">&gt;</span> <span class="dv">0</span>).astype(np.int8)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>fish_df_binary.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="37">
+</section>
+</section>
+<section id="hierarchical-cluster-analysis" class="level1">
+<h1>Hierarchical Cluster Analysis</h1>
+<div id="0c9363c8" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>fish_df_binary <span class="op">=</span> (fish_df <span class="op">&gt;</span> <span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>fish_df_binary.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="221">
 <div>
 
 
@@ -2033,59 +2060,55 @@ Shape of filtered fish_df: (2412, 40)</code></pre>
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">FWDM</th>
-<th data-quarto-table-cell-role="th">PNSD</th>
-<th data-quarto-table-cell-role="th">SHRH</th>
-<th data-quarto-table-cell-role="th">PGMW</th>
-<th data-quarto-table-cell-role="th">JYDR</th>
-<th data-quarto-table-cell-role="th">GZSD</th>
-<th data-quarto-table-cell-role="th">BKSS</th>
-<th data-quarto-table-cell-role="th">GDRH</th>
-<th data-quarto-table-cell-role="th">ERSN</th>
-<th data-quarto-table-cell-role="th">LMBS</th>
 <th data-quarto-table-cell-role="th">CNCF</th>
+<th data-quarto-table-cell-role="th">WLYE</th>
+<th data-quarto-table-cell-role="th">RVCS</th>
+<th data-quarto-table-cell-role="th">YWPH</th>
 <th data-quarto-table-cell-role="th">SMBF</th>
 <th data-quarto-table-cell-role="th">STSN</th>
-<th data-quarto-table-cell-role="th">SVRH</th>
-<th data-quarto-table-cell-role="th">GNSF</th>
-<th data-quarto-table-cell-role="th">RKBS</th>
-<th data-quarto-table-cell-role="th">BHMW</th>
-<th data-quarto-table-cell-role="th">RVSN</th>
-<th data-quarto-table-cell-role="th">BLGL</th>
-<th data-quarto-table-cell-role="th">BMBF</th>
-<th data-quarto-table-cell-role="th">BKCP</th>
-<th data-quarto-table-cell-role="th">QLBK</th>
-<th data-quarto-table-cell-role="th">SMBS</th>
-<th data-quarto-table-cell-role="th">GDSN</th>
-<th data-quarto-table-cell-role="th">SPSK</th>
-<th data-quarto-table-cell-role="th">CARP</th>
-<th data-quarto-table-cell-role="th">OSSF</th>
-<th data-quarto-table-cell-role="th">WDSN</th>
-<th data-quarto-table-cell-role="th">WLYE</th>
-<th data-quarto-table-cell-role="th">YWPH</th>
-<th data-quarto-table-cell-role="th">BWFN</th>
-<th data-quarto-table-cell-role="th">WTBS</th>
-<th data-quarto-table-cell-role="th">SGER</th>
-<th data-quarto-table-cell-role="th">NTPK</th>
 <th data-quarto-table-cell-role="th">RVRH</th>
-<th data-quarto-table-cell-role="th">MMSN</th>
+<th data-quarto-table-cell-role="th">OSSF</th>
+<th data-quarto-table-cell-role="th">PNSD</th>
 <th data-quarto-table-cell-role="th">SFSN</th>
-<th data-quarto-table-cell-role="th">RVCS</th>
-<th data-quarto-table-cell-role="th">LGPH</th>
+<th data-quarto-table-cell-role="th">WTBS</th>
+<th data-quarto-table-cell-role="th">GDSN</th>
+<th data-quarto-table-cell-role="th">SMBS</th>
+<th data-quarto-table-cell-role="th">BHMW</th>
+<th data-quarto-table-cell-role="th">WDSN</th>
+<th data-quarto-table-cell-role="th">GZSD</th>
+<th data-quarto-table-cell-role="th">NTPK</th>
+<th data-quarto-table-cell-role="th">QLBK</th>
+<th data-quarto-table-cell-role="th">SPSK</th>
+<th data-quarto-table-cell-role="th">BMBF</th>
+<th data-quarto-table-cell-role="th">LMBS</th>
+<th data-quarto-table-cell-role="th">FWDM</th>
+<th data-quarto-table-cell-role="th">PGMW</th>
+<th data-quarto-table-cell-role="th">CARP</th>
+<th data-quarto-table-cell-role="th">GNSF</th>
+<th data-quarto-table-cell-role="th">RVSN</th>
+<th data-quarto-table-cell-role="th">BKSS</th>
+<th data-quarto-table-cell-role="th">BWFN</th>
+<th data-quarto-table-cell-role="th">BLGL</th>
 <th data-quarto-table-cell-role="th">WTCP</th>
+<th data-quarto-table-cell-role="th">SVRH</th>
+<th data-quarto-table-cell-role="th">ERSN</th>
+<th data-quarto-table-cell-role="th">LGPH</th>
+<th data-quarto-table-cell-role="th">JYDR</th>
+<th data-quarto-table-cell-role="th">GDRH</th>
+<th data-quarto-table-cell-role="th">SHRH</th>
+<th data-quarto-table-cell-role="th">BKCP</th>
+<th data-quarto-table-cell-role="th">SGER</th>
+<th data-quarto-table-cell-role="th">MMSN</th>
+<th data-quarto-table-cell-role="th">RKBS</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
 <td>0</td>
 <td>1</td>
 <td>0</td>
-<td>0</td>
+<td>1</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
@@ -2097,16 +2120,9 @@ Shape of filtered fish_df: (2412, 40)</code></pre>
 <td>0</td>
 <td>0</td>
 <td>1</td>
-<td>0</td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
@@ -2116,43 +2132,37 @@ Shape of filtered fish_df: (2412, 40)</code></pre>
 <td>0</td>
 <td>0</td>
 <td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
 <td>0</td>
 <td>0</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
 <td>1</td>
 <td>0</td>
 <td>1</td>
 <td>0</td>
 <td>1</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
 <td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
@@ -2160,23 +2170,31 @@ Shape of filtered fish_df: (2412, 40)</code></pre>
 <td>0</td>
 <td>0</td>
 <td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
 <td>0</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>1</td>
-<td>0</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
 <td>1</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
@@ -2191,8 +2209,6 @@ Shape of filtered fish_df: (2412, 40)</code></pre>
 <td>1</td>
 <td>0</td>
 <td>0</td>
-<td>0</td>
-<td>0</td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
@@ -2202,11 +2218,25 @@ Shape of filtered fish_df: (2412, 40)</code></pre>
 <td>0</td>
 <td>0</td>
 <td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
 <td>0</td>
 <td>0</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
@@ -2225,18 +2255,15 @@ Shape of filtered fish_df: (2412, 40)</code></pre>
 <td>0</td>
 <td>0</td>
 <td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
 <td>1</td>
-<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
@@ -2250,16 +2277,6 @@ Shape of filtered fish_df: (2412, 40)</code></pre>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
@@ -2269,22 +2286,32 @@ Shape of filtered fish_df: (2412, 40)</code></pre>
 <td>0</td>
 <td>0</td>
 <td>1</td>
-<td>0</td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
-<td>0</td>
-<td>1</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
 <td>1</td>
 <td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
 <td>0</td>
 <td>0</td>
 <td>1</td>
 <td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
 <td>0</td>
 <td>1</td>
 <td>0</td>
@@ -2300,8 +2327,8 @@ Shape of filtered fish_df: (2412, 40)</code></pre>
 <section id="distance" class="level2">
 <h2 class="anchored" data-anchor-id="distance">Distance</h2>
 <p><strong>How do we measure similarity between samples?</strong> We can use Jaccard distance, which is a common metric for binary data (presence/absence). The Jaccard distance between two samples A and B is defined as: <span class="math display">\[d_J(A, B) = 1 - \frac{|A \cap B|}{|A \cup B|}\]</span> Where <span class="math inline">\(|A \cap B|\)</span> is the number of species present in both samples, and <span class="math inline">\(|A \cup B|\)</span> is the number of species present in either sample.</p>
-<div id="bd7d270f" class="cell" data-execution_count="15">
-<div class="cell-output cell-output-display" data-execution_count="38">
+<div id="d468be58" class="cell" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="222">
 <div>
 <figure class="figure">
 <p><img src="DSC210pres_files/figure-html/cell-16-output-1.png" width="600" height="400" class="figure-img"></p>
@@ -2309,15 +2336,15 @@ Shape of filtered fish_df: (2412, 40)</code></pre>
 </div>
 </div>
 </div>
-<div id="a27aedda" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial.distance <span class="im">import</span> pdist, squareform</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> linkage, dendrogram, fcluster</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>dist_matrix <span class="op">=</span> pdist(fish_df_binary, metric<span class="op">=</span><span class="st">'jaccard'</span>)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>dist_df <span class="op">=</span> pd.DataFrame(squareform(dist_matrix))</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>dist_df.head().<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="39">
+<div id="6a43b2f3" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial.distance <span class="im">import</span> pdist, squareform</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> linkage, dendrogram, fcluster</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>dist_matrix <span class="op">=</span> pdist(fish_df_binary, metric<span class="op">=</span><span class="st">'jaccard'</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>dist_df <span class="op">=</span> pd.DataFrame(squareform(dist_matrix))</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>dist_df.head().<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="223">
 <div>
 
 
@@ -16826,9 +16853,9 @@ Shape of filtered fish_df: (2412, 40)</code></pre>
 <h2 class="anchored" data-anchor-id="linkage-and-dendrogram">Linkage and Dendrogram</h2>
 <p>Next, we can use hierarchical clustering to group similar samples together based on their Jaccard distances. The hierarchical clustering process involves iteratively merging the closest clusters until all samples are in a single cluster.</p>
 <p>For example, if we focus only in the first 4 samples of the distance matrix</p>
-<div id="834ff065" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dist_example <span class="op">=</span>dist_df.iloc[<span class="dv">0</span>:<span class="dv">4</span>, <span class="dv">0</span>:<span class="dv">4</span>].<span class="bu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dist_example)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e100939d" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dist_example <span class="op">=</span>dist_df.iloc[<span class="dv">0</span>:<span class="dv">4</span>, <span class="dv">0</span>:<span class="dv">4</span>].<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dist_example)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      0     1     2     3
 0  0.00  0.72  0.50  0.67
@@ -16893,13 +16920,13 @@ Shape of filtered fish_df: (2412, 40)</code></pre>
 </tbody>
 </table>
 <p>This process continues until all samples are clustered together. The result can be visualized as a <em>dendrogram</em>, which shows the hierarchical relationships between the samples based on their distances.</p>
-<div id="4f8fa150" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>dendrogram(linkage(dist_example, method<span class="op">=</span><span class="st">'average'</span>), </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>color_threshold<span class="op">=</span><span class="va">None</span>, no_labels<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Index"</span>, fontsize<span class="op">=</span><span class="dv">13</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Distance"</span>, fontsize<span class="op">=</span><span class="dv">13</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="99fbf2fa" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>dendrogram(linkage(dist_example, method<span class="op">=</span><span class="st">'average'</span>), </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>color_threshold<span class="op">=</span><span class="va">None</span>, no_labels<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Index"</span>, fontsize<span class="op">=</span><span class="dv">13</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Distance"</span>, fontsize<span class="op">=</span><span class="dv">13</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -16909,7 +16936,7 @@ Shape of filtered fish_df: (2412, 40)</code></pre>
 </div>
 </div>
 <p>With a few more samples:</p>
-<div id="f7500fa3" class="cell" data-execution_count="19">
+<div id="e6b114c0" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -16919,7 +16946,7 @@ Shape of filtered fish_df: (2412, 40)</code></pre>
 </div>
 </div>
 <p>For the full dataset:</p>
-<div id="a0efe870" class="cell" data-execution_count="20">
+<div id="b09799e1" class="cell" data-execution_count="20">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -16939,7 +16966,7 @@ Shape of filtered fish_df: (2412, 40)</code></pre>
 <li><p>[Math] Limit over‑fragmentation by reducing the number of clusters containing fewer than 30 samples</p></li>
 <li><p>[Domain Knowledge] No cluster of more than 1,000 samples. An upper bound prevents a single dominant cluster from obscuring finer‑scale, ecologically meaningful assemblages.</p></li>
 </ul>
-<div id="9ec02c13" class="cell" data-execution_count="21">
+<div id="a0d0bf1a" class="cell" data-execution_count="21">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -16993,74 +17020,74 @@ dtype: int64</code></pre>
 </div>
 <p>Fish species codes (full species names in Table 1) for eight clusters, whereby cluster is defined by fish assemblage composition. The heatmap shows the percentage of sampling sites where each species was present within each cluster. Cell values and color represent prevalence (0–100%), with darker blues indicating higher prevalence of that fish species. Clusters are ordered by sample size or the number of sites classified within that cluster (shown in parentheses).</p>
 </section>
-<section id="cluster-analysis-1" class="level1">
+<section id="cluster-analysis" class="level1">
 <h1>Cluster Analysis</h1>
-<div id="f7fa9c37" class="cell" data-execution_count="22">
+<div id="ed3ea028" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Show this code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"white"</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>sns.set_context(<span class="st">"notebook"</span>, font_scale<span class="op">=</span><span class="fl">1.0</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Order species by overall frequency of occurrence (sum across columns)</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>species_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> fish_df.columns <span class="cf">if</span> c <span class="op">!=</span> <span class="st">'cluster'</span>]</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>species_order <span class="op">=</span> fish_df[species_cols].<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>).sort_values(ascending<span class="op">=</span><span class="va">False</span>).index.tolist()</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep only top 20 most common species</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>fishcode_2_include <span class="op">=</span> <span class="dv">41</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>top_species <span class="op">=</span> species_order[:fishcode_2_include]</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute percent presence per cluster for top 20 species only</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Result: rows = cluster, cols = species</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>jac_comp <span class="op">=</span> fish_df.groupby(<span class="st">'cluster'</span>)[top_species].mean() <span class="op">*</span> <span class="dv">100</span></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Order clusters by overall sample count (so columns are in meaningful order)</span></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter clusters with size &gt;= 10</span></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 cluster size &gt; 160</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 8 cluster size &gt; 30</span></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>cluster_filter <span class="op">=</span> <span class="dv">30</span></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>cluster_sizes <span class="op">=</span> fish_df[<span class="st">'cluster'</span>].value_counts()</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>cluster_sizes <span class="op">=</span> cluster_sizes[cluster_sizes <span class="op">&gt;=</span> cluster_filter]</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>cluster_order <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> cluster_sizes.index <span class="cf">if</span> c <span class="kw">in</span> jac_comp.index]</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>jac_comp <span class="op">=</span> jac_comp.reindex(cluster_order)</span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Transpose so rows=species, cols=cluster (more natural for reading species)</span></span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>display_df <span class="op">=</span> jac_comp.T</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Create readable cluster labels with site counts</span></span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>col_labels <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span>c<span class="sc">}</span><span class="ch">\n</span><span class="ss">(</span><span class="sc">{</span>cluster_sizes<span class="sc">.</span>get(c,<span class="dv">0</span>)<span class="sc">}</span><span class="ss"> samples)"</span> <span class="cf">for</span> c <span class="kw">in</span> display_df.columns]</span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="bu">max</span>(<span class="dv">10</span>, <span class="fl">0.6</span> <span class="op">*</span> display_df.shape[<span class="dv">1</span>]), <span class="fl">0.35</span> <span class="op">*</span> display_df.shape[<span class="dv">0</span>] <span class="op">+</span> <span class="dv">4</span>))</span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>cmap <span class="op">=</span> sns.color_palette(<span class="st">"YlGnBu"</span>, as_cmap<span class="op">=</span><span class="va">True</span>)  <span class="co"># perceptually-uniform sequential</span></span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>sns.heatmap(</span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>    display_df,</span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>cmap,</span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>    vmin<span class="op">=</span><span class="dv">0</span>,</span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>    vmax<span class="op">=</span><span class="dv">100</span>,</span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>    annot<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">=</span><span class="st">".1f"</span>,</span>
-<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>    linewidths<span class="op">=</span><span class="fl">0.4</span>,</span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>    linecolor<span class="op">=</span><span class="st">"0.9"</span>,</span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>    cbar_kws<span class="op">=</span>{<span class="st">"label"</span>: <span class="st">"% presence"</span>}</span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>ax.set_xticklabels(col_labels, rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">"right"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>ax.set_yticklabels(ax.get_yticklabels(), rotation<span class="op">=</span><span class="dv">0</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
-<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Cluster (sample count)"</span>)</span>
-<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Species"</span>)</span>
-<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"Fish Species by Cluster (of sample count </span><span class="sc">{</span>cluster_filter<span class="sc">}</span><span class="ss"> or larger) — % presence"</span>, pad<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a><span class="co">#ax.set_title(f"Top {fishcode_2_include} Most Common Fish Species by Cluster (of sample count {cluster_filter} or larger) — % presence", pad=14)</span></span>
-<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a>fig.savefig(</span>
-<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a>    <span class="st">'cluster_species_presence.jpg'</span>,</span>
-<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a>    dpi<span class="op">=</span><span class="dv">300</span>,</span>
-<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a>    bbox_inches<span class="op">=</span><span class="st">'tight'</span>,</span>
-<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">'jpeg'</span>,</span>
-<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a>    pil_kwargs<span class="op">=</span>{<span class="st">'quality'</span>: <span class="dv">95</span>, <span class="st">'optimize'</span>: <span class="va">True</span>, <span class="st">'progressive'</span>: <span class="va">True</span>}</span>
-<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"white"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sns.set_context(<span class="st">"notebook"</span>, font_scale<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Order species by overall frequency of occurrence (sum across columns)</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>species_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> fish_df.columns <span class="cf">if</span> c <span class="op">!=</span> <span class="st">'cluster'</span>]</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>species_order <span class="op">=</span> fish_df[species_cols].<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>).sort_values(ascending<span class="op">=</span><span class="va">False</span>).index.tolist()</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep only top 20 most common species</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>fishcode_2_include <span class="op">=</span> <span class="dv">41</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>top_species <span class="op">=</span> species_order[:fishcode_2_include]</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute percent presence per cluster for top 20 species only</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Result: rows = cluster, cols = species</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>jac_comp <span class="op">=</span> fish_df.groupby(<span class="st">'cluster'</span>)[top_species].mean() <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Order clusters by overall sample count (so columns are in meaningful order)</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter clusters with size &gt;= 10</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 cluster size &gt; 160</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 8 cluster size &gt; 30</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>cluster_filter <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>cluster_sizes <span class="op">=</span> fish_df[<span class="st">'cluster'</span>].value_counts()</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>cluster_sizes <span class="op">=</span> cluster_sizes[cluster_sizes <span class="op">&gt;=</span> cluster_filter]</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>cluster_order <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> cluster_sizes.index <span class="cf">if</span> c <span class="kw">in</span> jac_comp.index]</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>jac_comp <span class="op">=</span> jac_comp.reindex(cluster_order)</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Transpose so rows=species, cols=cluster (more natural for reading species)</span></span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>display_df <span class="op">=</span> jac_comp.T</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Create readable cluster labels with site counts</span></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>col_labels <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span>c<span class="sc">}</span><span class="ch">\n</span><span class="ss">(</span><span class="sc">{</span>cluster_sizes<span class="sc">.</span>get(c,<span class="dv">0</span>)<span class="sc">}</span><span class="ss"> samples)"</span> <span class="cf">for</span> c <span class="kw">in</span> display_df.columns]</span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="bu">max</span>(<span class="dv">10</span>, <span class="fl">0.6</span> <span class="op">*</span> display_df.shape[<span class="dv">1</span>]), <span class="fl">0.35</span> <span class="op">*</span> display_df.shape[<span class="dv">0</span>] <span class="op">+</span> <span class="dv">4</span>))</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>cmap <span class="op">=</span> sns.color_palette(<span class="st">"YlGnBu"</span>, as_cmap<span class="op">=</span><span class="va">True</span>)  <span class="co"># perceptually-uniform sequential</span></span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>sns.heatmap(</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>    display_df,</span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>cmap,</span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>    vmin<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>    vmax<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>    annot<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">=</span><span class="st">".1f"</span>,</span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>    linewidths<span class="op">=</span><span class="fl">0.4</span>,</span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>    linecolor<span class="op">=</span><span class="st">"0.9"</span>,</span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a>    cbar_kws<span class="op">=</span>{<span class="st">"label"</span>: <span class="st">"% presence"</span>}</span>
+<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>ax.set_xticklabels(col_labels, rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">"right"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>ax.set_yticklabels(ax.get_yticklabels(), rotation<span class="op">=</span><span class="dv">0</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Cluster (sample count)"</span>)</span>
+<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Species"</span>)</span>
+<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"Fish Species by Cluster (of sample count </span><span class="sc">{</span>cluster_filter<span class="sc">}</span><span class="ss"> or larger) — % presence"</span>, pad<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a><span class="co">#ax.set_title(f"Top {fishcode_2_include} Most Common Fish Species by Cluster (of sample count {cluster_filter} or larger) — % presence", pad=14)</span></span>
+<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a>fig.savefig(</span>
+<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a>    <span class="st">'cluster_species_presence.jpg'</span>,</span>
+<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a>    dpi<span class="op">=</span><span class="dv">300</span>,</span>
+<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a>    bbox_inches<span class="op">=</span><span class="st">'tight'</span>,</span>
+<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">'jpeg'</span>,</span>
+<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a>    pil_kwargs<span class="op">=</span>{<span class="st">'quality'</span>: <span class="dv">95</span>, <span class="st">'optimize'</span>: <span class="va">True</span>, <span class="st">'progressive'</span>: <span class="va">True</span>}</span>
+<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -17070,106 +17097,106 @@ dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="aa2dc426" class="cell" data-execution_count="23">
+<div id="a64dd3aa" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Show this code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tol_colors <span class="im">as</span> tc</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>CB_PALETTE <span class="op">=</span> tc.muted</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fallback colors for clusters &gt; 8</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>EXTRA_COLORS <span class="op">=</span> [ <span class="st">'#44AA99'</span>, <span class="st">'#999933'</span>,<span class="st">'#882255'</span>, <span class="st">'#AA4499'</span>]</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>GREY_COLOR <span class="op">=</span> (<span class="fl">0.75</span>, <span class="fl">0.75</span>, <span class="fl">0.75</span>)  <span class="co"># light gray for non-highlighted clusters</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># CONFIGURATION: Select clusters to highlight</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>highlight_clusters <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>]  <span class="co"># &lt;-- CHANGE THIS to select clusters (set to None or [] to show all)</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Minimum cluster size filter</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>min_cluster_size <span class="op">=</span> <span class="dv">30</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Define pool order for facets (2 columns: row1 = Pool 4s, row2 = Pool 8 &amp; 13)</span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>pool_order <span class="op">=</span> [<span class="st">"Upper Pool 4"</span>, <span class="st">"Lower Pool 4"</span>, <span class="st">"Pool 8"</span>, <span class="st">"Pool 13"</span>]</span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Data preparation</span></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter cluster size over threshold</span></span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>cluster_counts <span class="op">=</span> agg_df[<span class="st">'cluster'</span>].value_counts()</span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>clusters_over_threshold <span class="op">=</span> cluster_counts[cluster_counts <span class="op">&gt;=</span> min_cluster_size].index</span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>df_plot <span class="op">=</span> agg_df[agg_df[<span class="st">'cluster'</span>].isin(clusters_over_threshold)].copy()</span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter to only include pools in our desired order</span></span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>df_plot <span class="op">=</span> df_plot[df_plot[<span class="st">'pool'</span>].isin(pool_order)].copy()</span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Set mode_pool as ordered categorical to control facet order</span></span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>df_plot[<span class="st">'pool'</span>] <span class="op">=</span> pd.Categorical(</span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>    df_plot[<span class="st">'pool'</span>], </span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>    categories<span class="op">=</span>pool_order, </span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>    ordered<span class="op">=</span><span class="va">True</span></span>
-<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>cluster_sizes <span class="op">=</span> df_plot[<span class="st">'cluster'</span>].value_counts()</span>
-<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>unique_clusters <span class="op">=</span> <span class="bu">sorted</span>(df_plot[<span class="st">'cluster'</span>].unique())</span>
-<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
-<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Build color map: use consistent CB colors, grey out non-highlighted clusters</span></span>
-<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
-<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a><span class="co"># create a color map for highlighed clusters mapped to CB_PALETTE colors</span></span>
-<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> {}</span>
-<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idx, cluster_id <span class="kw">in</span> <span class="bu">enumerate</span>(unique_clusters):</span>
-<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> highlight_clusters <span class="kw">and</span> cluster_id <span class="kw">not</span> <span class="kw">in</span> highlight_clusters:</span>
-<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>        color_map[cluster_id] <span class="op">=</span> GREY_COLOR</span>
-<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> idx <span class="op">&lt;</span> <span class="bu">len</span>(CB_PALETTE):</span>
-<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>            color_map[cluster_id] <span class="op">=</span> CB_PALETTE[idx]</span>
-<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>            extra_color_idx <span class="op">=</span> (idx <span class="op">-</span> <span class="bu">len</span>(CB_PALETTE)) <span class="op">%</span> <span class="bu">len</span>(EXTRA_COLORS)</span>
-<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>            color_map[cluster_id] <span class="op">=</span> EXTRA_COLORS[extra_color_idx]</span>
-<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Add jitter to UTM coordinates</span></span>
-<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust jitter_amount based on your coordinate scale (UTM is in meters)</span></span>
-<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>jitter_amount <span class="op">=</span> <span class="dv">300</span>  <span class="co"># 300 meters of jitter</span></span>
-<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)  <span class="co"># For reproducibility</span></span>
-<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a>df_plot[<span class="st">'utm_e_jitter'</span>] <span class="op">=</span> df_plot[<span class="st">'utm_e'</span>] <span class="op">+</span> np.random.uniform(<span class="op">-</span>jitter_amount, jitter_amount, <span class="bu">len</span>(df_plot))</span>
-<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a>df_plot[<span class="st">'utm_n_jitter'</span>] <span class="op">=</span> df_plot[<span class="st">'utm_n'</span>] <span class="op">+</span> np.random.uniform(<span class="op">-</span>jitter_amount, jitter_amount, <span class="bu">len</span>(df_plot))</span>
-<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.FacetGrid(</span>
-<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a>    df_plot,</span>
-<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a>    col<span class="op">=</span><span class="st">"pool"</span>,</span>
-<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"cluster"</span>,</span>
-<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span>color_map,</span>
-<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a>    col_wrap<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">5</span>,</span>
-<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a>    sharex<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a>    sharey<span class="op">=</span><span class="va">False</span></span>
-<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a>g.map_dataframe(sns.scatterplot, x<span class="op">=</span><span class="st">"utm_e_jitter"</span>, y<span class="op">=</span><span class="st">"utm_n_jitter"</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, s<span class="op">=</span><span class="dv">40</span>)</span>
-<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Format axes in thousands</span></span>
-<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> g.axes.flat:</span>
-<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(axis<span class="op">=</span><span class="st">'x'</span>, rotation<span class="op">=</span><span class="dv">45</span>)</span>
-<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_major_locator(plt.MaxNLocator(nbins<span class="op">=</span><span class="dv">5</span>))</span>
-<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_major_formatter(plt.FuncFormatter(<span class="kw">lambda</span> x, p: <span class="ss">f'</span><span class="sc">{</span>x<span class="op">/</span><span class="dv">1000</span><span class="sc">:.0f}</span><span class="ss">'</span>))</span>
-<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a>    ax.yaxis.set_major_formatter(plt.FuncFormatter(<span class="kw">lambda</span> y, p: <span class="ss">f'</span><span class="sc">{</span>y<span class="op">/</span><span class="dv">1000</span><span class="sc">:.0f}</span><span class="ss">'</span>))</span>
-<span id="cb20-81"><a href="#cb20-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-82"><a href="#cb20-82" aria-hidden="true" tabindex="-1"></a>g.set_axis_labels(<span class="st">"UTM Easting (×1000)"</span>, <span class="st">"UTM Northing (×1000)"</span>)</span>
-<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a><span class="co"># Add legend positioned closer to the plots</span></span>
-<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a>g.add_legend(title<span class="op">=</span><span class="st">"Cluster"</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.0</span>, <span class="fl">0.5</span>), loc<span class="op">=</span><span class="st">'center left'</span>)</span>
-<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a><span class="co"># Update title</span></span>
-<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> highlight_clusters:</span>
-<span id="cb20-89"><a href="#cb20-89" aria-hidden="true" tabindex="-1"></a>    title_suffix <span class="op">=</span> <span class="ss">f" (highlighting clusters: </span><span class="sc">{</span>highlight_clusters<span class="sc">}</span><span class="ss">)"</span></span>
-<span id="cb20-90"><a href="#cb20-90" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb20-91"><a href="#cb20-91" aria-hidden="true" tabindex="-1"></a>    title_suffix <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb20-92"><a href="#cb20-92" aria-hidden="true" tabindex="-1"></a>g.figure.suptitle(<span class="ss">f"Assemblage Locations by Cluster and Pool"</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-94"><a href="#cb20-94" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout with more bottom space for rotated labels and proper right margin</span></span>
-<span id="cb20-95"><a href="#cb20-95" aria-hidden="true" tabindex="-1"></a>g.figure.subplots_adjust(right<span class="op">=</span><span class="fl">0.9</span>, bottom<span class="op">=</span><span class="fl">0.15</span>, top<span class="op">=</span><span class="fl">0.90</span>, hspace<span class="op">=</span><span class="fl">0.25</span>, wspace<span class="op">=</span><span class="fl">0.25</span>)</span>
-<span id="cb20-96"><a href="#cb20-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-97"><a href="#cb20-97" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tol_colors <span class="im">as</span> tc</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>CB_PALETTE <span class="op">=</span> tc.muted</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fallback colors for clusters &gt; 8</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>EXTRA_COLORS <span class="op">=</span> [ <span class="st">'#44AA99'</span>, <span class="st">'#999933'</span>,<span class="st">'#882255'</span>, <span class="st">'#AA4499'</span>]</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>GREY_COLOR <span class="op">=</span> (<span class="fl">0.75</span>, <span class="fl">0.75</span>, <span class="fl">0.75</span>)  <span class="co"># light gray for non-highlighted clusters</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># CONFIGURATION: Select clusters to highlight</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>highlight_clusters <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>]  <span class="co"># &lt;-- CHANGE THIS to select clusters (set to None or [] to show all)</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Minimum cluster size filter</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>min_cluster_size <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Define pool order for facets (2 columns: row1 = Pool 4s, row2 = Pool 8 &amp; 13)</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>pool_order <span class="op">=</span> [<span class="st">"Upper Pool 4"</span>, <span class="st">"Lower Pool 4"</span>, <span class="st">"Pool 8"</span>, <span class="st">"Pool 13"</span>]</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Data preparation</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter cluster size over threshold</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>cluster_counts <span class="op">=</span> agg_df[<span class="st">'cluster'</span>].value_counts()</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>clusters_over_threshold <span class="op">=</span> cluster_counts[cluster_counts <span class="op">&gt;=</span> min_cluster_size].index</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>df_plot <span class="op">=</span> agg_df[agg_df[<span class="st">'cluster'</span>].isin(clusters_over_threshold)].copy()</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter to only include pools in our desired order</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>df_plot <span class="op">=</span> df_plot[df_plot[<span class="st">'pool'</span>].isin(pool_order)].copy()</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Set mode_pool as ordered categorical to control facet order</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>df_plot[<span class="st">'pool'</span>] <span class="op">=</span> pd.Categorical(</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>    df_plot[<span class="st">'pool'</span>], </span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>    categories<span class="op">=</span>pool_order, </span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>    ordered<span class="op">=</span><span class="va">True</span></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>cluster_sizes <span class="op">=</span> df_plot[<span class="st">'cluster'</span>].value_counts()</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>unique_clusters <span class="op">=</span> <span class="bu">sorted</span>(df_plot[<span class="st">'cluster'</span>].unique())</span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Build color map: use consistent CB colors, grey out non-highlighted clusters</span></span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a><span class="co"># create a color map for highlighed clusters mapped to CB_PALETTE colors</span></span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> {}</span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idx, cluster_id <span class="kw">in</span> <span class="bu">enumerate</span>(unique_clusters):</span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> highlight_clusters <span class="kw">and</span> cluster_id <span class="kw">not</span> <span class="kw">in</span> highlight_clusters:</span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>        color_map[cluster_id] <span class="op">=</span> GREY_COLOR</span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> idx <span class="op">&lt;</span> <span class="bu">len</span>(CB_PALETTE):</span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>            color_map[cluster_id] <span class="op">=</span> CB_PALETTE[idx]</span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>            extra_color_idx <span class="op">=</span> (idx <span class="op">-</span> <span class="bu">len</span>(CB_PALETTE)) <span class="op">%</span> <span class="bu">len</span>(EXTRA_COLORS)</span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>            color_map[cluster_id] <span class="op">=</span> EXTRA_COLORS[extra_color_idx]</span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Add jitter to UTM coordinates</span></span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust jitter_amount based on your coordinate scale (UTM is in meters)</span></span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a>jitter_amount <span class="op">=</span> <span class="dv">300</span>  <span class="co"># 300 meters of jitter</span></span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)  <span class="co"># For reproducibility</span></span>
+<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a>df_plot[<span class="st">'utm_e_jitter'</span>] <span class="op">=</span> df_plot[<span class="st">'utm_e'</span>] <span class="op">+</span> np.random.uniform(<span class="op">-</span>jitter_amount, jitter_amount, <span class="bu">len</span>(df_plot))</span>
+<span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a>df_plot[<span class="st">'utm_n_jitter'</span>] <span class="op">=</span> df_plot[<span class="st">'utm_n'</span>] <span class="op">+</span> np.random.uniform(<span class="op">-</span>jitter_amount, jitter_amount, <span class="bu">len</span>(df_plot))</span>
+<span id="cb22-62"><a href="#cb22-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-63"><a href="#cb22-63" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.FacetGrid(</span>
+<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a>    df_plot,</span>
+<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a>    col<span class="op">=</span><span class="st">"pool"</span>,</span>
+<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"cluster"</span>,</span>
+<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span>color_map,</span>
+<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a>    col_wrap<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a>    sharex<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a>    sharey<span class="op">=</span><span class="va">False</span></span>
+<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a>g.map_dataframe(sns.scatterplot, x<span class="op">=</span><span class="st">"utm_e_jitter"</span>, y<span class="op">=</span><span class="st">"utm_n_jitter"</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, s<span class="op">=</span><span class="dv">40</span>)</span>
+<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-75"><a href="#cb22-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Format axes in thousands</span></span>
+<span id="cb22-76"><a href="#cb22-76" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> g.axes.flat:</span>
+<span id="cb22-77"><a href="#cb22-77" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(axis<span class="op">=</span><span class="st">'x'</span>, rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_major_locator(plt.MaxNLocator(nbins<span class="op">=</span><span class="dv">5</span>))</span>
+<span id="cb22-79"><a href="#cb22-79" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_major_formatter(plt.FuncFormatter(<span class="kw">lambda</span> x, p: <span class="ss">f'</span><span class="sc">{</span>x<span class="op">/</span><span class="dv">1000</span><span class="sc">:.0f}</span><span class="ss">'</span>))</span>
+<span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a>    ax.yaxis.set_major_formatter(plt.FuncFormatter(<span class="kw">lambda</span> y, p: <span class="ss">f'</span><span class="sc">{</span>y<span class="op">/</span><span class="dv">1000</span><span class="sc">:.0f}</span><span class="ss">'</span>))</span>
+<span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a>g.set_axis_labels(<span class="st">"UTM Easting (×1000)"</span>, <span class="st">"UTM Northing (×1000)"</span>)</span>
+<span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a><span class="co"># Add legend positioned closer to the plots</span></span>
+<span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a>g.add_legend(title<span class="op">=</span><span class="st">"Cluster"</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.0</span>, <span class="fl">0.5</span>), loc<span class="op">=</span><span class="st">'center left'</span>)</span>
+<span id="cb22-86"><a href="#cb22-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-87"><a href="#cb22-87" aria-hidden="true" tabindex="-1"></a><span class="co"># Update title</span></span>
+<span id="cb22-88"><a href="#cb22-88" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> highlight_clusters:</span>
+<span id="cb22-89"><a href="#cb22-89" aria-hidden="true" tabindex="-1"></a>    title_suffix <span class="op">=</span> <span class="ss">f" (highlighting clusters: </span><span class="sc">{</span>highlight_clusters<span class="sc">}</span><span class="ss">)"</span></span>
+<span id="cb22-90"><a href="#cb22-90" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb22-91"><a href="#cb22-91" aria-hidden="true" tabindex="-1"></a>    title_suffix <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb22-92"><a href="#cb22-92" aria-hidden="true" tabindex="-1"></a>g.figure.suptitle(<span class="ss">f"Assemblage Locations by Cluster and Pool"</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb22-93"><a href="#cb22-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-94"><a href="#cb22-94" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout with more bottom space for rotated labels and proper right margin</span></span>
+<span id="cb22-95"><a href="#cb22-95" aria-hidden="true" tabindex="-1"></a>g.figure.subplots_adjust(right<span class="op">=</span><span class="fl">0.9</span>, bottom<span class="op">=</span><span class="fl">0.15</span>, top<span class="op">=</span><span class="fl">0.90</span>, hspace<span class="op">=</span><span class="fl">0.25</span>, wspace<span class="op">=</span><span class="fl">0.25</span>)</span>
+<span id="cb22-96"><a href="#cb22-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-97"><a href="#cb22-97" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -17278,6 +17305,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -17388,6 +17417,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
+      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
