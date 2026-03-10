@@ -250,15 +250,237 @@ plt.show()
 
 # How do we decide how many clusters to cut the dendrogram into?
 
-There is no single "correct" way to determine the optimal number of clusters, but there are several complementary approaches we can use to make an informed decision. We can
+There is no single "correct" way to determine the optimal number of clusters, but there are several complementary approaches we can use to make an informed decision. 
 
--   [Math] Look for large vertical gaps in the dendrogram, which indicate distinct clusters. A large gap suggests that merging those clusters would result in a significant increase in distance, indicating that they are quite different from each other.
+### Method 1 — Largest Gap
+- **Idea:** Find the biggest jump between consecutive merge heights and cut in the middle.
+- **Pros:** Simple, parameter-free, and purely visual — it formalizes the "look for big gaps" heuristic.
+- **Cons:** Only considers *one* gap. If the dendrogram has several similarly-sized gaps it can be unstable. It also ignores cluster quality entirely — a large gap doesn't guarantee internally cohesive groups.
 
--   [Math] Assess the consistency of cluster membership when bootstrapping sampling of the data. 
+```{python}
+#| code-fold: true
+#| code-summary: "Show this code"
+# ── Work with the 20-sample subset ──────────────────────────────────────
+subset_binary = fish_df_binary.iloc[0:20]
+dist_sub = pdist(subset_binary, metric='jaccard')
+Z_sub = linkage(dist_sub, method='average')
 
--   [Math] Limit over‑fragmentation by reducing the number of clusters containing fewer than 30 samples
+# =========================================================================
+# Method 1 – Largest-gap heuristic
+# =========================================================================
+# The merge heights are stored in the third column of the linkage matrix.
+# We look for the single biggest jump between consecutive merge heights;
+# the threshold is placed in the middle of that gap.
 
--   [Domain Knowledge] No cluster of more than 1,000 samples. An upper bound prevents a single dominant cluster from obscuring finer‑scale, ecologically meaningful assemblages. 
+heights = Z_sub[:, 2]
+gaps = np.diff(heights)
+largest_gap_idx = np.argmax(gaps)
+threshold_gap = (heights[largest_gap_idx] + heights[largest_gap_idx + 1]) / 2
+
+print("── Method 1: Largest-gap ──")
+print(f"  Merge heights : {np.round(heights, 4)}")
+print(f"  Gaps           : {np.round(gaps, 4)}")
+print(f"  Largest gap between merges {largest_gap_idx} → {largest_gap_idx+1}")
+print(f"  Suggested threshold = {threshold_gap:.4f}")
+
+clusters_gap = fcluster(Z_sub, t=threshold_gap, criterion='distance')
+print(f"  Number of clusters  = {len(np.unique(clusters_gap))}")
+print(f"  Cluster sizes       = {np.bincount(clusters_gap)[1:]}")
+
+# Plot
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+ax = axes[0]
+ax.plot(range(1, len(heights) + 1), heights, 'o-', label='Merge height')
+ax.axhline(threshold_gap, color='red', ls='--', label=f'Threshold = {threshold_gap:.3f}')
+ax.set_xlabel('Merge step')
+ax.set_ylabel('Distance')
+ax.set_title('Method 1: Largest Gap in Merge Heights')
+ax.legend()
+
+ax = axes[1]
+dendrogram(Z_sub, ax=ax, color_threshold=threshold_gap)
+ax.axhline(threshold_gap, color='red', ls='--')
+ax.set_title(f'Dendrogram cut at {threshold_gap:.3f}')
+ax.set_xlabel('Sample index')
+ax.set_ylabel('Distance')
+
+plt.tight_layout()
+plt.show()
+```
+
+### Method 2 — Silhouette Score
+- **Idea:** For each threshold, assign clusters and compute the mean silhouette coefficient, which balances within-cluster tightness against between-cluster separation. Range is [−1, 1]; higher is better.
+
+```{python}
+#| echo: false
+Image(filename="silhouette.png", width=600, height=300)
+```
+
+- **Pros:** Directly measures cluster quality using the same Jaccard distance matrix. Works well with arbitrary cluster shapes and is agnostic to the clustering method.
+- **Cons:** Computationally expensive on large datasets ($O(n^2)$ per evaluation). Can favor coarser (fewer) clusters when many samples are dissimilar. For binary ecological data  where species composition changes gradually across the landscape, silhouette values may stay low everywhere.
+
+```{python}
+#| code-fold: true
+#| code-summary: "Show this code"
+# =========================================================================
+# Method 2 – Silhouette score across a grid of thresholds
+# =========================================================================
+from sklearn.metrics import silhouette_score
+
+subset_binary = fish_df_binary.iloc[0:20]
+dist_sub = pdist(subset_binary, metric='jaccard')
+Z_sub = linkage(dist_sub, method='average')
+
+thresholds = np.linspace(heights.min() + 0.01, heights.max() - 0.01, 50)
+sil_scores = []
+
+dist_square_sub = squareform(dist_sub)
+
+for t in thresholds:
+    labels = fcluster(Z_sub, t=t, criterion='distance')
+    n_clusters = len(np.unique(labels))
+    if n_clusters < 2 or n_clusters >= len(subset_binary):
+        sil_scores.append(np.nan)
+    else:
+        sil_scores.append(silhouette_score(dist_square_sub, labels, metric='precomputed'))
+
+sil_scores = np.array(sil_scores)
+best_idx = np.nanargmax(sil_scores)
+threshold_sil = thresholds[best_idx]
+best_sil = sil_scores[best_idx]
+
+print("── Method 2: Silhouette Analysis ──")
+print(f"  Best threshold  = {threshold_sil:.4f}")
+print(f"  Best silhouette = {best_sil:.4f}")
+
+clusters_sil = fcluster(Z_sub, t=threshold_sil, criterion='distance')
+print(f"  Number of clusters = {len(np.unique(clusters_sil))}")
+print(f"  Cluster sizes      = {np.bincount(clusters_sil)[1:]}")
+
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+ax = axes[0]
+ax.plot(thresholds, sil_scores, 'o-', ms=3)
+ax.axvline(threshold_sil, color='red', ls='--', label=f'Best = {threshold_sil:.3f}')
+ax.set_xlabel('Distance threshold')
+ax.set_ylabel('Silhouette score')
+ax.set_title('Method 2: Silhouette Score vs. Threshold')
+ax.legend()
+
+ax = axes[1]
+dendrogram(Z_sub, ax=ax, color_threshold=threshold_sil)
+ax.axhline(threshold_sil, color='red', ls='--')
+ax.set_title(f'Dendrogram cut at {threshold_sil:.3f}')
+ax.set_xlabel('Sample index')
+ax.set_ylabel('Distance')
+
+plt.tight_layout()
+plt.show()
+```
+
+### Method 3 — Elbow Method (Within-Cluster Sum of Squares)
+- **Idea:** 
+1. For each candidate number of clusters k (2 through n−1), cut the dendrogram to get k groups.
+2. Compute the within-cluster sum of pairwise Jaccard distances (WCSS) — the total "spread" inside all clusters.
+3. Plot k vs. WCSS. As k increases, WCSS decreases monotonically (more clusters → each is tighter).
+4. The elbow is the k where the curve bends — further splits yield only marginal reduction in WCSS. 
+
+- **Pros:** Intuitive...directly answers "at what point do we stop gaining much by splitting further?"
+- **Cons:** The elbow can be ambiguous — ecological data often produces a smooth, gradual curve with no sharp bend, making the "elbow" subjective.
+Biased toward many clusters — WCSS always decreases with more clusters, so the method can't tell you when clusters become meaningless, only when they become marginally less helpful.
+
+```{python}
+#| code-fold: true
+#| code-summary: "Show this code"
+# =========================================================================
+# Method: Elbow Method (Within-Cluster Sum of Squares / Inertia)
+# =========================================================================
+# For each possible number of clusters k (from 2 to n-1), cut the
+# dendrogram and compute the total within-cluster sum of squared Jaccard
+# distances. Plot k vs. WCSS and look for the "elbow" — the point where
+# the curve bends and additional clusters stop providing much improvement.
+
+subset_binary = fish_df_binary.iloc[0:20]
+dist_sub = pdist(subset_binary, metric='jaccard')
+Z_sub = linkage(dist_sub, method='average')
+dist_square_sub = squareform(dist_sub)
+
+max_k = len(subset_binary) - 1  # max clusters = n-1
+k_range = range(2, max_k + 1)
+wcss = []
+
+for k in k_range:
+    labels = fcluster(Z_sub, t=k, criterion='maxclust')
+    total_wcss = 0
+    for c in np.unique(labels):
+        members = np.where(labels == c)[0]
+        if len(members) > 1:
+            # Sum of pairwise Jaccard distances within this cluster
+            cluster_dists = dist_square_sub[np.ix_(members, members)]
+            # Use upper triangle to avoid double-counting
+            total_wcss += np.sum(np.triu(cluster_dists, k=1))
+    wcss.append(total_wcss)
+
+wcss = np.array(wcss)
+k_array = np.array(list(k_range))
+
+# ── Automated elbow detection via maximum curvature ──
+# Draw a line from the first point to the last point; the elbow is the
+# k whose perpendicular distance to that line is greatest.
+p1 = np.array([k_array[0], wcss[0]])
+p2 = np.array([k_array[-1], wcss[-1]])
+line_vec = p2 - p1
+line_len = np.linalg.norm(line_vec)
+line_unit = line_vec / line_len
+
+distances_to_line = []
+for i in range(len(k_array)):
+    pt = np.array([k_array[i], wcss[i]])
+    proj = np.dot(pt - p1, line_unit)
+    closest = p1 + proj * line_unit
+    distances_to_line.append(np.linalg.norm(pt - closest))
+
+elbow_idx = np.argmax(distances_to_line)
+elbow_k = k_array[elbow_idx]
+
+print("── Elbow Method (Within-Cluster Sum of Jaccard Distances) ──")
+print(f"  Suggested number of clusters (elbow) = {elbow_k}")
+
+# Recover the merge-height threshold that gives elbow_k clusters
+labels_elbow = fcluster(Z_sub, t=elbow_k, criterion='maxclust')
+# The threshold is the merge height just before the (n - elbow_k)th merge
+threshold_elbow = Z_sub[-(elbow_k), 2] if elbow_k <= len(Z_sub) else Z_sub[0, 2]
+print(f"  Corresponding distance threshold ≈ {threshold_elbow:.4f}")
+print(f"  Cluster sizes = {np.bincount(labels_elbow)[1:]}")
+
+# ── Plot ──
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+ax = axes[0]
+ax.plot(k_array, wcss, 'o-', ms=5)
+ax.axvline(elbow_k, color='red', ls='--', label=f'Elbow at k = {elbow_k}')
+ax.set_xlabel('Number of clusters (k)')
+ax.set_ylabel('Within-cluster sum of Jaccard distances')
+ax.set_title('Elbow Method')
+ax.legend()
+
+ax = axes[1]
+dendrogram(Z_sub, ax=ax, color_threshold=threshold_elbow)
+ax.axhline(threshold_elbow, color='red', ls='--')
+ax.set_title(f'Dendrogram cut at k = {elbow_k} (d ≈ {threshold_elbow:.3f})')
+ax.set_xlabel('Sample index')
+ax.set_ylabel('Distance')
+
+plt.tight_layout()
+plt.show()
+```
+
+### Method 4 - The Best Method? Check them all AND use domain-specidiv knowledge (collaboration is important!)
+
+There is no single "correct" way to determine the optimal number of clusters AND we should consider the utiltiy for our specific ecological question. 
+
+For example, if we want to identify broad assemblage types that are easy to interpret and communicate, we might prefer a smaller number of clusters (e.g. 4-8) that capture major patterns in the data. On the other hand, if we want to explore finer-scale variation in assemblages or identify rare or specialized groups, we might prefer a larger number of clusters (e.g. 10-20) that capture more subtle differences between samples.
 
 ```{python}
 #| echo: false
@@ -280,9 +502,9 @@ agg_df['cluster'] = agg_df['cluster'].map(cluster_map)
 fish_df['cluster'] = agg_df['cluster']
 
 # Summary of clusters
-cluster_summary = agg_df.groupby('cluster').size().sort_values(ascending=False)
-print(f"\nCluster sizes:")
-print(cluster_summary.head(30))
+#cluster_summary = agg_df.groupby('cluster').size().sort_values(ascending=False)
+#print(f"\nCluster sizes:")
+#print(cluster_summary.head(30))
 
 # Visualize cluster size distribution
 plt.figure(figsize=(12, 5))
