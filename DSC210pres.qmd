@@ -1,6 +1,10 @@
 ---
 title: "Spatial and Temporal Changes in Fish Assemblages of the Upper Mississippi River"
-format: html
+format:
+  html:
+    embed-resources: true
+    self-contained-math: true
+    html-math-method: katex
 ---
 
 ```{python}
@@ -9,11 +13,12 @@ from IPython.display import Image, display
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+pd.options.display.max_columns = None
 ```
+
 This project is a collaboration with federal scientists at the US Geological Survey (USGS) Upper Midwest Environmental Sciences Center (UMESC).
 
 For over 30 years, the USGS UMESC has been monitoring the fish assemblages of the Upper Mississippi River as part of the Long Term Resource Monitoring (LTRM) program. The LTRM program collects data on fish populations, habitat conditions, and other environmental factors to understand the spatial and temporal changes in fish assemblages. This information is crucial for informing conservation and management efforts to protect and sustain the fish populations in the Upper Mississippi River.
-
 
 ```{python}
 #| echo: false
@@ -26,27 +31,32 @@ display(Image(filename="LTRM2.png", width=600, height=500))
 A *fish assemblage* is a group of fish species that are found together in a particular habitat or area. Fish assemblages can be influenced by various factors such as water quality, habitat structure, and food availability.
 
 ```{python}
+#| warning: false
 #| code-fold: true
 #| code-summary: "Show this code"
 df_data = pd.read_csv("ltrm_fish_D_p4813_aa1_aa3_all.csv", low_memory=False)
-pd.options.display.max_columns = None
 df_data['year'] = pd.to_datetime(df_data['sdate']).dt.year
 df_data.head(5)
 ```
 
 ## Original Dataset Shape
+
 ```{python}
 df_data.shape
 ```
 
-# Data Wrangling
-The original dataset contains 314,004 rows and 177 columns.
+The original dataset contains:
+
+-   314,004 rows of individual fish records, and
+-   177 features about the fish (species, weight, length, etc.) and the sampling conditions (e.g., date, location, water temperature, catch method, etc.).
+
+# Data Clean-up and Wrangling
 
 ## Row filtering steps
-- Filter to keep only rows where the fishcode column is not missing.
-- Remove unknown fish codes (those starting with 'U-'), UNID = unidentified, and NFSH = no fish
-- Remove hybrid fish codes
 
+-   Filter to keep only rows where the fishcode column is not missing.
+-   Remove unknown fish codes (those starting with 'U-'), UNID = unidentified, and NFSH = no fish
+-   Remove hybrid fish codes
 
 ```{python}
 #| code-fold: true
@@ -62,18 +72,21 @@ print("Hybrid removed: ", df_data.shape)
 ```
 
 Filter only for Fall samples (September, October, November) reflects conditions prior to overwintering.
+
 ```{python}
 df = df_data[df_data['period'] == 3].reset_index(drop=True)
 print(df.shape)
 ```
 
 ## Column filtering steps
+
 For this specific investigation, only some of the columns are relevant
-- barcode for sample identification
-- fishcode for species identification
-- year collected for temporal analysis
-- pool (i.e. location) for spatial analysis
-- (utm_e, utm_n) for specific location
+
+-   barcode for sample identification
+-   fishcode for species identification
+-   year collected for temporal analysis
+-   pool (i.e. location) for spatial analysis
+-   (utm_e, utm_n) for specific location
 
 We will drop the rest.
 
@@ -105,6 +118,7 @@ df['pool'] = df.apply(assign_pool, axis=1)
 ```
 
 ### Organize data by sample (barcode) and expand fish presence/absence
+
 ```{python}
 agg_df = df.groupby(['barcode']).agg(
     fish_codes=('fishcode', lambda x: list(x)),
@@ -126,7 +140,6 @@ agg_df = pd.concat([agg_df.drop(columns=['fish_codes']), fish_df], axis=1)
 agg_df.head()
 ```
 
-
 There are alot of of columns of False. We can remove fish species found in less than 5% of samples.
 
 ```{python}
@@ -144,33 +157,62 @@ fish_df_filtered = fish_df[common_species].copy()
 print(f"Original number of species: {len(fish_df.columns)}")
 print(f"Species occurring in ≥ 5% of assemblages: {len(common_species)}")
 print(f"Removed {len(fish_df.columns) - len(common_species)} rare species")
-print(f"Number of samples (barcodes): {len(fish_df)}")
-print(f"Shape of filtered fish_df: {fish_df_filtered.shape}")
+print("\n")
+print(f"Number of samples (barcodes): {fish_df_filtered.shape[0]}")
+print(f"Number of unique fish species: {fish_df_filtered.shape[1]}")
 ```
 
 # Hierarchical Cluster Analysis
-```{python}
-#| echo: false
-fish_df = pd.read_csv('pandas/fish_df.csv')
-```
-
 
 ```{python}
-import numpy as np
-fish_df_binary = (fish_df > 0).astype(int)
+fish_df_binary = (fish_df_filtered > 0).astype(int)
 fish_df_binary.head()
 ```
 
 ## Distance
 
-**How do we measure similarity between samples?** We can use Jaccard distance, which is a common metric for binary data (presence/absence). The Jaccard distance between two samples A and B is defined as:
-$$d_J(A, B) = 1 - \frac{|A \cap B|}{|A \cup B|}$$
-Where $|A \cap B|$ is the number of species present in both samples, and $|A \cup B|$ is the number of species present in either sample.
+**How do we measure similarity between samples?**
+
+Euclidean distance is the most common distance measure used to the determine the distance between two points. It is the distance from one point to the other along a line computed with the Distance Formula. However, for binary data (presence/absence), this does not make much sense.
+
+**Example:** Suppose we have three samples with the following species presence/absence
+
+| Sample       | Fish A | Fish B | Fish C | Fish D |
+|--------------|--------|--------|--------|--------|
+| **Sample 1** | 1      | 1      | 0      | 0      |
+| **Sample 2** | 1      | 1      | 1      | 0      |
+| **Sample 3** | 1      | 0      | 0      | 0      |
+
+**Is Sample 2 or Sample 3 more similar to Sample 1?**
+
+The Euclidean distance between
+
+-   Sample 1 and Sample 2 is $\sqrt{(1-1)^2 + (1-1)^2 + (0-1)^2 + (0-0)^2} = \sqrt{1} = 1$
+-   Sample 1 and Sample 3 is $\sqrt{(1-1)^2 + (1-0)^2 + (0-0)^2 + (0-0)^2} = \sqrt{1} = 1$
+
+This suggests that Sample 1 is equally similar to Sample 2 and Sample 3. But, Sample 2 has one more species present than Sample 1, while Sample 3 has one less species present than Sample 1.
+
+Instead, it is common for binary data to use the *Jaccard distance*. The Jaccard distance between two samples A and B is defined as: $$d_J(A, B) = 1 - \underbrace{\frac{|A \cap B|}{|A \cup B|}}_{\text{Jaccard Similarity}}$$ Where $|A \cap B|$ is the number of species present in both samples, and $|A \cup B|$ is the number of species present in either sample.
 
 ```{python}
 #| echo: false
 Image(filename="jaccard.png", width=600, height=400)
 ```
+
+| Sample       | Fish A | Fish B | Fish C | Fish D |
+|--------------|--------|--------|--------|--------|
+| **Sample 1** | 1      | 1      | 0      | 0      |
+| **Sample 2** | 1      | 1      | 1      | 0      |
+| **Sample 3** | 1      | 0      | 0      | 0      |
+
+The Jaccard distance between
+
+-   Sample 1 and Sample 2 is $1 - \frac{2}{3} = \frac{1}{3} \approx 0.33$
+-   Sample 1 and Sample 3 is $1 - \frac{1}{2} = \frac{1}{2} = 0.5$
+
+This suggests that Sample 1 is more similar to Sample 2 than Sample 3, which makes more sense given the presence/absence data.
+
+In Python, we can compute the Jaccard distance matrix for our samples using the pair-wise distance function `pdist` from `scipy.spatial.distance` with the `metric='jaccard'` option.
 
 ```{python}
 from scipy.spatial.distance import pdist, squareform
@@ -186,31 +228,31 @@ dist_df.head().round(2)
 
 Next, we can use hierarchical clustering to group similar samples together based on their Jaccard distances. The hierarchical clustering process involves iteratively merging the closest clusters until all samples are in a single cluster.
 
-For example, if we focus only in the first 4 samples of the distance matrix
+**Example:** Focus only on the first 4 samples of the distance matrix:
 
 ```{python}
 dist_example =dist_df.iloc[0:4, 0:4].round(2)
 print(dist_example)
 ```
 
-The samples that are most similar (and have smaller distance) are samples 0 and 2 (distance = 0.50). We can cluster those samples together and recalculate the distance matrix to see how the remaining samples relate to that cluster. 
+The samples that are most similar (and have smaller distance) are samples 0 and 2 (distance = 0.50). We can cluster those samples together and recalculate the distance matrix to see how the remaining samples relate to that cluster.
 
-The distance between the new cluster 02 and sample 1 is the average of the distances between sample 0 and sample 1 (0.72) and sample 2 and sample 1 (0.67), which is 0.695. 
+The distance between the new cluster 02 and sample 1 is the average of the distances between sample 0 and sample 1 (0.72) and sample 2 and sample 1 (0.67), which is 0.695.
 
-Similar, the distance between 02 and sample 3 is the average of the distances between sample 0 and sample 3 (0.67) and sample 2 and sample 3 (0.71), which is 0.69. 
+Similar, the distance between 02 and sample 3 is the average of the distances between sample 0 and sample 3 (0.67) and sample 2 and sample 3 (0.71), which is 0.69.
 
-|        | 02 | 1 | 3 |
-|-------|------|------|------|
-| **02** | 0   |    |    |
-| **1** | 0.695   | 0   |    |
-| **3** | 0.69   | 0.79   | 0   |
+|        | 02    | 1    | 3   |
+|--------|-------|------|-----|
+| **02** | 0     |      |     |
+| **1**  | 0.695 | 0    |     |
+| **3**  | 0.69  | 0.79 | 0   |
 
 Now we repeat the process. Since the smallest distance is between cluster 02 and 3, we cluster those together and recalculate the distance matrix again. The distance between the new cluster 023 and sample 1 is the average of the distances between sample 02 and sample 1 (0.695), sample 02 and sample 3 (0.69).
 
-|        | 023 | 1 | 
-|-------|------|------|
-| **023** | 0   |    |    
-| **1** | 0.6925   | 0   |    
+|         | 023    | 1   |
+|---------|--------|-----|
+| **023** | 0      |     |
+| **1**   | 0.6925 | 0   |
 
 This process continues until all samples are clustered together. The result can be visualized as a *dendrogram*, which shows the hierarchical relationships between the samples based on their distances.
 
@@ -225,6 +267,7 @@ plt.show()
 ```
 
 With a few more samples:
+
 ```{python}
 #| echo: false
 #| warning: false
@@ -250,17 +293,20 @@ plt.show()
 
 # How do we decide how many clusters to cut the dendrogram into?
 
-There is no single "correct" way to determine the optimal number of clusters, but there are several complementary approaches we can use to make an informed decision. 
+There is no single "correct" way to determine the optimal number of clusters, but there are several complementary approaches we can use to make an informed decision.
 
 ### Method 1 — Largest Gap
-- **Idea:** Find the biggest jump between consecutive merge heights and cut in the middle.
-- **Pros:** Simple, parameter-free, and purely visual — it formalizes the "look for big gaps" heuristic.
-- **Cons:** Only considers *one* gap. If the dendrogram has several similarly-sized gaps it can be unstable. It also ignores cluster quality entirely — a large gap doesn't guarantee internally cohesive groups.
+
+-   **Idea:** Find the biggest jump between consecutive merge heights and cut in the middle.
+-   **Pros:** Simple, parameter-free, and purely visual — it formalizes the "look for big gaps" heuristic.
+-   **Cons:** Only considers *one* gap. If the dendrogram has several similarly-sized gaps it can be unstable. It also ignores cluster quality entirely — a large gap doesn't guarantee internally cohesive groups.
 
 ```{python}
 #| code-fold: true
 #| code-summary: "Show this code"
 # ── Work with the 20-sample subset ──────────────────────────────────────
+import numpy as np
+import sklearn
 subset_binary = fish_df_binary.iloc[0:20]
 dist_sub = pdist(subset_binary, metric='jaccard')
 Z_sub = linkage(dist_sub, method='average')
@@ -309,16 +355,67 @@ plt.tight_layout()
 plt.show()
 ```
 
+```{python}
+#| echo: false
+subset_binary = fish_df_binary
+dist_sub = pdist(subset_binary, metric='jaccard')
+Z_sub = linkage(dist_sub, method='average')
+
+# =========================================================================
+# Method 1 – Largest-gap heuristic
+# =========================================================================
+# The merge heights are stored in the third column of the linkage matrix.
+# We look for the single biggest jump between consecutive merge heights;
+# the threshold is placed in the middle of that gap.
+
+heights = Z_sub[:, 2]
+gaps = np.diff(heights)
+largest_gap_idx = np.argmax(gaps)
+threshold_gap = (heights[largest_gap_idx] + heights[largest_gap_idx + 1]) / 2
+
+print("── Method 1: Largest-gap ──")
+print(f"  Merge heights : {np.round(heights, 4)}")
+print(f"  Gaps           : {np.round(gaps, 4)}")
+print(f"  Largest gap between merges {largest_gap_idx} → {largest_gap_idx+1}")
+print(f"  Suggested threshold = {threshold_gap:.4f}")
+
+clusters_gap = fcluster(Z_sub, t=threshold_gap, criterion='distance')
+print(f"  Number of clusters  = {len(np.unique(clusters_gap))}")
+print(f"  Cluster sizes       = {np.bincount(clusters_gap)[1:]}")
+
+# Plot
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+ax = axes[0]
+ax.plot(range(1, len(heights) + 1), heights, 'o-', label='Merge height')
+ax.axhline(threshold_gap, color='red', ls='--', label=f'Threshold = {threshold_gap:.3f}')
+ax.set_xlabel('Merge step')
+ax.set_ylabel('Distance')
+ax.set_title('Method 1: Largest Gap in Merge Heights')
+ax.legend()
+
+ax = axes[1]
+dendrogram(Z_sub, ax=ax, color_threshold=threshold_gap)
+ax.axhline(threshold_gap, color='red', ls='--')
+ax.set_title(f'Dendrogram cut at {threshold_gap:.3f}')
+ax.set_xlabel('Sample index')
+ax.set_ylabel('Distance')
+
+plt.tight_layout()
+plt.show()
+```
+
 ### Method 2 — Silhouette Score
-- **Idea:** For each threshold, assign clusters and compute the mean silhouette coefficient, which balances within-cluster tightness against between-cluster separation. Range is [−1, 1]; higher is better.
+
+-   **Idea:** For each threshold, assign clusters and compute the mean silhouette coefficient, which balances within-cluster tightness (green) against between-cluster separation (yellow).
 
 ```{python}
 #| echo: false
 Image(filename="silhouette.png", width=600, height=300)
 ```
 
-- **Pros:** Directly measures cluster quality using the same Jaccard distance matrix. Works well with arbitrary cluster shapes and is agnostic to the clustering method.
-- **Cons:** Computationally expensive on large datasets ($O(n^2)$ per evaluation). Can favor coarser (fewer) clusters when many samples are dissimilar. For binary ecological data  where species composition changes gradually across the landscape, silhouette values may stay low everywhere.
+-   **Pros:** Directly measures cluster quality using the same Jaccard distance matrix. Works well with arbitrary cluster shapes and works for other clustering methods.
+-   **Cons:** Computationally expensive on large datasets. Can favor coarser (fewer) clusters when many samples are dissimilar. For binary ecological data where species composition changes gradually across the landscape, silhouette values may stay low everywhere.
 
 ```{python}
 #| code-fold: true
@@ -352,7 +449,63 @@ best_sil = sil_scores[best_idx]
 
 print("── Method 2: Silhouette Analysis ──")
 print(f"  Best threshold  = {threshold_sil:.4f}")
-print(f"  Best silhouette = {best_sil:.4f}")
+
+clusters_sil = fcluster(Z_sub, t=threshold_sil, criterion='distance')
+print(f"  Number of clusters = {len(np.unique(clusters_sil))}")
+print(f"  Cluster sizes      = {np.bincount(clusters_sil)[1:]}")
+
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+ax = axes[0]
+ax.plot(thresholds, sil_scores, 'o-', ms=3)
+ax.axvline(threshold_sil, color='red', ls='--', label=f'Best = {threshold_sil:.3f}')
+ax.set_xlabel('Distance threshold')
+ax.set_ylabel('Silhouette score')
+ax.set_title('Method 2: Silhouette Score vs. Threshold')
+ax.legend()
+
+ax = axes[1]
+dendrogram(Z_sub, ax=ax, color_threshold=threshold_sil)
+ax.axhline(threshold_sil, color='red', ls='--')
+ax.set_title(f'Dendrogram cut at {threshold_sil:.3f}')
+ax.set_xlabel('Sample index')
+ax.set_ylabel('Distance')
+
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+#| echo: false
+# =========================================================================
+# Method 2 – Silhouette score across a grid of thresholds
+# =========================================================================
+from sklearn.metrics import silhouette_score
+
+subset_binary = fish_df_binary
+dist_sub = pdist(subset_binary, metric='jaccard')
+Z_sub = linkage(dist_sub, method='average')
+
+thresholds = np.linspace(heights.min() + 0.01, heights.max() - 0.01, 50)
+sil_scores = []
+
+dist_square_sub = squareform(dist_sub)
+
+for t in thresholds:
+    labels = fcluster(Z_sub, t=t, criterion='distance')
+    n_clusters = len(np.unique(labels))
+    if n_clusters < 2 or n_clusters >= len(subset_binary):
+        sil_scores.append(np.nan)
+    else:
+        sil_scores.append(silhouette_score(dist_square_sub, labels, metric='precomputed'))
+
+sil_scores = np.array(sil_scores)
+best_idx = np.nanargmax(sil_scores)
+threshold_sil = thresholds[best_idx]
+best_sil = sil_scores[best_idx]
+
+print("── Method 2: Silhouette Analysis ──")
+print(f"  Best threshold  = {threshold_sil:.4f}")
 
 clusters_sil = fcluster(Z_sub, t=threshold_sil, criterion='distance')
 print(f"  Number of clusters = {len(np.unique(clusters_sil))}")
@@ -380,15 +533,10 @@ plt.show()
 ```
 
 ### Method 3 — Elbow Method (Within-Cluster Sum of Squares)
-- **Idea:** 
-1. For each candidate number of clusters k (2 through n−1), cut the dendrogram to get k groups.
-2. Compute the within-cluster sum of pairwise Jaccard distances (WCSS) — the total "spread" inside all clusters.
-3. Plot k vs. WCSS. As k increases, WCSS decreases monotonically (more clusters → each is tighter).
-4. The elbow is the k where the curve bends — further splits yield only marginal reduction in WCSS. 
 
-- **Pros:** Intuitive...directly answers "at what point do we stop gaining much by splitting further?"
-- **Cons:** The elbow can be ambiguous — ecological data often produces a smooth, gradual curve with no sharp bend, making the "elbow" subjective.
-Biased toward many clusters — WCSS always decreases with more clusters, so the method can't tell you when clusters become meaningless, only when they become marginally less helpful.
+-   **Idea:** Create k clusters. Compute the within-cluster sum of pairwise Jaccard distances (WCSS). Add up the WCSS for all clusters. Plot k vs. total WCSS.The elbow is the k where the curve bends — further splits yield only marginal reduction in WCSS.
+-   **Pros:** Intuitive...WCSS for a given number of clusters provides a sense of how much variability there is within each cluster. Directly answers "at what point do we stop gaining much by splitting further?"
+-   **Cons:** The elbow can be ambiguous. Ecological data often produces a smooth, gradual curve with no sharp bend, making the "elbow" subjective. Biased toward many clusters. WCSS always decreases with more clusters, so the method can't tell you when clusters become meaningless, only when they become marginally less helpful.
 
 ```{python}
 #| code-fold: true
@@ -444,7 +592,7 @@ for i in range(len(k_array)):
 elbow_idx = np.argmax(distances_to_line)
 elbow_k = k_array[elbow_idx]
 
-print("── Elbow Method (Within-Cluster Sum of Jaccard Distances) ──")
+print("── Method 3 - Elbow Method ──")
 print(f"  Suggested number of clusters (elbow) = {elbow_k}")
 
 # Recover the merge-height threshold that gives elbow_k clusters
@@ -476,20 +624,107 @@ plt.tight_layout()
 plt.show()
 ```
 
-### Method 4 - The Best Method? Check them all AND use domain-specidiv knowledge (collaboration is important!)
+```{python}
+#| echo: false
+# =========================================================================
+# Method: Elbow Method (Within-Cluster Sum of Squares / Inertia)
+# =========================================================================
+# For each possible number of clusters k (from 2 to n-1), cut the
+# dendrogram and compute the total within-cluster sum of squared Jaccard
+# distances. Plot k vs. WCSS and look for the "elbow" — the point where
+# the curve bends and additional clusters stop providing much improvement.
 
-There is no single "correct" way to determine the optimal number of clusters AND we should consider the utiltiy for our specific ecological question. 
+subset_binary = fish_df_binary
+dist_sub = pdist(subset_binary, metric='jaccard')
+Z_sub = linkage(dist_sub, method='average')
+dist_square_sub = squareform(dist_sub)
+
+max_k = len(subset_binary) - 1  # max clusters = n-1
+k_range = range(2, max_k + 1)
+wcss = []
+
+for k in k_range:
+    labels = fcluster(Z_sub, t=k, criterion='maxclust')
+    total_wcss = 0
+    for c in np.unique(labels):
+        members = np.where(labels == c)[0]
+        if len(members) > 1:
+            # Sum of pairwise Jaccard distances within this cluster
+            cluster_dists = dist_square_sub[np.ix_(members, members)]
+            # Use upper triangle to avoid double-counting
+            total_wcss += np.sum(np.triu(cluster_dists, k=1))
+    wcss.append(total_wcss)
+
+wcss = np.array(wcss)
+k_array = np.array(list(k_range))
+
+# ── Automated elbow detection via maximum curvature ──
+# Draw a line from the first point to the last point; the elbow is the
+# k whose perpendicular distance to that line is greatest.
+p1 = np.array([k_array[0], wcss[0]])
+p2 = np.array([k_array[-1], wcss[-1]])
+line_vec = p2 - p1
+line_len = np.linalg.norm(line_vec)
+line_unit = line_vec / line_len
+
+distances_to_line = []
+for i in range(len(k_array)):
+    pt = np.array([k_array[i], wcss[i]])
+    proj = np.dot(pt - p1, line_unit)
+    closest = p1 + proj * line_unit
+    distances_to_line.append(np.linalg.norm(pt - closest))
+
+elbow_idx = np.argmax(distances_to_line)
+elbow_k = k_array[elbow_idx]
+
+print("── Method 3 - Elbow Method ──")
+print(f"  Suggested number of clusters (elbow) = {elbow_k}")
+
+# Recover the merge-height threshold that gives elbow_k clusters
+labels_elbow = fcluster(Z_sub, t=elbow_k, criterion='maxclust')
+# The threshold is the merge height just before the (n - elbow_k)th merge
+threshold_elbow = Z_sub[-(elbow_k), 2] if elbow_k <= len(Z_sub) else Z_sub[0, 2]
+print(f"  Corresponding distance threshold ≈ {threshold_elbow:.4f}")
+print(f"  Cluster sizes = {np.bincount(labels_elbow)[1:]}")
+
+# ── Plot ──
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+ax = axes[0]
+ax.plot(k_array, wcss, 'o-', ms=5)
+ax.axvline(elbow_k, color='red', ls='--', label=f'Elbow at k = {elbow_k}')
+ax.set_xlabel('Number of clusters (k)')
+ax.set_ylabel('Within-cluster sum of Jaccard distances')
+ax.set_title('Elbow Method')
+ax.legend()
+
+ax = axes[1]
+dendrogram(Z_sub, ax=ax, color_threshold=threshold_elbow)
+ax.axhline(threshold_elbow, color='red', ls='--')
+ax.set_title(f'Dendrogram cut at k = {elbow_k} (d ≈ {threshold_elbow:.3f})')
+ax.set_xlabel('Sample index')
+ax.set_ylabel('Distance')
+
+plt.tight_layout()
+plt.show()
+```
+
+### Method 4 - The Best Method? Check them all AND use domain-specific knowledge (collaboration is important!)
+
+There is no single "correct" way to determine the optimal number of clusters AND we should consider the utiltiy for our specific ecological question.
 
 For example, if we want to identify broad assemblage types that are easy to interpret and communicate, we might prefer a smaller number of clusters (e.g. 4-8) that capture major patterns in the data. On the other hand, if we want to explore finer-scale variation in assemblages or identify rare or specialized groups, we might prefer a larger number of clusters (e.g. 10-20) that capture more subtle differences between samples.
+
+-   **Idea:** Apply multiple methods (largest gap, silhouette, elbow) to get a range of suggested cluster numbers. Look for consensus. Create a metric that includes domain-specific criteria (e.g. cluster interpretability, ecological relevance) with the range to select the final number of clusters.
+
+-   **Pros:** Uses the analytic methods to guide the decision but also incorporates ecological understanding and practical considerations. It acknowledges that there may not be a single "right" answer and allows for flexibility based on the research question.
+
+-   **Cons:** Requires more subjective judgment and domain expertise.
 
 ```{python}
 #| echo: false
 cluster_threshold = 0.71
-plt.figure(figsize=(15, 7))
-dendrogram(linkage(dist_matrix, method='average'), color_threshold=cluster_threshold, no_labels=True)
-plt.xlabel("Barcode", fontsize=13)
-plt.ylabel("Distance", fontsize=13)
-plt.show()
+print("── Method 4 ──")
 
 # First assign clusters using fcluster
 agg_df['cluster'] = fcluster(linkage(dist_matrix, method='average'), t=cluster_threshold, criterion='distance')
@@ -502,23 +737,32 @@ agg_df['cluster'] = agg_df['cluster'].map(cluster_map)
 fish_df['cluster'] = agg_df['cluster']
 
 # Summary of clusters
-#cluster_summary = agg_df.groupby('cluster').size().sort_values(ascending=False)
-#print(f"\nCluster sizes:")
-#print(cluster_summary.head(30))
+cluster_summary = agg_df.groupby('cluster').size().sort_values(ascending=False)
 
-# Visualize cluster size distribution
-plt.figure(figsize=(12, 5))
-cluster_summary.head(8).plot(kind='bar')
-plt.xlabel('Cluster ID')
-plt.ylabel('Number of Samples')
-plt.title(f'Cluster Sizes (threshold={cluster_threshold})')
-plt.xticks(rotation=45);
-#print(agg_df.groupby('cluster').size())
+#fig, axes = plt.subplots(1, 2, figsize=(20, 6))
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+ax = axes[0]
+dendrogram(linkage(dist_matrix, method='average'), color_threshold=cluster_threshold, no_labels=True, ax=ax)
+ax.axhline(cluster_threshold, color='red', ls='--')
+ax.set_xlabel("Barcode", fontsize=13)
+ax.set_ylabel("Distance", fontsize=13)
+ax.set_title(f'Dendrogram (threshold={cluster_threshold})')
+
+ax = axes[1]
+cluster_summary.head(8).plot(kind='bar', ax=ax)
+ax.set_xlabel('Cluster ID')
+ax.set_ylabel('Number of Samples')
+ax.set_title(f'Cluster Sizes (threshold={cluster_threshold})')
+ax.tick_params(axis='x', rotation=45)
+
+plt.tight_layout()
+plt.show()
 ```
 
-Fish species codes (full species names in Table 1) for eight clusters, whereby cluster is defined by fish assemblage composition. The heatmap shows the percentage of sampling sites where each species was present within each cluster. Cell values and color represent prevalence (0–100%), with darker blues indicating higher prevalence of that fish species. Clusters are ordered by sample size or the number of sites classified within that cluster (shown in parentheses).  
-
 # Cluster Analysis
+
+Fish species codes for eight clusters. The heatmap shows the percentage of sampling sites where each species was present within each cluster. Cell values and color represent prevalence (0–100%), with darker blues indicating higher prevalence of that fish species. Clusters are ordered by sample size or the number of sites classified within that cluster (shown in parentheses).
 
 ```{python}
 #| code-fold: true
@@ -588,6 +832,7 @@ fig.savefig(
 )
 ```
 
+Spatial distribution of fish assemblage clusters across four Upper Mississippi River study reaches. Points represent sampling locations in UTM coordinates; colors denote cluster ID (1 = rose, 2 = indigo, 3 = sand, 4 = green, etc.). Rows correspond to pools (Upper Pool 4, Lower Pool 4, Pool 8, Pool 13).
 
 ```{python}
 #| code-fold: true
@@ -690,12 +935,12 @@ g.figure.subplots_adjust(right=0.9, bottom=0.15, top=0.90, hspace=0.25, wspace=0
 
 plt.show()
 ```
-Spatial distribution of fish assemblage clusters across four Upper Mississippi River study reaches. Points represent sampling locations in UTM coordinates; colors denote cluster ID (1 = gray, 2 = green, 3 = blue, 4 = red). Rows correspond to pools (Upper Pool 4, Lower Pool 4, Pool 8, Pool 13).
 
 # Next steps
 
 -   Explore how clusters relate to environmental variables (e.g. water temperature and quality, type of habitat, etc.)
-    - Can a decision tree predict cluster membership based on environmental variables? Which variables are most important for distinguishing clusters?
+
+    -   Can a decision tree predict cluster membership based on environmental variables? Which variables are most important for distinguishing clusters?
 
 -   Explore temporal trends in cluster membership. Are certain clusters becoming more or less common over time? Are there seasonal patterns in cluster composition?
 
