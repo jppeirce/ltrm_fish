@@ -1,5 +1,6 @@
 ---
 title: "Spatial and Temporal Changes in Fish Assemblages of the Upper Mississippi River"
+author: "J. Peirce, K. Bouska, R. Erickson, D Gibson-Reinemer, D. Larson, M. Mika, G. Sandland, D. Schumann"
 format:
   html:
     embed-resources: true
@@ -16,7 +17,7 @@ import seaborn as sns
 pd.options.display.max_columns = None
 ```
 
-This project is a collaboration with federal scientists at the US Geological Survey (USGS) Upper Midwest Environmental Sciences Center (UMESC).
+This project is a collaboration with federal scientists at the US Geological Survey (USGS) Upper Midwest Environmental Sciences Center (UMESC) and UWL Biologists.
 
 For over 30 years, the USGS UMESC has been monitoring the fish assemblages of the Upper Mississippi River as part of the Long Term Resource Monitoring (LTRM) program. The LTRM program collects data on fish populations, habitat conditions, and other environmental factors to understand the spatial and temporal changes in fish assemblages. This information is crucial for informing conservation and management efforts to protect and sustain the fish populations in the Upper Mississippi River.
 
@@ -34,15 +35,15 @@ A *fish assemblage* is a group of fish species that are found together in a part
 #| warning: false
 #| code-fold: true
 #| code-summary: "Show this code"
-df_data = pd.read_csv("ltrm_fish_D_p4813_aa1_aa3_all.csv", low_memory=False)
-df_data['year'] = pd.to_datetime(df_data['sdate']).dt.year
-df_data.head(5)
+dat = pd.read_csv("ltrm_fish_D_p4813_aa1_aa3_all.csv")
+dat['year'] = pd.to_datetime(dat['sdate']).dt.year
+dat.head(5)
 ```
 
 ## Original Dataset Shape
 
 ```{python}
-df_data.shape
+dat.shape
 ```
 
 The original dataset contains:
@@ -61,21 +62,21 @@ The original dataset contains:
 ```{python}
 #| code-fold: true
 #| code-summary: "Show this code"
-print("Before: ", df_data.shape)
-df_data = df_data[df_data['fishcode'].notna()].reset_index(drop=True)
-print("Removed fishcode = NA:", df_data.shape)
-df_data = df_data[(~df_data['fishcode'].str.startswith('U-')) & (~df_data['fishcode'].isin(['NFSH', 'UNID']))].reset_index(drop=True)
-print("Removed unknown fish codes: ", df_data.shape)
+print("Before: ", dat.shape)
+dat = dat[dat['fishcode'].notna()].reset_index(drop=True)
+print("Removed fishcode = NA:", dat.shape)
+dat = dat[(~dat['fishcode'].str.startswith('U-')) & (~dat['fishcode'].isin(['NFSH', 'UNID']))].reset_index(drop=True)
+print("Removed unknown fish codes: ", dat.shape)
 hybrid_fish = ['BCWC', 'BGLE', 'BGOS', 'BGRS', 'BGWM', 'CCGF', 'GSBG', 'GSPS', 'GSRS', 'GSWM', 'GSOS', 'LNST', 'OSLE', 'PSBG', 'PSOS', 'PSWM', 'SBWB', 'SCBS', 'SGWE', 'SNPD', 'WPYB']
-df_data = df_data[~df_data['fishcode'].isin(hybrid_fish)].reset_index(drop=True)
-print("Hybrid removed: ", df_data.shape)
+dat = dat[~dat['fishcode'].isin(hybrid_fish)].reset_index(drop=True)
+print("Hybrid removed: ", dat.shape)
 ```
 
 Filter only for Fall samples (September, October, November) reflects conditions prior to overwintering.
 
 ```{python}
-df = df_data[df_data['period'] == 3].reset_index(drop=True)
-print(df.shape)
+dat_study = dat[dat['period'] == 3].reset_index(drop=True)
+print(dat_study.shape)
 ```
 
 ## Column filtering steps
@@ -92,14 +93,15 @@ We will drop the rest.
 
 ```{python}
 keep_cols =['barcode', 'fishcode', 'year', 'pool', 'utm_e', 'utm_n']
-df = df[keep_cols].reset_index(drop=True)
-print(df.head())
-print(df.shape)
+dat_study = dat_study[keep_cols].reset_index(drop=True)
+print(dat_study.head())
+print(dat_study.shape)
 ```
 
 ```{python}
-print(f"Number of unique samples (identified by barcode)= {df.barcode.unique().shape[0]}")
-print(f"Number of unique fishcodes = {df.fishcode.unique().shape[0]}")
+#| echo: false
+print(f"Number of unique samples (identified by barcode)= {dat_study.barcode.unique().shape[0]}")
+print(f"Number of unique fishcodes = {dat_study.fishcode.unique().shape[0]}")
 ```
 
 ```{python}
@@ -114,16 +116,14 @@ def assign_pool(row):
     else:
         return f'Pool {int(pool_val)}' # Convert to string format
 
-df['pool'] = df.apply(assign_pool, axis=1)
+dat_study['pool'] = dat_study.apply(assign_pool, axis=1)
 ```
 
 ### Organize data by sample (barcode) and expand fish presence/absence
 
 ```{python}
-agg_df = df.groupby(['barcode']).agg(
+agg_df = dat_study.groupby(['barcode', 'year', 'pool']).agg(
     fish_codes=('fishcode', lambda x: list(x)),
-    year=('year', lambda x: x.value_counts().index[0]),
-    pool=('pool', lambda x: x.value_counts().index[0]),
     utm_e=('utm_e', 'median'),
     utm_n=('utm_n', 'median')
 ).reset_index()
@@ -192,7 +192,7 @@ The Euclidean distance between
 
 This suggests that Sample 1 is equally similar to Sample 2 and Sample 3. But, Sample 2 has one more species present than Sample 1, while Sample 3 has one less species present than Sample 1.
 
-Instead, it is common for binary data to use the *Jaccard distance*. The Jaccard distance between two samples A and B is defined as: $$d_J(A, B) = 1 - \underbrace{\frac{|A \cap B|}{|A \cup B|}}_{\text{Jaccard Similarity}}$$ Where $|A \cap B|$ is the number of species present in both samples, and $|A \cup B|$ is the number of species present in either sample.
+Instead, it is common for binary data to use the *Jaccard distance*. The Jaccard distance between two samples A and B is defined as: $$d_J(A, B) = 1 - \underbrace{\frac{|A \cap B|}{|A \cup B|}}_{\text{Jaccard Similarity}}$$ Where $|A \cap B|$ is the number of species present in *both* samples, and $|A \cup B|$ is the number of species present in *either* sample.
 
 ```{python}
 #| echo: false
@@ -221,7 +221,7 @@ from scipy.cluster.hierarchy import linkage, dendrogram, fcluster
 dist_matrix = pdist(fish_df_binary, metric='jaccard')
 dist_df = pd.DataFrame(squareform(dist_matrix))
 
-dist_df.head().round(2)
+dist_df.round(2)
 ```
 
 ## Linkage and Dendrogram
@@ -231,7 +231,7 @@ Next, we can use hierarchical clustering to group similar samples together based
 **Example:** Focus only on the first 4 samples of the distance matrix:
 
 ```{python}
-dist_example =dist_df.iloc[0:4, 0:4].round(2)
+dist_example = dist_df.iloc[0:4, 0:4].round(2)
 print(dist_example)
 ```
 
@@ -711,11 +711,12 @@ plt.show()
 
 ### Method 4 - The Best Method? Check them all AND use domain-specific knowledge (collaboration is important!)
 
+
 There is no single "correct" way to determine the optimal number of clusters AND we should consider the utiltiy for our specific ecological question.
 
 For example, if we want to identify broad assemblage types that are easy to interpret and communicate, we might prefer a smaller number of clusters (e.g. 4-8) that capture major patterns in the data. On the other hand, if we want to explore finer-scale variation in assemblages or identify rare or specialized groups, we might prefer a larger number of clusters (e.g. 10-20) that capture more subtle differences between samples.
 
--   **Idea:** Apply multiple methods (largest gap, silhouette, elbow) to get a range of suggested cluster numbers. Look for consensus. Create a metric that includes domain-specific criteria (e.g. cluster interpretability, ecological relevance) with the range to select the final number of clusters.
+-   **Idea:** Apply multiple methods (largest gap, silhouette, elbow) to get a range of suggested cluster numbers. Look for consensus. Create a metric that also includes domain-specific criteria (e.g. cluster interpretability, ecological relevance) with the range to select the final number of clusters.
 
 -   **Pros:** Uses the analytic methods to guide the decision but also incorporates ecological understanding and practical considerations. It acknowledges that there may not be a single "right" answer and allows for flexibility based on the research question.
 
@@ -774,7 +775,7 @@ sns.set_context("notebook", font_scale=1.0)
 species_cols = [c for c in fish_df.columns if c != 'cluster']
 species_order = fish_df[species_cols].sum(axis=0).sort_values(ascending=False).index.tolist()
 
-# Keep only top 20 most common species
+# Keep only top 40 most common species
 fishcode_2_include = 41
 top_species = species_order[:fishcode_2_include]
 
@@ -783,9 +784,6 @@ top_species = species_order[:fishcode_2_include]
 jac_comp = fish_df.groupby('cluster')[top_species].mean() * 100
 
 # Order clusters by overall sample count (so columns are in meaningful order)
-# Filter clusters with size >= 10
-# 4 cluster size > 160
-# 8 cluster size > 30
 cluster_filter = 30
 cluster_sizes = fish_df['cluster'].value_counts()
 cluster_sizes = cluster_sizes[cluster_sizes >= cluster_filter]
